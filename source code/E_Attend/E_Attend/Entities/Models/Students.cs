@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Attend.Entities.Models
 {
@@ -9,6 +10,7 @@ namespace E_Attend.Entities.Models
 
 
         [Required]
+        [ForeignKey("AppUser")]
         public int UserID { get; set; }
 
 

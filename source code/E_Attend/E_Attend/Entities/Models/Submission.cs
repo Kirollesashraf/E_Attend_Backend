@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Attend.Entities.Models
 {
@@ -8,9 +9,11 @@ namespace E_Attend.Entities.Models
         public int ID { get; set; }
 
         [Required]
+        [ForeignKey("Assignment")]
         public int AssignmentID { get; set; }
 
         [Required]
+        [ForeignKey("Students")]
         public int StudentID { get; set; }
 
         [Required]

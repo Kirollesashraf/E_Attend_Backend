@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Attend.Entities.Models
 {
@@ -20,6 +21,7 @@ namespace E_Attend.Entities.Models
 
 
         [Required]
+        [ForeignKey("professor")]
         public int ProfessorID { get; set; }
 
 
