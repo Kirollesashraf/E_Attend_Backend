@@ -8,7 +8,7 @@ namespace E_Attend.Entities.Models
 
         [Required]
         [MaxLength(50)] 
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [EmailAddress]

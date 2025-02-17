@@ -16,7 +16,7 @@ namespace E_Attend.Entities.Models
         public string Title { get; set; }
 
         [Required]
-        public TextWriter Description { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public DateTime DueDate { get; set; }
