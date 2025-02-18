@@ -15,7 +15,7 @@ namespace E_Attend.Entities.Models
         public int CourseID { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        public string Titel{ get; set; }
 
 
 

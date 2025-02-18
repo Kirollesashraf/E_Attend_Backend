@@ -4,6 +4,7 @@ using E_Attend.Data_Access.context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Attend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250217175727_changeTitel")]
+    partial class changeTitel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +59,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("AppUsers", (string)null);
+                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Assignment", b =>
@@ -86,7 +89,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Assignments", (string)null);
+                    b.ToTable("Assignments");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Assistant", b =>
@@ -109,7 +112,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Assistants", (string)null);
+                    b.ToTable("Assistants");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Attendance", b =>
@@ -135,7 +138,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Attendances", (string)null);
+                    b.ToTable("Attendances");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Course", b =>
@@ -165,7 +168,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Enrollment", b =>
@@ -187,7 +190,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Enrollments", (string)null);
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Sheets", b =>
@@ -205,7 +208,7 @@ namespace E_Attend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Titel")
+                    b.Property<string>("Titles")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -214,7 +217,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Sheets", (string)null);
+                    b.ToTable("Sheets");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Students", b =>
@@ -241,7 +244,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Submission", b =>
@@ -270,7 +273,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Submissions", (string)null);
+                    b.ToTable("Submissions");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.professor", b =>
@@ -297,7 +300,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Professors", (string)null);
+                    b.ToTable("Professors");
                 });
 #pragma warning restore 612, 618
         }
