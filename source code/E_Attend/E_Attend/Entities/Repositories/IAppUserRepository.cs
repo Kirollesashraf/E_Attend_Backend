@@ -1,12 +1,11 @@
-﻿namespace E_Attend.Entities.Repositories
+﻿using E_Attend.Entities.Models;
+
+namespace E_Attend.Entities.Repositories
 {
-    public interface IAppUserRepository
+    public interface IAppUserRepository : IGenericRepository<AppUser>
     {
-        public interface IApplicationUserRepository : IGenericRepository<ApplicationUser>
-        {
-            
-        }
-
-
+       
     }
-}
+   
+    }
+
