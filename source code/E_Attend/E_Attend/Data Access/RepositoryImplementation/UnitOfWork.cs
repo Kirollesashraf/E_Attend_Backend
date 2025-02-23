@@ -8,15 +8,13 @@ namespace E_Attend.Data_Access.RepositoryImplementation
 
         public IAssignmentRepository AssignmentRepository => throw new NotImplementedException();
 
-        public IAssistantRepository AssistantRepository => throw new NotImplementedException();
-
         public IAttendanceRepository AttendanceRepository => throw new NotImplementedException();
 
         public ICourseRepository CourseRepository => throw new NotImplementedException();
 
         public IEnrollmentRepository EnrollmentRepository => throw new NotImplementedException();
 
-        public IprofessorRepository professorRepository => throw new NotImplementedException();
+        public IInstructorRepository instructorRepository => throw new NotImplementedException();
 
         public ISheetRepository SheetRepository => throw new NotImplementedException();
 

@@ -5,11 +5,11 @@
         Task<int> CompleteAsync();
         IAppUserRepository AppUserRepository { get;}
         IAssignmentRepository AssignmentRepository { get; }
-        IAssistantRepository AssistantRepository { get; }
+        
         IAttendanceRepository AttendanceRepository { get; }
         ICourseRepository CourseRepository { get; }
         IEnrollmentRepository EnrollmentRepository { get; }
-        IprofessorRepository professorRepository { get; }
+        IInstructorRepository instructorRepository { get; }
         ISheetRepository SheetRepository { get; }
         IStudentRepository StudentRepository { get; }
         ISubmissionRepository submissionRepository { get; }
