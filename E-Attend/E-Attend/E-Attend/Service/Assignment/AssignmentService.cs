@@ -1,12 +1,13 @@
 ﻿
 using E_Attend.Entities.DTOs;
 using E_Attend.Entities.Repositories;
+using E_Attend.Service.Assignment.Interfaces;
 
 namespace E_Attend.Service.Assignment;
 
 using Entities.Models;
 
-public class AssignmentService {
+public class AssignmentService : IAssignmentService {
     
     private readonly IUnitOfWork unitOfWork;
 
@@ -19,6 +20,18 @@ public class AssignmentService {
         if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
         return assignment;
     }
+
+    public async Task<IEnumerable<Assignment>> ViewAllAssignmentsByInstructorIdAsync(int instructorId)
+    {
+        var assignments = 
+            from course in await unitOfWork.CourseRepository.GetAllAsync(c => c.InstructorID == instructorId)
+            join assignment in await unitOfWork.AssignmentRepository.GetAllAsync(a => true) 
+            on course.ID equals assignment.CourseID
+            select assignment;
+
+        return assignments;
+    }
+
     public async Task<AssignmentDTO> CreateAssignmentAsync(AssignmentDTO assignment) {
         if (string.IsNullOrWhiteSpace(assignment.Title) || string.IsNullOrWhiteSpace(assignment.Description))
             throw new ArgumentException("Title and description are required.");

@@ -13,7 +13,7 @@ namespace E_Attend.Entities.Models
         public int AssignmentID { get; set; }
 
         [Required]
-        [ForeignKey("Students")]
+        [ForeignKey("Student")]
         public int StudentID { get; set; }
 
         [Required]

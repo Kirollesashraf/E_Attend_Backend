@@ -2,6 +2,7 @@ using E_Attend.Data_Access.context;
 using E_Attend.Data_Access.RepositoryImplementation;
 using E_Attend.Entities.Repositories;
 using E_Attend.Service.Assignment;
+using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 // Register UnitOfWork
-builder.Services.AddScoped<IInstructorServicesOrchestrator, InstructorServicesOrchestrator>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 
 var app = builder.Build();
 
