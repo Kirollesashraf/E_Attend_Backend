@@ -1,6 +1,0 @@
-@E_Attend_HostAddress = http://localhost:5054
-
-GET {{E_Attend_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
