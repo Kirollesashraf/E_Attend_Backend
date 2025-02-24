@@ -3,10 +3,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Attend.Entities.Models
 {
-    public class Assistant
+    public class Instructor
     {
+
+
         [Required]
         public int ID { get; set; }
+
+
+        [Required]
+        public string Name { get; set; }
+
+
+
+
+        [Required]
+        public string AcademicDegree { get; set; }
+
+
+
 
 
         [Required]
@@ -14,12 +29,19 @@ namespace E_Attend.Entities.Models
         public int UserID { get; set; }
 
 
+
+        [Required]
+        public string Specialization { get; set; }
+
+
         [Required]
         public string Department { get; set; }
 
 
-
         [Required]
         public DateTime CreatedAt { get; set; }
+
+
+
     }
 }

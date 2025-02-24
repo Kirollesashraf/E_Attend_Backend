@@ -10,11 +10,10 @@ namespace E_Attend.Data_Access.context
         }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
-        public DbSet<Assistant> Assistants { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<Professor> Professors { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Submission> Submissions { get; set; }

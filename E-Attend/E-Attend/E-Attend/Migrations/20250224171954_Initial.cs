@@ -47,21 +47,6 @@ namespace E_Attend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Assistants",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Assistants", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Attendances",
                 columns: table => new
                 {
@@ -86,7 +71,7 @@ namespace E_Attend.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreditHours = table.Column<int>(type: "int", nullable: false),
-                    ProfessorID = table.Column<int>(type: "int", nullable: false),
+                    InstructorID = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -110,11 +95,13 @@ namespace E_Attend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Professors",
+                name: "Instructors",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AcademicDegree = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -122,7 +109,7 @@ namespace E_Attend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Professors", x => x.ID);
+                    table.PrimaryKey("PK_Instructors", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,9 +172,6 @@ namespace E_Attend.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
-                name: "Assistants");
-
-            migrationBuilder.DropTable(
                 name: "Attendances");
 
             migrationBuilder.DropTable(
@@ -197,7 +181,7 @@ namespace E_Attend.Migrations
                 name: "Enrollments");
 
             migrationBuilder.DropTable(
-                name: "Professors");
+                name: "Instructors");
 
             migrationBuilder.DropTable(
                 name: "Sheets");

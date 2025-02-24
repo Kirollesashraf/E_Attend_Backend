@@ -2,7 +2,7 @@
 
 namespace E_Attend.Entities.Repositories
 {
-    public interface IAssistantRepository : IGenericRepository<Assistant>
+    public interface IInstructorRepository : IGenericRepository<Instructor>
     {
     }
 }

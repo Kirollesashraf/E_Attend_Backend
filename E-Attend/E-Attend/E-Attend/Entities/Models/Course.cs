@@ -21,8 +21,8 @@ namespace E_Attend.Entities.Models
 
 
         [Required]
-        [ForeignKey("professor")]
-        public int ProfessorID { get; set; }
+        [ForeignKey("Instructor")]
+        public int InstructorID { get; set; }
 
 
 

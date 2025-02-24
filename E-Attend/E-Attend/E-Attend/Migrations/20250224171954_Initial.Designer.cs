@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Attend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250223000947_Initial")]
+    [Migration("20250224171954_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -92,29 +92,6 @@ namespace E_Attend.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("E_Attend.Entities.Models.Assistant", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Department")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Assistants");
-                });
-
             modelBuilder.Entity("E_Attend.Entities.Models.Attendance", b =>
                 {
                     b.Property<int>("ID")
@@ -159,12 +136,12 @@ namespace E_Attend.Migrations
                     b.Property<int>("CreditHours")
                         .HasColumnType("int");
 
+                    b.Property<int>("InstructorID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfessorID")
-                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -193,7 +170,7 @@ namespace E_Attend.Migrations
                     b.ToTable("Enrollments");
                 });
 
-            modelBuilder.Entity("E_Attend.Entities.Models.Professor", b =>
+            modelBuilder.Entity("E_Attend.Entities.Models.Instructor", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -201,10 +178,18 @@ namespace E_Attend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("AcademicDegree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -217,7 +202,7 @@ namespace E_Attend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Professors");
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Models.Sheet", b =>

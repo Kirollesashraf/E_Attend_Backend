@@ -17,11 +17,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 // Register UnitOfWork
-builder.Services.AddScoped<ICreatingAssignmentService, CreatingAssignmentService>();
+builder.Services.AddScoped<IInstructorServicesOrchestrator, InstructorServicesOrchestrator>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-// builder.Services.AddScoped<IServiceOrchestrator, ServiceOrchestrator>();
 
-var app = builder.Build(); // ✅ Build after all services are registered
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
