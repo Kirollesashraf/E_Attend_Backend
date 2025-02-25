@@ -4,6 +4,8 @@ using E_Attend.Entities.Repositories;
 using E_Attend.Service.Assignment;
 using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
