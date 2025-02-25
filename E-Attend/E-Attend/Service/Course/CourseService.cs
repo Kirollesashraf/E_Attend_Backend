@@ -32,8 +32,10 @@ public class CourseService : ICourseService {
         return true;
     }
 
-    public async Task<IEnumerable<Entities.Models.Course>> ViewAllCoursesAsync() {
-        return await unitOfWork.CourseRepository.GetAllAsync();
+    public async Task<IEnumerable<Entities.Models.Course>> ViewAllCoursesByStudentIDAsync(int studentId) {
+        return await unitOfWork.CourseRepository.GetAllAsync(c => 
+            unitOfWork.EnrollmentRepository.AnyAsync(e => e.CourseID == c.ID && e.StudentID == studentId).Result);
+
     }
 
     public async Task<bool> DeleteCourseAsync(int courseId) {

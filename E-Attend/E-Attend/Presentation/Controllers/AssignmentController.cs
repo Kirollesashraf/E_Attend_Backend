@@ -17,18 +17,18 @@ public class AssignmentController : ControllerBase {
         this._assignmentService = assignmentService;
     }
 
-    [HttpPost("/view/{assignmentId}")]
+    [HttpPost("/view-assignment/{assignmentId}")]
     public async Task<OkObjectResult> ViewAssignment(int assignmentId) =>
         Ok(await _assignmentService.ViewAssignmentAsync(assignmentId));
 
-    [HttpPost("/create")]
+    [HttpPost("/create-assignment")]
     public async Task<IActionResult> CreateAssignment([FromBody] AssignmentDTO assignment) =>
         Ok(await _assignmentService.CreateAssignmentAsync(assignment));
-    [HttpPost("/delete/{assignmentId}")]
+    [HttpPost("/delete-assignment/{assignmentId}")]
     public async Task<IActionResult> DeleteAssignment(int assignmentId) =>
         Ok(await _assignmentService.DeleteAssignmentAsync(assignmentId));
 
-    [HttpPost("/update/{assignmentId}")]
+    [HttpPost("/update-assignment/{assignmentId}")]
     public async Task<IActionResult> UpdateAssignmentDescription(int assignmentId, [FromBody] AssignmentDTO newDescription) =>
         Ok(await _assignmentService.UpdateAssignment(assignmentId,
             newDescription));

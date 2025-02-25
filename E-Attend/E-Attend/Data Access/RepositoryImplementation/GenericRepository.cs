@@ -16,6 +16,10 @@ namespace E_Attend.Data_Access.RepositoryImplementation
             dbSet = context.Set<T>();
         }
 
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate) {
+            return await dbSet.AnyAsync(predicate);
+        }
+
         public async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
