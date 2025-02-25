@@ -2,9 +2,9 @@
 {
     public interface IInstructorService
     {
-        Task<bool> AddInstructorAsync(Instructor instructor);
-        Task<bool> UpdateInstructorAsync(int instructorId, Instructor updatedInstructor);
-        Task<IEnumerable<Instructor>> ViewAllInstructorsAsync();
+        Task<bool> AddInstructorAsync(Entities.Models.Instructor instructor);
+        Task<bool> UpdateInstructorAsync(int instructorId, Entities.Models.Instructor updatedInstructor);
+        Task<IEnumerable<Entities.Models.Instructor>> ViewAllInstructorsAsync();
         Task<bool> DeleteInstructorAsync(int instructorId);
     }
 }

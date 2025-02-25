@@ -7,6 +7,11 @@ namespace E_Attend.Entities.Models
     {
         [Required]
         public int ID { get; set; }
+        
+       
+        [Required]
+        [MaxLength(50)] 
+        public string Name { get; set; }
 
 
         [Required]

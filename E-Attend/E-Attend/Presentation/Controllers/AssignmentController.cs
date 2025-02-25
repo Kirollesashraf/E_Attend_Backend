@@ -28,18 +28,12 @@ public class AssignmentController : ControllerBase {
     public async Task<IActionResult> DeleteAssignment(int assignmentId) =>
         Ok(await _assignmentService.DeleteAssignmentAsync(assignmentId));
 
-    [HttpPost("/update-description/{assignmentId}")]
-    public async Task<IActionResult> UpdateAssignmentDescription(int assignmentId, [FromBody] string newDescription) =>
-        Ok(await _assignmentService.UpdateDescriptionAsync(assignmentId,
+    [HttpPost("/update/{assignmentId}")]
+    public async Task<IActionResult> UpdateAssignmentDescription(int assignmentId, [FromBody] AssignmentDTO newDescription) =>
+        Ok(await _assignmentService.UpdateAssignment(assignmentId,
             newDescription));
 
-    [HttpPost("/update-due-date/{assignmentId}")]
-    public async Task<IActionResult> UpdateAssignmentDueDate(int assignmentId, [FromBody] DateTime newDate) =>
-        Ok(await _assignmentService.UpdateDueDateAsync(assignmentId, newDate));
 
-    [HttpPost("/update-title/{assignmentId}")]
-    public async Task<IActionResult> UpdateAssignmentTitle(int assignmentId, [FromBody] string newTitle) =>
-        Ok(await _assignmentService.UpdateTitleAsync(assignmentId, newTitle));
     
     
     [HttpPost("/view-all-by-instructor-id/{instructorId}")]

@@ -59,38 +59,23 @@ public class AssignmentService : IAssignmentService {
         return Task.CompletedTask;
     }
 
-    public async Task<Task> UpdateDueDateAsync(int assignmentId, DateTime newDate) {
+    public async Task<Task> UpdateAssignment(int assignmentId, AssignmentDTO newAssignment) {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
         if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
 
-        assignment.DueDate = newDate;
+        assignment.DueDate = newAssignment.DueDate;
+        assignment.Description = newAssignment.Description;
+        assignment.CreatedAt = newAssignment.CreatedAt;
+        assignment.CourseID = newAssignment.CourseID;
+        assignment.Title = newAssignment.Title;
+        
         await unitOfWork.AssignmentRepository.UpdateAsync(assignment);
         await unitOfWork.CompleteAsync();
         return Task.CompletedTask;
 
     }
 
-    public async Task<Task> UpdateDescriptionAsync(int assignmentId, string newDescription) {
-        var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
-        if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
-
-        assignment.Description = newDescription;
-        await unitOfWork.AssignmentRepository.UpdateAsync(assignment);
-        await unitOfWork.CompleteAsync();
-        return Task.CompletedTask;
-
-    }
-
-    public async Task<Task> UpdateTitleAsync(int assignmentId, string newTitle) {
-        var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
-        if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
-
-        assignment.Title = newTitle;
-        await unitOfWork.AssignmentRepository.UpdateAsync(assignment);
-        await unitOfWork.CompleteAsync();
-        return Task.CompletedTask;
-
-    }
+  
     
     
 }

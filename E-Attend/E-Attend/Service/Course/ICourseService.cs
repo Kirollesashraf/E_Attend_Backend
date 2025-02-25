@@ -2,9 +2,9 @@
 {
     public interface ICourseService
     {
-        Task<bool> AddCourseAsync(Course course);
-        Task<bool> UpdateCourseAsync(int courseId, Course updatedCourse);
-        Task<IEnumerable<Course>> ViewAllCoursesAsync();
+        Task<bool> AddCourseAsync(Entities.Models.Course course);
+        Task<bool> UpdateCourseAsync(int courseId, Entities.Models.Course updatedCourse);
+        Task<IEnumerable<Entities.Models.Course>> ViewAllCoursesAsync();
         Task<bool> DeleteCourseAsync(int courseId);
         Task<byte[]> DownloadCourseAsync(int courseId);
     }

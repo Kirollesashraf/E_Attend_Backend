@@ -2,9 +2,9 @@
 {
     public interface IStudentService
     {
-        Task<bool> AddStudentAsync(Student student);
-        Task<bool> UpdateStudentAsync(int studentId, Student updatedStudent);
-        Task<IEnumerable<Student>> ViewAllStudentsOfSectionAsync(int sectionId);
+        Task<bool> AddStudentAsync(Entities.Models.Student student);
+        Task<bool> UpdateStudentAsync(int studentId, Entities.Models.Student updatedStudent);
+        Task<IEnumerable<Entities.Models.Student>> ViewAllStudentsOfSectionAsync(int sectionId);
         Task<bool> DeleteStudentAsync(int studentId);
     }
 }
