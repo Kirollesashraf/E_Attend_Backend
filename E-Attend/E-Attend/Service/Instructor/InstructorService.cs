@@ -10,6 +10,7 @@ public class InstructorService : IInstructorService {
     }
 
     public async Task<bool> AddInstructorAsync(Entities.Models.Instructor instructor) {
+        
         await unitOfWork.InstructorRepository.AddAsync(instructor);
         await unitOfWork.CompleteAsync();
         return true;

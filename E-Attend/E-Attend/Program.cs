@@ -5,6 +5,12 @@ using E_Attend.Service.Assignment;
 using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
+using E_Attend.Service.Course;
+using E_Attend.Service.Enrollment;
+using E_Attend.Service.Instructor;
+using E_Attend.Service.Sheet;
+using E_Attend.Service.Student;
+using E_Attend.Service.Submission;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +27,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IInstructorService, InstructorService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+builder.Services.AddScoped<ISheetService, SheetService>();
+builder.Services.AddScoped<ISubmissionService, SubmissionService>();
 
 var app = builder.Build();
 

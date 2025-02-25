@@ -22,8 +22,16 @@ namespace E_Attend.Data_Access.RepositoryImplementation
 
         public async Task AddAsync(T entity)
         {
+            var idProperty = typeof(T).GetProperty("ID");
+
+            if (idProperty != null && idProperty.PropertyType == typeof(int))
+            {
+                idProperty.SetValue(entity, 0);
+            }
+
             await dbSet.AddAsync(entity);
         }
+
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null, string? IncludeWord = null)
         {
