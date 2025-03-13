@@ -11,6 +11,7 @@ using E_Attend.Service.Instructor;
 using E_Attend.Service.Sheet;
 using E_Attend.Service.Student;
 using E_Attend.Service.Submission;
+using Scalar.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
