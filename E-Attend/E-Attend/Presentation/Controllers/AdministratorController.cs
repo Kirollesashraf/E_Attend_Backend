@@ -30,7 +30,7 @@ namespace E_Attend.Presentation.Controllers
         public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>
             Ok(await _courseService.ViewAllCoursesByStudentIDAsync(studentId));
 
-        [HttpPost("courses")]
+        [HttpPost("courses/add")]
         public async Task<IActionResult> CreateCourse([FromBody] Course newCourse) =>
             Ok(await _courseService.AddCourseAsync(newCourse));
 

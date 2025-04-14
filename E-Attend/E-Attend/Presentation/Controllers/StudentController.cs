@@ -9,8 +9,10 @@ public class StudentController : ControllerBase {
     private readonly ISheetService _sheetService; 
     private readonly ICourseService _courseService; 
     
-    public StudentController(ISheetService sheetService) {
+    public StudentController(ICourseService courseService  ,  ISheetService sheetService) {
         _sheetService = sheetService;
+        _courseService = courseService;
+
     }
     
     [HttpPost("sheets/{sheetId}/upload")]
