@@ -1,24 +1,31 @@
-﻿using E_Attend.Entities.Repositories;
+﻿using E_Attend.Entities.DTOs;
+using E_Attend.Entities.Repositories;
+using E_Attend.Entities.Models;
 
 namespace E_Attend.Service.Student;
 
-public class StudentService : IStudentService{
+public class StudentService : IStudentService
+{
     private readonly IUnitOfWork unitOfWork;
 
-    public StudentService(IUnitOfWork unitOfWork) {
+    public StudentService(IUnitOfWork unitOfWork)
+    {
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<bool> AddStudentAsync(Entities.Models.Student student) {
+    public async Task<GeneralResponse<Entities.Models.Student>> AddStudentAsync(Entities.Models.Student student)
+    {
         await unitOfWork.StudentRepository.AddAsync(student);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<Entities.Models.Student>.Success(student, "Student added successfully.");
     }
 
-    public async Task<bool> UpdateStudentAsync(int studentId, Entities.Models.Student updatedStudent) {
+    public async Task<GeneralResponse<object>> UpdateStudentAsync(int studentId, Entities.Models.Student updatedStudent)
+    {
         var student = await unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s => s.ID == studentId);
-        if (student == null) throw new KeyNotFoundException("Student not found.");
-        
+        if (student == null)
+            return GeneralResponse<object>.Error("Student not found.");
+
         student.Department = updatedStudent.Department;
         student.UniversityID = updatedStudent.UniversityID;
         student.Name = updatedStudent.Name;
@@ -26,21 +33,23 @@ public class StudentService : IStudentService{
 
         await unitOfWork.StudentRepository.UpdateAsync(student);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Student updated successfully.");
     }
 
-    public async Task<IEnumerable<Entities.Models.Student>> ViewAllStudentsOfSectionAsync(int sectionId) {
-        // return await unitOfWork.StudentRepository.GetAllAsync(s => s. == sectionId);
-        
-        throw new NotImplementedException();
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudentsOfSectionAsync(int sectionId)
+    {
+        // Implement your logic to retrieve students by sectionId.  For now, returning an error:
+        return GeneralResponse<IEnumerable<Entities.Models.Student>>.Error("View students by section not implemented.");
     }
 
-    public async Task<bool> DeleteStudentAsync(int studentId) {
+    public async Task<GeneralResponse<object>> DeleteStudentAsync(int studentId)
+    {
         var student = await unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s => s.ID == studentId);
-        if (student == null) throw new KeyNotFoundException("Student not found.");
+        if (student == null)
+            return GeneralResponse<object>.Error("Student not found.");
 
         await unitOfWork.StudentRepository.RemoveAsync(student);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Student deleted successfully.");
     }
 }

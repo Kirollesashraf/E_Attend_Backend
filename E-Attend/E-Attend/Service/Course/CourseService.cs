@@ -1,25 +1,30 @@
-﻿using E_Attend.Entities.Repositories;
+﻿using E_Attend.Entities.DTOs;
+using E_Attend.Entities.Repositories;
 using E_Attend.Entities.Models;
-
 
 namespace E_Attend.Service.Course;
 
-public class CourseService : ICourseService {
+public class CourseService : ICourseService
+{
     private readonly IUnitOfWork unitOfWork;
 
-    public CourseService(IUnitOfWork unitOfWork) {
+    public CourseService(IUnitOfWork unitOfWork)
+    {
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<bool> AddCourseAsync(Entities.Models.Course course) {
+    public async Task<GeneralResponse<Entities.Models.Course>> AddCourseAsync(Entities.Models.Course course)
+    {
         await unitOfWork.CourseRepository.AddAsync(course);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<Entities.Models.Course>.Success(course, "Course added successfully");
     }
 
-    public async Task<bool> UpdateCourseAsync(int courseId, Entities.Models.Course updatedCourse) {
+    public async Task<GeneralResponse<object>> UpdateCourseAsync(int courseId, Entities.Models.Course updatedCourse)
+    {
         var course = await unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.ID == courseId);
-        if (course == null) throw new KeyNotFoundException("Course not found.");
+        if (course == null)
+            return GeneralResponse<object>.Error("Course not found.");
 
         course.InstructorID = updatedCourse.InstructorID;
         course.CreatedAt = updatedCourse.CreatedAt;
@@ -29,28 +34,38 @@ public class CourseService : ICourseService {
 
         await unitOfWork.CourseRepository.UpdateAsync(course);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Course updated successfully");
     }
 
-    public async Task<IEnumerable<Entities.Models.Course>> ViewAllCoursesByStudentIDAsync(int studentId) {
-        return await unitOfWork.CourseRepository.GetAllAsync(c => 
-            unitOfWork.EnrollmentRepository.AnyAsync(e => e.CourseID == c.ID && e.StudentID == studentId).Result);
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Course>>> ViewAllCoursesByStudentIDAsync(int studentId)
+    {
+        var enrollments = await unitOfWork.EnrollmentRepository
+            .GetAllAsync(e => e.StudentID == studentId);
 
+        var courseIds = enrollments.Select(e => e.CourseID).Distinct();
+
+        var courses = await unitOfWork.CourseRepository
+            .GetAllAsync(c => courseIds.Contains(c.ID));
+
+        return GeneralResponse<IEnumerable<Entities.Models.Course>>.Success(courses);
     }
 
-    public async Task<bool> DeleteCourseAsync(int courseId) {
+    public async Task<GeneralResponse<object>> DeleteCourseAsync(int courseId)
+    {
         var course = await unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.ID == courseId);
-        if (course == null) throw new KeyNotFoundException("Course not found.");
+        if (course == null)
+            return GeneralResponse<object>.Error("Course not found.");
 
         await unitOfWork.CourseRepository.RemoveAsync(course);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Course deleted successfully");
     }
 
-    public async Task<byte[]> DownloadCourseAsync(int courseId) {
-        // var course = await unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.ID == courseId);
-        // if (course == null) throw new KeyNotFoundException("Course not found.");
+    public async Task<GeneralResponse<byte[]>> DownloadCourseAsync(int courseId)
+    {
+        // Implement your download logic here.  For now, returning an error:
+        return GeneralResponse<byte[]>.Error("Download not implemented");
 
-        throw new NotImplementedException();
+
     }
 }

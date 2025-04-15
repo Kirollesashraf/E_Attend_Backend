@@ -1,10 +1,13 @@
-﻿namespace E_Attend.Service.Instructor
+﻿using E_Attend.Entities.DTOs;
+using E_Attend.Entities.Models;
+
+namespace E_Attend.Service.Instructor
 {
     public interface IInstructorService
     {
-        Task<bool> AddInstructorAsync(Entities.Models.Instructor instructor);
-        Task<bool> UpdateInstructorAsync(int instructorId, Entities.Models.Instructor updatedInstructor);
-        Task<IEnumerable<Entities.Models.Instructor>> ViewAllInstructorsAsync();
-        Task<bool> DeleteInstructorAsync(int instructorId);
+        Task<GeneralResponse<Entities.Models.Instructor>> AddInstructorAsync(Entities.Models.Instructor instructor);
+        Task<GeneralResponse<object>> UpdateInstructorAsync(int instructorId, Entities.Models.Instructor updatedInstructor);
+        Task<GeneralResponse<IEnumerable<Entities.Models.Instructor>>> ViewAllInstructorsAsync();
+        Task<GeneralResponse<object>> DeleteInstructorAsync(int instructorId);
     }
 }

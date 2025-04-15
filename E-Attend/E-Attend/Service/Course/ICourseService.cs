@@ -1,11 +1,14 @@
-﻿namespace E_Attend.Service.Course
+﻿using E_Attend.Entities.DTOs;
+using E_Attend.Entities.Models;
+
+namespace E_Attend.Service.Course
 {
     public interface ICourseService
     {
-        Task<bool> AddCourseAsync(Entities.Models.Course course);
-        Task<bool> UpdateCourseAsync(int courseId, Entities.Models.Course updatedCourse);
-        Task<IEnumerable<Entities.Models.Course>> ViewAllCoursesByStudentIDAsync(int studentId);
-        Task<bool> DeleteCourseAsync(int courseId);
-        Task<byte[]> DownloadCourseAsync(int courseId);
+        Task<GeneralResponse<Entities.Models.Course>> AddCourseAsync(Entities.Models.Course course);
+        Task<GeneralResponse<object>> UpdateCourseAsync(int courseId, Entities.Models.Course updatedCourse);
+        Task<GeneralResponse<IEnumerable<Entities.Models.Course>>> ViewAllCoursesByStudentIDAsync(int studentId);
+        Task<GeneralResponse<object>> DeleteCourseAsync(int courseId);
+        Task<GeneralResponse<byte[]>> DownloadCourseAsync(int courseId); // Keep consistent return type
     }
 }

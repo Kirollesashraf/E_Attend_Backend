@@ -1,81 +1,86 @@
-﻿
-using E_Attend.Entities.DTOs;
+﻿using E_Attend.Entities.DTOs;
 using E_Attend.Entities.Repositories;
 using E_Attend.Service.Assignment.Interfaces;
+using Microsoft.AspNetCore.Mvc; // For IActionResult
 
 namespace E_Attend.Service.Assignment;
 
 using Entities.Models;
 
-public class AssignmentService : IAssignmentService {
-    
+public class AssignmentService : IAssignmentService
+{
     private readonly IUnitOfWork unitOfWork;
 
-    public AssignmentService(IUnitOfWork unitOfWork) {
-        this.unitOfWork = unitOfWork; 
-    }
-
-    public async Task<Assignment> ViewAssignmentAsync(int assignmentId) {
-        var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
-        if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
-        return assignment;
-    }
-
-    public async Task<IEnumerable<Assignment>> ViewAllAssignmentsByInstructorIdAsync(int instructorId)
+    public AssignmentService(IUnitOfWork unitOfWork)
     {
-        var assignments = 
+        this.unitOfWork = unitOfWork;
+    }
+
+    public async Task<GeneralResponse<Assignment>> ViewAssignmentAsync(int assignmentId)
+    {
+        var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
+        return assignment == null
+            ? GeneralResponse<Assignment>.Error("Assignment not found")
+            : GeneralResponse<Assignment>.Success(assignment);
+    }
+
+    public async Task<GeneralResponse<IEnumerable<Assignment>>> ViewAllAssignmentsByInstructorIdAsync(int instructorId)
+    {
+        var assignments =
             from course in await unitOfWork.CourseRepository.GetAllAsync(c => c.InstructorID == instructorId)
-            join assignment in await unitOfWork.AssignmentRepository.GetAllAsync(a => true) 
-            on course.ID equals assignment.CourseID
+            join assignment in await unitOfWork.AssignmentRepository.GetAllAsync()
+                on course.ID equals assignment.CourseID
             select assignment;
 
-        return assignments;
+        return GeneralResponse<IEnumerable<Assignment>>.Success(assignments);
     }
 
-    public async Task<AssignmentDTO> CreateAssignmentAsync(AssignmentDTO assignment) {
+    public async Task<GeneralResponse<Assignment>> CreateAssignmentAsync(Assignment assignment)
+    {
         if (string.IsNullOrWhiteSpace(assignment.Title) || string.IsNullOrWhiteSpace(assignment.Description))
-            throw new ArgumentException("Title and description are required.");
-        
+            return GeneralResponse<Assignment>.Error("Title and description are required.");
 
-        await unitOfWork.AssignmentRepository.AddAsync(new Assignment {
+
+        var newAssignment = new Assignment
+        {
             CourseID = assignment.CourseID,
             CreatedAt = assignment.CreatedAt,
             Description = assignment.Description,
             Title = assignment.Title,
             DueDate = assignment.DueDate
-            
-            
-        });
+        };
+
+        await unitOfWork.AssignmentRepository.AddAsync(newAssignment);
         await unitOfWork.CompleteAsync();
 
-        return assignment;
+        return GeneralResponse<Assignment>.Success(assignment); // Return the DTO
     }
-    
-    public async Task<Task> DeleteAssignmentAsync(int assignmentId) {
+
+    public async Task<GeneralResponse<object>> DeleteAssignmentAsync(int assignmentId)
+    {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
-        if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
+        if (assignment == null)
+            return GeneralResponse<object>.Error("Assignment not found.");
+
         await unitOfWork.AssignmentRepository.RemoveAsync(assignment);
         await unitOfWork.CompleteAsync();
-        return Task.CompletedTask;
+        return GeneralResponse<object>.Success(null, "Assignment deleted successfully");
     }
 
-    public async Task<Task> UpdateAssignment(int assignmentId, AssignmentDTO newAssignment) {
+    public async Task<GeneralResponse<object>> UpdateAssignment(int assignmentId, Assignment newAssignment)
+    {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
-        if (assignment == null) throw new KeyNotFoundException("Assignment not found.");
+        if (assignment == null)
+            return GeneralResponse<object>.Error("Assignment not found.");
 
         assignment.DueDate = newAssignment.DueDate;
         assignment.Description = newAssignment.Description;
         assignment.CreatedAt = newAssignment.CreatedAt;
         assignment.CourseID = newAssignment.CourseID;
         assignment.Title = newAssignment.Title;
-        
+
         await unitOfWork.AssignmentRepository.UpdateAsync(assignment);
         await unitOfWork.CompleteAsync();
-        return Task.CompletedTask;
-
+        return GeneralResponse<object>.Success(null, "Assignment updated successfully");
     }
-
-  
-    
-    
 }

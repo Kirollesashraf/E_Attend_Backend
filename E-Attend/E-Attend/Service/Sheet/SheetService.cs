@@ -1,23 +1,29 @@
-﻿using E_Attend.Entities.Repositories;
+﻿using E_Attend.Entities.DTOs;
+using E_Attend.Entities.Repositories;
 
 namespace E_Attend.Service.Sheet;
 
-public class SheetService : ISheetService {
+public class SheetService : ISheetService
+{
     private readonly IUnitOfWork unitOfWork;
 
-    public SheetService(IUnitOfWork unitOfWork) {
+    public SheetService(IUnitOfWork unitOfWork)
+    {
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<bool> AddSheetAsync(Entities.Models.Sheet sheet) {
+    public async Task<GeneralResponse<Entities.Models.Sheet>> AddSheetAsync(Entities.Models.Sheet sheet)
+    {
         await unitOfWork.SheetRepository.AddAsync(sheet);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<Entities.Models.Sheet>.Success(sheet, "Sheet added successfully.");
     }
 
-    public async Task<bool> UpdateSheetAsync(int sheetId, Entities.Models.Sheet updatedSheet) {
+    public async Task<GeneralResponse<object>> UpdateSheetAsync(int sheetId, Entities.Models.Sheet updatedSheet)
+    {
         var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
-        if (sheet == null) throw new KeyNotFoundException("Sheet not found.");
+        if (sheet == null)
+            return GeneralResponse<object>.Error("Sheet not found.");
 
         sheet.CourseID = updatedSheet.CourseID;
         sheet.Titel = updatedSheet.Titel;
@@ -26,30 +32,32 @@ public class SheetService : ISheetService {
 
         await unitOfWork.SheetRepository.UpdateAsync(sheet);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Sheet updated successfully.");
     }
 
-    public async Task<Entities.Models.Sheet> ViewSheetAsync(int sheetId) {
-        return await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId) ?? throw new KeyNotFoundException("Sheet not found.");
-    }
-
-    public async Task<bool> DeleteSheetAsync(int sheetId) {
+    public async Task<GeneralResponse<Entities.Models.Sheet>> ViewSheetAsync(int sheetId)
+    {
         var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
-        if (sheet == null) throw new KeyNotFoundException("Sheet not found.");
+        return sheet == null
+            ? GeneralResponse<Entities.Models.Sheet>.Error("Sheet not found.")
+            : GeneralResponse<Entities.Models.Sheet>.Success(sheet);
+
+    }
+
+    public async Task<GeneralResponse<object>> DeleteSheetAsync(int sheetId)
+    {
+        var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
+        if (sheet == null)
+            return GeneralResponse<object>.Error("Sheet not found.");
 
         await unitOfWork.SheetRepository.RemoveAsync(sheet);
         await unitOfWork.CompleteAsync();
-        return true;
+        return GeneralResponse<object>.Success(null, "Sheet deleted successfully.");
     }
 
-    public async Task<bool> UploadSheetAsync(int sheetId, byte[] fileData) {
-        // var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
-        // if (sheet == null) throw new KeyNotFoundException("Sheet not found.");
-        //
-        // sheet.FileData = fileData;
-        // await unitOfWork.SheetRepository.UpdateAsync(sheet);
-        // await unitOfWork.CompleteAsync();
-        // return true;
-        throw new NotImplementedException();
+    public async Task<GeneralResponse<object>> UploadSheetAsync(int sheetId, byte[] fileData)
+    {
+        // Implement your upload logic here.  This remains unchanged from the previous example.
+        return GeneralResponse<object>.Error("Upload not implemented");
     }
 }

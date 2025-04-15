@@ -36,11 +36,11 @@ public class InstructorController : ControllerBase {
 
         
         [HttpPost("assignments")]
-        public async Task<IActionResult> CreateAssignment([FromBody] AssignmentDTO assignment) =>
+        public async Task<IActionResult> CreateAssignment([FromBody] Assignment assignment) =>
             Ok(await _assignmentService.CreateAssignmentAsync(assignment));
 
         [HttpPut("assignments/{assignmentId}")]
-        public async Task<IActionResult> UpdateAssignment(int assignmentId, [FromBody] AssignmentDTO newAssignment) =>
+        public async Task<IActionResult> UpdateAssignment(int assignmentId, [FromBody] Assignment newAssignment) =>
             Ok(await _assignmentService.UpdateAssignment(assignmentId, newAssignment));
 
         [HttpDelete("assignments/{assignmentId}")]
