@@ -56,7 +56,7 @@ namespace E_Attend.Service
             var supabase = new Supabase.Client(options.Value.Url, options.Value.Key, supabaseOptions);
             await supabase.InitializeAsync();
 
-            var lst = await supabase.Rpc<List<Attendance>>("AttendanceTableUsingJoin", null);
+            var lst = await supabase.Rpc<List<Entities.Models.Attendance>>("AttendanceTableUsingJoin", null);
 
             if (lst != null)
             {

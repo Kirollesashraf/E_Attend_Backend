@@ -4,6 +4,8 @@ using E_Attend.Service.Instructor;
 using E_Attend.Service.Student;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using E_Attend.Entities.Repositories;
+using E_Attend.Service.Attendance;
 using E_Attend.Service.Enrollment;
 
 namespace E_Attend.Presentation.Controllers
@@ -16,15 +18,21 @@ namespace E_Attend.Presentation.Controllers
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
         private readonly IEnrollmentService _enrollmentService;
+        private readonly IAttendanceService _attendanceService;
 
-        public AdministratorController(IInstructorService instructorService, ICourseService courseService, IStudentService studentService, IEnrollmentService enrollmentService)
+        public AdministratorController(IInstructorService instructorService, ICourseService courseService, IStudentService studentService, IEnrollmentService enrollmentService, IAttendanceService attendanceService)
         {
             _studentService = studentService;
             _courseService = courseService;
             _instructorService = instructorService;
             _enrollmentService = enrollmentService;
+            _attendanceService = attendanceService;
         }
 
+        
+        [HttpGet("attendance/{attendanceId}")]
+        public async Task<IActionResult> ViewAttendance(int attendanceId) =>
+            Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
         // Courses
         [HttpGet("courses/student/{studentId}")]
         public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>
