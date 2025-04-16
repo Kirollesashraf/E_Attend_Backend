@@ -5,18 +5,22 @@ using E_Attend.Service.Assignment;
 using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
+using E_Attend.Entities.ConfigurationModels;
+using E_Attend.Service;
 using E_Attend.Service.Course;
 using E_Attend.Service.Enrollment;
 using E_Attend.Service.Instructor;
 using E_Attend.Service.Sheet;
 using E_Attend.Service.Student;
 using E_Attend.Service.Submission;
+using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<SupabaseOptions>(builder.Configuration.GetSection("Supabase"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,6 +29,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+builder.Services.AddHostedService<DailySupabaseSyncService>();
 
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -44,6 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     // app.MapScalarApiReference();
 }
+
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
