@@ -9,6 +9,6 @@ namespace E_Attend.Service.Sheet
         Task<GeneralResponse<object>> UpdateSheetAsync(int sheetId, Entities.Models.Sheet updatedSheet);
         Task<GeneralResponse<Entities.Models.Sheet>> ViewSheetAsync(int sheetId);
         Task<GeneralResponse<object>> DeleteSheetAsync(int sheetId);
-        Task<GeneralResponse<object>> UploadSheetAsync(int sheetId, byte[] fileData);
+        //Task<GeneralResponse<object>> UploadSheetAsync(int sheetId, byte[] fileData);
     }
 }

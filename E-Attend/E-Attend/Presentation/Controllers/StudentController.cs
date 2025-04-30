@@ -24,9 +24,9 @@ public class StudentController : ControllerBase {
     public async Task<IActionResult> ViewAttendance(int attendanceId) =>
         Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
     
-    [HttpPost("sheets/{sheetId}/upload")]
-    public async Task<IActionResult> UploadSheet(int sheetId, [FromBody] byte[] fileData) =>
-        Ok(await _sheetService.UploadSheetAsync(sheetId, fileData));
+    //[HttpPost("sheets/{sheetId}/upload")]
+    //public async Task<IActionResult> UploadSheet(int sheetId, [FromBody] byte[] fileData) =>
+    //    Ok(await _sheetService.UploadSheetAsync(sheetId, fileData));
     
     [HttpGet("courses/student/{studentId}")]
     public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>

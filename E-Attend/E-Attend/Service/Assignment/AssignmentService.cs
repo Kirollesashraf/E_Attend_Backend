@@ -53,7 +53,7 @@ public class AssignmentService : IAssignmentService
         await unitOfWork.AssignmentRepository.AddAsync(newAssignment);
         await unitOfWork.CompleteAsync();
 
-        return GeneralResponse<Assignment>.Success(assignment); // Return the DTO
+        return GeneralResponse<Assignment>.Success(newAssignment); // Return the DTO
     }
 
     public async Task<GeneralResponse<object>> DeleteAssignmentAsync(int assignmentId)
