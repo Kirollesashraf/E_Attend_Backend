@@ -4,12 +4,10 @@ obj/
 *.dll
 *.exe
 *.pdb
-*.json
 *.props
 *.cache
 *.info
 *.info
-*.json
 *.cache 
 *.editorconfig
 *.info
