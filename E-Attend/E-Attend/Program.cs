@@ -10,6 +10,7 @@ using E_Attend.Entities.ConfigurationModels;
 using E_Attend.Entities.Models;
 using E_Attend.Service;
 using E_Attend.Service.Attendance;
+using E_Attend.Service.Auth;
 using E_Attend.Service.Course;
 using E_Attend.Service.Enrollment;
 using E_Attend.Service.Instructor;
@@ -24,20 +25,9 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.Configure<SupabaseOptions>(builder.Configuration.GetSection("Supabase"));
-builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWTOptions"));
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // Register ApplicationDbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
 builder.Services.AddHostedService<DailySupabaseSyncService>();
-
-
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -64,6 +54,14 @@ builder.Services.AddAuthentication(
     }
 );
 
+
+// Add services to the container.
+builder.Services.Configure<SupabaseOptions>(builder.Configuration.GetSection("Supabase"));
+builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWTOptions"));
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICourseService, CourseService>();
@@ -74,22 +72,20 @@ builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<ISheetService, SheetService>();
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // ? Allow CORS for all origins
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => {
         policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
     // app.MapScalarApiReference();

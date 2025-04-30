@@ -1,13 +1,10 @@
 ﻿using E_Attend.Entities.Models;
 using Microsoft.EntityFrameworkCore;
-namespace E_Attend.Data_Access.context
-{
-    public class ApplicationDbContext:DbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) 
-        {
-        }
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace E_Attend.Data_Access.context {
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : IdentityDbContext<AppUser>(options) {
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
@@ -17,6 +14,5 @@ namespace E_Attend.Data_Access.context
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Submission> Submissions { get; set; }
-
     }
 }
