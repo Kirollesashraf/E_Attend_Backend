@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace E_Attend.Presentation.Controllers;
 
 [Route("[controller]")]
+[ApiController]
 public class AuthController : ControllerBase {
     private readonly IAuthService _authService;
 
@@ -34,5 +35,17 @@ public class AuthController : ControllerBase {
 
         return Ok(res);
     }
+    
+    [HttpPost("add-role")]
+    public async Task<IActionResult> AddRoleAsync(AddRoleModel model) {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        var res = await _authService.AddRoleAsync(model);
+        if (!string.IsNullOrEmpty(res))
+            return BadRequest(res);
+
+        return Ok($"Role {model.RoleName} assigned successfully" );
+    }
+    
     
 }

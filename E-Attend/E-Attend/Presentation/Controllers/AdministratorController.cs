@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using E_Attend.Entities.Repositories;
 using E_Attend.Service.Attendance;
 using E_Attend.Service.Enrollment;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Attend.Presentation.Controllers {
-    [Route("admin")]
+    [Authorize(Roles = "Admin")]
     [ApiController]
+    [Route("admin")]
+    
     public class AdministratorController : ControllerBase {
         private readonly IInstructorService _instructorService;
         private readonly IStudentService _studentService;

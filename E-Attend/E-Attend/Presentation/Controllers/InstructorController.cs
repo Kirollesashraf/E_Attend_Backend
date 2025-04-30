@@ -3,9 +3,12 @@ using E_Attend.Entities.Models;
 using E_Attend.Service.Assignment.Interfaces;
 using E_Attend.Service.Attendance;
 using E_Attend.Service.Sheet;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Presentation.Controllers;
+
+[Authorize(Roles = "Instrutor")]
 
 [Route("instructor")]
 [ApiController]

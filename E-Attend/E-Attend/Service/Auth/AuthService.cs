@@ -12,10 +12,12 @@ namespace E_Attend.Service.Auth;
 public class AuthService : IAuthService {
     private readonly UserManager<AppUser> _userManager;
     private readonly JWTOptions _jwtOptions;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AuthService(UserManager<AppUser> userManager, IOptions<JWTOptions> jwtOptions) {
+    public AuthService(UserManager<AppUser> userManager, IOptions<JWTOptions> jwtOptions, RoleManager<IdentityRole> roleManager) {
         _userManager = userManager;
         _jwtOptions = jwtOptions.Value;
+        _roleManager = roleManager;
     }
 
     public async Task<AuthModel> RegisterAsync(RegisterModel model) {
@@ -41,14 +43,14 @@ public class AuthService : IAuthService {
             return new AuthModel() { Message = errors };
         }
 
-        await _userManager.AddToRoleAsync(user, "Student");
+        await _userManager.AddToRoleAsync(user, "User");
 
         var jwtSecurityToken = await CreateJwtToken(user);
         return new AuthModel() {
             Email = user.Email,
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
-            Roles = ["Student"],
+            Roles = ["User"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };
@@ -78,6 +80,22 @@ public class AuthService : IAuthService {
 
         return authModel;
     }
+
+    public async Task<string> AddRoleAsync(AddRoleModel model)
+    {
+        var user = await _userManager.FindByIdAsync(model.UserId);
+
+        if (user is null || !await _roleManager.RoleExistsAsync(model.RoleName))
+            return "Invalid user ID or Role";
+
+        if (await _userManager.IsInRoleAsync(user, model.RoleName))
+            return "User already assigned to this role";
+
+        var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+
+        return result.Succeeded ? string.Empty : "Something went wrong";
+    }
+
     public async Task<JwtSecurityToken> CreateJwtToken(AppUser user) {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var roles = await _userManager.GetRolesAsync(user);

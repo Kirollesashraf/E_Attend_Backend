@@ -7,4 +7,5 @@ public interface IAuthService {
     Task<AuthModel> RegisterAsync(RegisterModel model);
     Task<JwtSecurityToken> CreateJwtToken(AppUser user);
     public Task<AuthModel> GetTokenAsync(TokenRequestModel model);
+    public Task<string> AddRoleAsync(AddRoleModel model);
 }
