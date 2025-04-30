@@ -41,19 +41,43 @@ public class AuthService : IAuthService {
             return new AuthModel() { Message = errors };
         }
 
-        await _userManager.AddToRoleAsync(user, "Admin");
+        await _userManager.AddToRoleAsync(user, "Student");
 
         var jwtSecurityToken = await CreateJwtToken(user);
         return new AuthModel() {
             Email = user.Email,
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
-            Roles = ["Admin"],
+            Roles = ["Student"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };
     }
 
+    public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
+    {
+        var authModel = new AuthModel();
+
+        var user = await _userManager.FindByEmailAsync(model.Email);
+
+        if (user is null || !await _userManager.CheckPasswordAsync(user, model.Password))
+        {
+            authModel.Message = "Email or Password is incorrect!";
+            return authModel;
+        }
+
+        var jwtSecurityToken = await CreateJwtToken(user);
+        var rolesList = await _userManager.GetRolesAsync(user);
+
+        authModel.IsAuthenticated = true;
+        authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+        authModel.Email = user.Email;
+        authModel.Username = user.UserName;
+        authModel.ExpiresOn = jwtSecurityToken.ValidTo;
+        authModel.Roles = rolesList.ToList();
+
+        return authModel;
+    }
     public async Task<JwtSecurityToken> CreateJwtToken(AppUser user) {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var roles = await _userManager.GetRolesAsync(user);

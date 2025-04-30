@@ -22,6 +22,17 @@ public class AuthController : ControllerBase {
             return BadRequest(res.Message);
 
         return Ok(res);
+    }   
+    
+    [HttpPost("token")]
+    public async Task<IActionResult> GetTokenAsync(TokenRequestModel model) {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        var res = await _authService.GetTokenAsync(model);
+        if (!res.IsAuthenticated)
+            return BadRequest(res.Message);
+
+        return Ok(res);
     }
     
 }
