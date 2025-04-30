@@ -8,20 +8,19 @@ using E_Attend.Entities.Repositories;
 using E_Attend.Service.Attendance;
 using E_Attend.Service.Enrollment;
 
-namespace E_Attend.Presentation.Controllers
-{
+namespace E_Attend.Presentation.Controllers {
     [Route("admin")]
     [ApiController]
-    public class AdministratorController : ControllerBase
-    {
+    public class AdministratorController : ControllerBase {
         private readonly IInstructorService _instructorService;
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
         private readonly IEnrollmentService _enrollmentService;
         private readonly IAttendanceService _attendanceService;
 
-        public AdministratorController(IInstructorService instructorService, ICourseService courseService, IStudentService studentService, IEnrollmentService enrollmentService, IAttendanceService attendanceService)
-        {
+        public AdministratorController(IInstructorService instructorService, ICourseService courseService,
+            IStudentService studentService, IEnrollmentService enrollmentService,
+            IAttendanceService attendanceService) {
             _studentService = studentService;
             _courseService = courseService;
             _instructorService = instructorService;
@@ -29,14 +28,19 @@ namespace E_Attend.Presentation.Controllers
             _attendanceService = attendanceService;
         }
 
-        
+
         [HttpGet("attendance/{attendanceId}")]
         public async Task<IActionResult> ViewAttendance(int attendanceId) =>
             Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
+
         // Courses
         [HttpGet("courses/student/{studentId}")]
         public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>
             Ok(await _courseService.ViewAllCoursesByStudentIDAsync(studentId));
+
+        [HttpGet("courses/view-all")]
+        public async Task<IActionResult> ViewAllCourses() =>
+            Ok(await _courseService.ViewAllCourses());
 
         [HttpPost("courses/add")]
         public async Task<IActionResult> CreateCourse([FromBody] Course newCourse) =>
@@ -79,8 +83,8 @@ namespace E_Attend.Presentation.Controllers
         [HttpDelete("students/{studentId}")]
         public async Task<IActionResult> DeleteStudent(int studentId) =>
             Ok(await _studentService.DeleteStudentAsync(studentId));
-        
-        
+
+
         [HttpPost("enrollments")]
         public async Task<IActionResult> EnrollStudent([FromQuery] int studentId, [FromQuery] int courseId) =>
             Ok(await _enrollmentService.EnrollCourseAsync(studentId, courseId));
@@ -96,6 +100,5 @@ namespace E_Attend.Presentation.Controllers
         [HttpDelete("enrollments/{enrollmentId}")]
         public async Task<IActionResult> DeleteEnrollment(int enrollmentId) =>
             Ok(await _enrollmentService.DeleteEnrollmentAsync(enrollmentId));
-        
     }
 }
