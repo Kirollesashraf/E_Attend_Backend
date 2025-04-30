@@ -21,10 +21,16 @@ public class AuthService : IAuthService {
     public async Task<AuthModel> RegisterAsync(RegisterModel model) {
         if (await _userManager.FindByEmailAsync(model.Email) is not null)
             return new AuthModel() { Message = "Email is already registered" };
+        
+        if (await _userManager.FindByNameAsync(model.Username) is not null)
+            return new AuthModel() { Message = "Username is already registered" };
+        
         var user = new AppUser() {
-            Email = model.Email
+            Email = model.Email,
+            UserName = model.Username,
+            
         };
-        var res = await _userManager.CreateAsync(user, model.Paswword);
+        var res = await _userManager.CreateAsync(user, model.Password);
 
         if (!res.Succeeded) {
             var errors = String.Empty;
@@ -35,14 +41,14 @@ public class AuthService : IAuthService {
             return new AuthModel() { Message = errors };
         }
 
-        await _userManager.AddToRoleAsync(user, "User");
+        await _userManager.AddToRoleAsync(user, "Admin");
 
         var jwtSecurityToken = await CreateJwtToken(user);
         return new AuthModel() {
             Email = user.Email,
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
-            Roles = ["User"],
+            Roles = ["Admin"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };

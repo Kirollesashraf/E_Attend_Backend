@@ -6,9 +6,6 @@ namespace E_Attend.Entities.Models
     public class AppUser : IdentityUser
     {
         [Required]
-        public string Role { get; set; }
-
-        [Required]
         public DateTime CreatedAt { get; set; }
 
 
