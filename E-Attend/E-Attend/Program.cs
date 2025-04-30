@@ -5,6 +5,7 @@ using E_Attend.Service.Assignment;
 using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
+using System.Text;
 using E_Attend.Entities.ConfigurationModels;
 using E_Attend.Entities.Models;
 using E_Attend.Service;
@@ -15,7 +16,10 @@ using E_Attend.Service.Instructor;
 using E_Attend.Service.Sheet;
 using E_Attend.Service.Student;
 using E_Attend.Service.Submission;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +36,33 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddHostedService<DailySupabaseSyncService>();
+
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+builder.Services.AddAuthentication(
+    options => {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    }
+).AddJwtBearer(
+    o => {
+        o.RequireHttpsMetadata = false;
+        o.SaveToken = false;
+        o.TokenValidationParameters = new TokenValidationParameters() {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["JWTOptions:Issuer"],
+            ValidAudience = builder.Configuration["JWTOptions:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTOptions:Key"]))
+        };
+    }
+);
 
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -68,6 +99,8 @@ app.UseHttpsRedirection();
 
 // ? Apply CORS policy
 app.UseCors("AllowAll");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace E_Attend.Entities.Models
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
         public int ID { get; set; }
 
