@@ -50,6 +50,7 @@ public class AuthService : IAuthService {
             Email = user.Email,
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
+            UserId = user.Id,
             Roles = ["User"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
