@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Presentation.Controllers;
 
-[Authorize(Roles = "Instrutor")]
+[Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Instructor")]
 
 [Route("instructor")]
 [ApiController]

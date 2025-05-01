@@ -1,6 +1,9 @@
-﻿using E_Attend.Entities.DTOs;
+﻿using System.Security.Claims;
+using E_Attend.Entities.DTOs;
 using E_Attend.Entities.Models;
 using E_Attend.Service.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Presentation.Controllers;
@@ -14,6 +17,7 @@ public class AuthController : ControllerBase {
         _authService = authService;
     }
 
+    
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync(RegisterModel model) {
         if (!ModelState.IsValid)
@@ -25,6 +29,7 @@ public class AuthController : ControllerBase {
         return Ok(res);
     }   
     
+    // [Authorize("Admin")] NOT SAFE 
     [HttpPost("token")]
     public async Task<IActionResult> GetTokenAsync(TokenRequestModel model) {
         if (!ModelState.IsValid)
@@ -36,6 +41,7 @@ public class AuthController : ControllerBase {
         return Ok(res);
     }
     
+    // [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
     [HttpPost("add-role")]
     public async Task<IActionResult> AddRoleAsync(AddRoleModel model) {
         if (!ModelState.IsValid)
@@ -46,6 +52,26 @@ public class AuthController : ControllerBase {
 
         return Ok($"Role {model.RoleName} assigned successfully" );
     }
+    
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet("debug-role")]
+    public IActionResult DebugUserRole()
+    {
+        var userName = User.Identity?.Name ?? "Unknown";
+        var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+        var roles = User.Claims
+            .Where(c => c.Type == ClaimTypes.Role)
+            .Select(c => c.Value)
+            .ToList();
+
+        return Ok(new
+        {
+            isAuthenticated,
+            userName,
+            roles
+        });
+    }
+
     
     
 }

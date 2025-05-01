@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Presentation.Controllers;
 
-[Authorize(Roles = "Student")]
+[Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Student")]
 [Route("student")]
 [ApiController]
 public class StudentController : ControllerBase {
