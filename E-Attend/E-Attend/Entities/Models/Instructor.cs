@@ -26,7 +26,7 @@ namespace E_Attend.Entities.Models
 
         [Required]
         [ForeignKey("AppUser")]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
 
 

@@ -75,6 +75,7 @@ public class AuthService : IAuthService {
         authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         authModel.Email = user.Email;
         authModel.Username = user.UserName;
+        authModel.UserId = user.Id;
         authModel.ExpiresOn = jwtSecurityToken.ValidTo;
         authModel.Roles = rolesList.ToList();
 
