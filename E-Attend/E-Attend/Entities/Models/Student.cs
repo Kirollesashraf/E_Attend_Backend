@@ -5,8 +5,7 @@ namespace E_Attend.Entities.Models
 {
     public class Student
     {
-        [Required]
-        public int ID { get; set; }
+        [Key] public string ID { get; set; } = Guid.NewGuid().ToString();
         
        
         [Required]

@@ -6,16 +6,15 @@ namespace E_Attend.Entities.Models
     public class Sheet
     {
 
-        [Required]
-        public int ID { get; set; }
+        [Key] public string ID { get; set; } = Guid.NewGuid().ToString();
 
 
         [Required]
         [ForeignKey("Course")]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
 
         [Required]
-        public string Titel{ get; set; }
+        public string Title{ get; set; }
 
 
 

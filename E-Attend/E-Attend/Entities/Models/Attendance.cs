@@ -5,16 +5,15 @@ namespace E_Attend.Entities.Models
 {
     public class Attendance
     {
-        [Required]
-        public int ID { get; set; }
+        [Key] public string ID { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [ForeignKey("Student")]
-        public int StudentID { get; set; }
+        public string StudentID { get; set; }
 
         [Required]
         [ForeignKey("Course")]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
 
         [Required]
         public string Status { get; set; }

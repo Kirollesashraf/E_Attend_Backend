@@ -6,8 +6,7 @@ namespace E_Attend.Entities.Models
     public class Course
     {
 
-        [Required]
-        public int ID { get; set; }
+        [Key] public string ID { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         public string Name { get; set; }
@@ -22,7 +21,7 @@ namespace E_Attend.Entities.Models
 
         [Required]
         [ForeignKey("Instructor")]
-        public int InstructorID { get; set; }
+        public string InstructorID { get; set; }
 
 
 

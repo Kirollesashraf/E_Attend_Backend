@@ -13,7 +13,7 @@ public class EnrollmentService : IEnrollmentService
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<GeneralResponse<Entities.Models.Enrollment>> EnrollCourseAsync(int studentId, int courseId)
+    public async Task<GeneralResponse<Entities.Models.Enrollment>> EnrollCourseAsync(string studentId, string courseId)
     {
         var enrollment = new Entities.Models.Enrollment { StudentID = studentId, CourseID = courseId, EnrolledAt = DateTime.UtcNow };
         await unitOfWork.EnrollmentRepository.AddAsync(enrollment);
@@ -21,7 +21,7 @@ public class EnrollmentService : IEnrollmentService
         return GeneralResponse<Entities.Models.Enrollment>.Success(enrollment, "Student enrolled successfully.");
     }
 
-    public async Task<GeneralResponse<object>> UpdateEnrollmentAsync(int enrollmentId, Entities.Models.Enrollment updatedEnrollment)
+    public async Task<GeneralResponse<object>> UpdateEnrollmentAsync(string enrollmentId, Entities.Models.Enrollment updatedEnrollment)
     {
         var enrollment = await unitOfWork.EnrollmentRepository.GetFirstOrDefaultAsync(e => e.ID == enrollmentId);
         if (enrollment == null)
@@ -36,13 +36,13 @@ public class EnrollmentService : IEnrollmentService
         return GeneralResponse<object>.Success(null, "Enrollment updated successfully.");
     }
 
-    public async Task<GeneralResponse<IEnumerable<Entities.Models.Enrollment>>> ViewAllEnrollmentsOfStudentAsync(int studentId)
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Enrollment>>> ViewAllEnrollmentsOfStudentAsync(string studentId)
     {
         var enrollments = await unitOfWork.EnrollmentRepository.GetAllAsync(e => e.StudentID == studentId);
         return GeneralResponse<IEnumerable<Entities.Models.Enrollment>>.Success(enrollments);
     }
 
-    public async Task<GeneralResponse<object>> DeleteEnrollmentAsync(int enrollmentId)
+    public async Task<GeneralResponse<object>> DeleteEnrollmentAsync(string enrollmentId)
     {
         var enrollment = await unitOfWork.EnrollmentRepository.GetFirstOrDefaultAsync(e => e.ID == enrollmentId);
         if (enrollment == null)

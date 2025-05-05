@@ -34,12 +34,12 @@ public class AdministratorController : ControllerBase {
 
 
     [HttpGet("attendance/{attendanceId}")]
-    public async Task<IActionResult> ViewAttendance(int attendanceId) =>
+    public async Task<IActionResult> ViewAttendance(string attendanceId) =>
         Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
 
     // Courses
     [HttpGet("courses/student/{studentId}")]
-    public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>
+    public async Task<IActionResult> ViewCoursesByStudentId(string studentId) =>
         Ok(await _courseService.ViewAllCoursesByStudentIDAsync(studentId));
 
     [HttpGet("courses/view-all")]
@@ -51,11 +51,11 @@ public class AdministratorController : ControllerBase {
         Ok(await _courseService.AddCourseAsync(newCourse));
 
     [HttpPut("courses/{courseId}")]
-    public async Task<IActionResult> UpdateCourse(int courseId, [FromBody] Course updatedCourse) =>
+    public async Task<IActionResult> UpdateCourse(string courseId, [FromBody] Course updatedCourse) =>
         Ok(await _courseService.UpdateCourseAsync(courseId, updatedCourse));
 
     [HttpDelete("courses/{courseId}")]
-    public async Task<IActionResult> DeleteCourse(int courseId) =>
+    public async Task<IActionResult> DeleteCourse(string courseId) =>
         Ok(await _courseService.DeleteCourseAsync(courseId));
 
     // Instructors
@@ -68,11 +68,11 @@ public class AdministratorController : ControllerBase {
         Ok(await _instructorService.AddInstructorAsync(instructor));
 
     [HttpPut("instructors/{instructorId}")]
-    public async Task<IActionResult> UpdateInstructor(int instructorId, [FromBody] Instructor updatedInstructor) =>
+    public async Task<IActionResult> UpdateInstructor(string instructorId, [FromBody] Instructor updatedInstructor) =>
         Ok(await _instructorService.UpdateInstructorAsync(instructorId, updatedInstructor));
 
     [HttpDelete("instructors/{instructorId}")]
-    public async Task<IActionResult> DeleteInstructor(int instructorId) =>
+    public async Task<IActionResult> DeleteInstructor(string instructorId) =>
         Ok(await _instructorService.DeleteInstructorAsync(instructorId));
 
     // Students
@@ -81,27 +81,27 @@ public class AdministratorController : ControllerBase {
         Ok(await _studentService.AddStudentAsync(student));
 
     [HttpPut("students/{studentId}")]
-    public async Task<IActionResult> UpdateStudent(int studentId, [FromBody] Student updatedStudent) =>
+    public async Task<IActionResult> UpdateStudent(string studentId, [FromBody] Student updatedStudent) =>
         Ok(await _studentService.UpdateStudentAsync(studentId, updatedStudent));
 
     [HttpDelete("students/{studentId}")]
-    public async Task<IActionResult> DeleteStudent(int studentId) =>
+    public async Task<IActionResult> DeleteStudent(string studentId) =>
         Ok(await _studentService.DeleteStudentAsync(studentId));
 
 
     [HttpPost("enrollments")]
-    public async Task<IActionResult> EnrollStudent([FromQuery] int studentId, [FromQuery] int courseId) =>
+    public async Task<IActionResult> EnrollStudent([FromQuery] string studentId, [FromQuery] string courseId) =>
         Ok(await _enrollmentService.EnrollCourseAsync(studentId, courseId));
 
     [HttpPut("enrollments/{enrollmentId}")]
-    public async Task<IActionResult> UpdateEnrollment(int enrollmentId, [FromBody] Enrollment updatedEnrollment) =>
+    public async Task<IActionResult> UpdateEnrollment(string enrollmentId, [FromBody] Enrollment updatedEnrollment) =>
         Ok(await _enrollmentService.UpdateEnrollmentAsync(enrollmentId, updatedEnrollment));
 
     [HttpGet("enrollments/student/{studentId}")]
-    public async Task<IActionResult> ViewEnrollmentsByStudent(int studentId) =>
+    public async Task<IActionResult> ViewEnrollmentsByStudent(string studentId) =>
         Ok(await _enrollmentService.ViewAllEnrollmentsOfStudentAsync(studentId));
 
     [HttpDelete("enrollments/{enrollmentId}")]
-    public async Task<IActionResult> DeleteEnrollment(int enrollmentId) =>
+    public async Task<IActionResult> DeleteEnrollment(string enrollmentId) =>
         Ok(await _enrollmentService.DeleteEnrollmentAsync(enrollmentId));
 }

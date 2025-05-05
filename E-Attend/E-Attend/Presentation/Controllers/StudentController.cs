@@ -23,7 +23,7 @@ public class StudentController : ControllerBase {
 
 
     [HttpGet("attendance/{attendanceId}")]
-    public async Task<IActionResult> ViewAttendance(int attendanceId) =>
+    public async Task<IActionResult> ViewAttendance(string attendanceId) =>
         Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
 
     //[HttpPost("sheets/{sheetId}/upload")]
@@ -31,6 +31,6 @@ public class StudentController : ControllerBase {
     //    Ok(await _sheetService.UploadSheetAsync(sheetId, fileData));
 
     [HttpGet("courses/student/{studentId}")]
-    public async Task<IActionResult> ViewCoursesByStudentId(int studentId) =>
+    public async Task<IActionResult> ViewCoursesByStudentId(string studentId) =>
         Ok(await _courseService.ViewAllCoursesByStudentIDAsync(studentId));
 }

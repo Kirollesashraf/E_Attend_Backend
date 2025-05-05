@@ -19,14 +19,14 @@ public class SheetService : ISheetService
         return GeneralResponse<Entities.Models.Sheet>.Success(sheet, "Sheet added successfully.");
     }
 
-    public async Task<GeneralResponse<object>> UpdateSheetAsync(int sheetId, Entities.Models.Sheet updatedSheet)
+    public async Task<GeneralResponse<object>> UpdateSheetAsync(string sheetId, Entities.Models.Sheet updatedSheet)
     {
         var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
         if (sheet == null)
             return GeneralResponse<object>.Error("Sheet not found.");
 
         sheet.CourseID = updatedSheet.CourseID;
-        sheet.Titel = updatedSheet.Titel;
+        sheet.Title = updatedSheet.Title;
         sheet.FilePath = updatedSheet.FilePath;
         sheet.UploadedAt = updatedSheet.UploadedAt;
 
@@ -35,7 +35,7 @@ public class SheetService : ISheetService
         return GeneralResponse<object>.Success(null, "Sheet updated successfully.");
     }
 
-    public async Task<GeneralResponse<Entities.Models.Sheet>> ViewSheetAsync(int sheetId)
+    public async Task<GeneralResponse<Entities.Models.Sheet>> ViewSheetAsync(string sheetId)
     {
         var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
         return sheet == null
@@ -44,7 +44,7 @@ public class SheetService : ISheetService
 
     }
 
-    public async Task<GeneralResponse<object>> DeleteSheetAsync(int sheetId)
+    public async Task<GeneralResponse<object>> DeleteSheetAsync(string sheetId)
     {
         var sheet = await unitOfWork.SheetRepository.GetFirstOrDefaultAsync(s => s.ID == sheetId);
         if (sheet == null)

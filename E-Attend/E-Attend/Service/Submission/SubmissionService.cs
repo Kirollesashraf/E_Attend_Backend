@@ -20,7 +20,7 @@ public class SubmissionService : ISubmissionService
         return GeneralResponse<Entities.Models.Submission>.Success(submission, "Submission added successfully.");
     }
 
-    public async Task<GeneralResponse<object>> UpdateSubmissionAsync(int submissionId, Entities.Models.Submission updatedSubmission)
+    public async Task<GeneralResponse<object>> UpdateSubmissionAsync(string submissionId, Entities.Models.Submission updatedSubmission)
     {
         var submission = await unitOfWork.SubmissionRepository.GetFirstOrDefaultAsync(s => s.ID == submissionId);
         if (submission == null)
@@ -35,13 +35,13 @@ public class SubmissionService : ISubmissionService
         return GeneralResponse<object>.Success(null, "Submission updated successfully.");
     }
 
-    public async Task<GeneralResponse<IEnumerable<Entities.Models.Submission>>> ViewAllSubmissionsOfStudentAsync(int studentId)
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Submission>>> ViewAllSubmissionsOfStudentAsync(string studentId)
     {
         var submissions = await unitOfWork.SubmissionRepository.GetAllAsync(s => s.StudentID == studentId);
         return GeneralResponse<IEnumerable<Entities.Models.Submission>>.Success(submissions);
     }
 
-    public async Task<GeneralResponse<object>> DeleteSubmissionAsync(int submissionId)
+    public async Task<GeneralResponse<object>> DeleteSubmissionAsync(string submissionId)
     {
         var submission = await unitOfWork.SubmissionRepository.GetFirstOrDefaultAsync(s => s.ID == submissionId);
         if (submission == null)

@@ -5,16 +5,15 @@ namespace E_Attend.Entities.Models
 {
     public class Submission
     {
-        [Required]
-        public int ID { get; set; }
+        [Key] public string ID { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [ForeignKey("Assignment")]
-        public int AssignmentID { get; set; }
+        public string AssignmentID { get; set; }
 
         [Required]
         [ForeignKey("Student")]
-        public int StudentID { get; set; }
+        public string StudentID { get; set; }
 
         [Required]
         public string FilePath { get; set; }

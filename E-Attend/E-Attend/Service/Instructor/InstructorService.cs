@@ -20,7 +20,7 @@ public class InstructorService : IInstructorService
         return GeneralResponse<Entities.Models.Instructor>.Success(instructor, "Instructor added successfully.");
     }
 
-    public async Task<GeneralResponse<object>> UpdateInstructorAsync(int instructorId, Entities.Models.Instructor updatedInstructor)
+    public async Task<GeneralResponse<object>> UpdateInstructorAsync(string instructorId, Entities.Models.Instructor updatedInstructor)
     {
         var instructor = await unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.ID == instructorId);
         if (instructor == null)
@@ -43,7 +43,7 @@ public class InstructorService : IInstructorService
         return GeneralResponse<IEnumerable<Entities.Models.Instructor>>.Success(instructors);
     }
 
-    public async Task<GeneralResponse<object>> DeleteInstructorAsync(int instructorId)
+    public async Task<GeneralResponse<object>> DeleteInstructorAsync(string instructorId)
     {
         var instructor = await unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.ID == instructorId);
         if (instructor == null)

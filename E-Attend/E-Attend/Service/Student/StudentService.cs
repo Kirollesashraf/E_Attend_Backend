@@ -20,7 +20,7 @@ public class StudentService : IStudentService
         return GeneralResponse<Entities.Models.Student>.Success(student, "Student added successfully.");
     }
 
-    public async Task<GeneralResponse<object>> UpdateStudentAsync(int studentId, Entities.Models.Student updatedStudent)
+    public async Task<GeneralResponse<object>> UpdateStudentAsync(string studentId, Entities.Models.Student updatedStudent)
     {
         var student = await unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s => s.ID == studentId);
         if (student == null)
@@ -36,13 +36,13 @@ public class StudentService : IStudentService
         return GeneralResponse<object>.Success(null, "Student updated successfully.");
     }
 
-    public async Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudentsOfSectionAsync(int sectionId)
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudentsOfSectionAsync(string sectionId)
     {
         // Implement your logic to retrieve students by sectionId.  For now, returning an error:
         return GeneralResponse<IEnumerable<Entities.Models.Student>>.Error("View students by section not implemented.");
     }
 
-    public async Task<GeneralResponse<object>> DeleteStudentAsync(int studentId)
+    public async Task<GeneralResponse<object>> DeleteStudentAsync(string studentId)
     {
         var student = await unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s => s.ID == studentId);
         if (student == null)

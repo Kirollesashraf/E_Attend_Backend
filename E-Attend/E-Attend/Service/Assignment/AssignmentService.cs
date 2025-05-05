@@ -16,7 +16,7 @@ public class AssignmentService : IAssignmentService
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<GeneralResponse<Assignment>> ViewAssignmentAsync(int assignmentId)
+    public async Task<GeneralResponse<Assignment>> ViewAssignmentAsync(string assignmentId)
     {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
         return assignment == null
@@ -24,7 +24,7 @@ public class AssignmentService : IAssignmentService
             : GeneralResponse<Assignment>.Success(assignment);
     }
 
-    public async Task<GeneralResponse<IEnumerable<Assignment>>> ViewAllAssignmentsByInstructorIdAsync(int instructorId)
+    public async Task<GeneralResponse<IEnumerable<Assignment>>> ViewAllAssignmentsByInstructorIdAsync(string instructorId)
     {
         var assignments =
             from course in await unitOfWork.CourseRepository.GetAllAsync(c => c.InstructorID == instructorId)
@@ -56,7 +56,7 @@ public class AssignmentService : IAssignmentService
         return GeneralResponse<Assignment>.Success(newAssignment); // Return the DTO
     }
 
-    public async Task<GeneralResponse<object>> DeleteAssignmentAsync(int assignmentId)
+    public async Task<GeneralResponse<object>> DeleteAssignmentAsync(string assignmentId)
     {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
         if (assignment == null)
@@ -67,7 +67,7 @@ public class AssignmentService : IAssignmentService
         return GeneralResponse<object>.Success(null, "Assignment deleted successfully");
     }
 
-    public async Task<GeneralResponse<object>> UpdateAssignment(int assignmentId, Assignment newAssignment)
+    public async Task<GeneralResponse<object>> UpdateAssignment(string assignmentId, Assignment newAssignment)
     {
         var assignment = await unitOfWork.AssignmentRepository.GetFirstOrDefaultAsync(a => a.ID == assignmentId);
         if (assignment == null)

@@ -5,9 +5,9 @@ namespace E_Attend.Service.Enrollment
 {
     public interface IEnrollmentService
     {
-        Task<GeneralResponse<Entities.Models.Enrollment>> EnrollCourseAsync(int studentId, int courseId);
-        Task<GeneralResponse<object>> UpdateEnrollmentAsync(int enrollmentId, Entities.Models.Enrollment updatedEnrollment);
-        Task<GeneralResponse<IEnumerable<Entities.Models.Enrollment>>> ViewAllEnrollmentsOfStudentAsync(int studentId);
-        Task<GeneralResponse<object>> DeleteEnrollmentAsync(int enrollmentId);
+        Task<GeneralResponse<Entities.Models.Enrollment>> EnrollCourseAsync(string studentId, string courseId);
+        Task<GeneralResponse<object>> UpdateEnrollmentAsync(string enrollmentId, Entities.Models.Enrollment updatedEnrollment);
+        Task<GeneralResponse<IEnumerable<Entities.Models.Enrollment>>> ViewAllEnrollmentsOfStudentAsync(string studentId);
+        Task<GeneralResponse<object>> DeleteEnrollmentAsync(string enrollmentId);
     }
 }

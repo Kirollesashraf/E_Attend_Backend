@@ -35,10 +35,7 @@ public class AuthService : IAuthService {
         var res = await _userManager.CreateAsync(user, model.Password);
 
         if (!res.Succeeded) {
-            var errors = String.Empty;
-            foreach (var error in res.Errors) {
-                errors += $"{error.Description}, ";
-            }
+            var errors = res.Errors.Aggregate(string.Empty, (current, error) => current + $"{error.Description}, ");
 
             return new AuthModel() { Message = errors };
         }
@@ -101,10 +98,7 @@ public class AuthService : IAuthService {
     public async Task<JwtSecurityToken> CreateJwtToken(AppUser user) {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var roles = await _userManager.GetRolesAsync(user);
-        var roleClaims = new List<Claim>();
-
-        foreach (var role in roles)
-            roleClaims.Add(new Claim("roles", role));
+        var roleClaims = roles.Select(role => new Claim("roles", role)).ToList();
 
         var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),

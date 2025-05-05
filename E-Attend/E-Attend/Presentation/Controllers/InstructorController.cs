@@ -27,22 +27,22 @@ public class InstructorController : ControllerBase {
         
         
         [HttpGet("attendance/{attendanceId}")]
-        public async Task<IActionResult> ViewAttendance(int attendanceId) =>
+        public async Task<IActionResult> ViewAttendance(string attendanceId) =>
             Ok(await _attendanceService.ViewAttendanceAsync(attendanceId));
         [HttpPost("sheets")]
         public async Task<IActionResult> AddSheet([FromBody] Sheet sheet) =>
             Ok(await _sheetService.AddSheetAsync(sheet));
 
         [HttpPut("sheets/{sheetId}")]
-        public async Task<IActionResult> UpdateSheet(int sheetId, [FromBody] Sheet updatedSheet) =>
+        public async Task<IActionResult> UpdateSheet(string sheetId, [FromBody] Sheet updatedSheet) =>
             Ok(await _sheetService.UpdateSheetAsync(sheetId, updatedSheet));
 
         [HttpGet("sheets/{sheetId}")]
-        public async Task<IActionResult> ViewSheet(int sheetId) =>
+        public async Task<IActionResult> ViewSheet(string sheetId) =>
             Ok(await _sheetService.ViewSheetAsync(sheetId));
 
         [HttpDelete("sheets/{sheetId}")]
-        public async Task<IActionResult> DeleteSheet(int sheetId) =>
+        public async Task<IActionResult> DeleteSheet(string sheetId) =>
             Ok(await _sheetService.DeleteSheetAsync(sheetId));
 
         
@@ -51,19 +51,19 @@ public class InstructorController : ControllerBase {
             Ok(await _assignmentService.CreateAssignmentAsync(assignment));
 
         [HttpPut("assignments/{assignmentId}")]
-        public async Task<IActionResult> UpdateAssignment(int assignmentId, [FromBody] Assignment newAssignment) =>
+        public async Task<IActionResult> UpdateAssignment(string assignmentId, [FromBody] Assignment newAssignment) =>
             Ok(await _assignmentService.UpdateAssignment(assignmentId, newAssignment));
 
         [HttpDelete("assignments/{assignmentId}")]
-        public async Task<IActionResult> DeleteAssignment(int assignmentId) =>
+        public async Task<IActionResult> DeleteAssignment(string assignmentId) =>
             Ok(await _assignmentService.DeleteAssignmentAsync(assignmentId));
 
         [HttpGet("assignments/{assignmentId}")]
-        public async Task<IActionResult> ViewAssignment(int assignmentId) =>
+        public async Task<IActionResult> ViewAssignment(string assignmentId) =>
             Ok(await _assignmentService.ViewAssignmentAsync(assignmentId));
 
         [HttpGet("assignments/instructor/{instructorId}")]
-        public async Task<IActionResult> ViewAllAssignmentsByInstructor(int instructorId) =>
+        public async Task<IActionResult> ViewAllAssignmentsByInstructor(string instructorId) =>
             Ok(await _assignmentService.ViewAllAssignmentsByInstructorIdAsync(instructorId));
 
 }
