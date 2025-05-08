@@ -36,6 +36,10 @@ public class StudentService : IStudentService
         return GeneralResponse<object>.Success(null, "Student updated successfully.");
     }
 
+    public async Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudents() {
+        return GeneralResponse<IEnumerable<Entities.Models.Student>>.Success(await unitOfWork.StudentRepository.GetAllAsync());
+    }
+
     public async Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudentsOfSectionAsync(string sectionId)
     {
         // Implement your logic to retrieve students by sectionId.  For now, returning an error:

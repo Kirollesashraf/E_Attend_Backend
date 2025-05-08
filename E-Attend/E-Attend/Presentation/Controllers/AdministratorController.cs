@@ -75,6 +75,10 @@ public class AdministratorController : ControllerBase {
     public async Task<IActionResult> DeleteInstructor(string instructorId) =>
         Ok(await _instructorService.DeleteInstructorAsync(instructorId));
 
+    
+    [HttpGet("students")]
+    public async Task<IActionResult> ViewAllStudentsAsync() =>
+        Ok(await _studentService.ViewAllStudents());
     // Students
     [HttpPost("students")]
     public async Task<IActionResult> AddStudent([FromBody] Student student) =>

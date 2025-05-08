@@ -7,6 +7,8 @@ namespace E_Attend.Service.Student
     {
         Task<GeneralResponse<Entities.Models.Student>> AddStudentAsync(Entities.Models.Student student);
         Task<GeneralResponse<object>> UpdateStudentAsync(string studentId, Entities.Models.Student updatedStudent);
+        Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudents();
+        
         Task<GeneralResponse<IEnumerable<Entities.Models.Student>>> ViewAllStudentsOfSectionAsync(string sectionId);
         Task<GeneralResponse<object>> DeleteStudentAsync(string studentId);
     }
