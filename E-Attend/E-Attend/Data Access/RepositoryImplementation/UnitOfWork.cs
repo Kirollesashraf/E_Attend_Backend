@@ -1,10 +1,16 @@
 ﻿using E_Attend.Data_Access.context;
+using E_Attend.Domain.Repositories;
+using E_Attend.Entities.Models;
 using E_Attend.Entities.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Attend.Data_Access.RepositoryImplementation
 {
     public class UnitOfWork : IUnitOfWork {
         private readonly ApplicationDbContext context;
+        private ApplicationDbContext _context;
+        private LectureRepository _lectures;
+
         public IAppUserRepository AppUserRepository { get; private set;  }
 
         public IAssignmentRepository AssignmentRepository{ get; private set; }
@@ -50,5 +56,16 @@ namespace E_Attend.Data_Access.RepositoryImplementation
         {
             await context.DisposeAsync();
         }
+
+
+
+        public UnitOfWork(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public ILectureRepository Lectures =>
+            _lectures ??= new LectureRepository(_context);
+
+
     }
 }

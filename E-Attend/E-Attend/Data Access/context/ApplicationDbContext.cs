@@ -14,5 +14,7 @@ namespace E_Attend.Data_Access.context {
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<Lecture> Lectures { get; set; }
+        public DbSet<StudentLecture> StudentLectures { get; set; }
     }
 }

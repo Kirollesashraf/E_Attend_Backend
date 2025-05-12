@@ -1,4 +1,6 @@
-﻿namespace E_Attend.Entities.Repositories
+﻿using E_Attend.Domain.Repositories;
+
+namespace E_Attend.Entities.Repositories
 {
     public interface IUnitOfWork : IDisposable, IAsyncDisposable
     {
@@ -13,8 +15,9 @@
         ISheetRepository SheetRepository { get; }
         IStudentRepository StudentRepository { get; }
         ISubmissionRepository SubmissionRepository { get; }
-
-
+        ILectureRepository Lectures { get; }
+    
+    
 
 
     }

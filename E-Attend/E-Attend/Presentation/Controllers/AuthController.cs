@@ -41,7 +41,7 @@ public class AuthController : ControllerBase {
         return Ok(res);
     }
     
-    // [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
     [HttpPost("add-role")]
     public async Task<IActionResult> AddRoleAsync(AddRoleModel model) {
         if (!ModelState.IsValid)

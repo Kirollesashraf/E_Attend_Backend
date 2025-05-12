@@ -24,6 +24,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
+using E_Attend.Domain.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,6 +102,10 @@ builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<ISheetService, SheetService>();
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+builder.Services.AddScoped<ILectureRepository, LectureRepository>();
+builder.Services.AddScoped<ILectureRepository, LectureRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 // ? Allow CORS for all origins
 builder.Services.AddCors(options => {
