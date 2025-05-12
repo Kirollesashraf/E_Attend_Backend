@@ -123,7 +123,7 @@ namespace E_Attend.Service.Lecture {
         public async Task<GeneralResponse<IEnumerable<Entities.Models.Lecture>>> GetStudentAttendLecture(string studentId, string courseId) {
             try {
                 var lst = await _unitOfWork.AttendanceRepository.GetAllAsync(a =>
-                    a.CourseID == courseId && a.StudentID == studentId);
+                    a.CourseID == courseId && a.Status == "Present" && a.StudentID == studentId);
 
                 var lectures = new List<Entities.Models.Lecture>();
 
