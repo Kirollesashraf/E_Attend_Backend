@@ -1,4 +1,6 @@
-﻿namespace E_Attend.Entities.DTOs;
+﻿using E_Attend.Entities.Models;
+
+namespace E_Attend.Entities.DTOs;
 
 public class GeneralResponse<T>
 {

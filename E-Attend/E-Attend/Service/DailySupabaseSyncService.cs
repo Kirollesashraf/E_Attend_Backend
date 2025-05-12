@@ -9,31 +9,24 @@ using E_Attend.Entities.Models;
 using E_Attend.Entities.Repositories;
 using E_Attend.Entities.ConfigurationModels;
 
-namespace E_Attend.Service
-{
-    public class DailySupabaseSyncService : BackgroundService
-    {
+namespace E_Attend.Service {
+    public class DailySupabaseSyncService : BackgroundService {
         private readonly ILogger<DailySupabaseSyncService> _logger;
         private readonly IServiceScopeFactory _scopeFactory;
 
         public DailySupabaseSyncService(
             ILogger<DailySupabaseSyncService> logger,
-            IServiceScopeFactory scopeFactory)
-        {
+            IServiceScopeFactory scopeFactory) {
             _logger = logger;
             _scopeFactory = scopeFactory;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                try
-                {
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
+            while (!stoppingToken.IsCancellationRequested) {
+                try {
                     await ReadFromSupabase();
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     _logger.LogError(ex, "Error while syncing from Supabase");
                 }
 
@@ -42,8 +35,7 @@ namespace E_Attend.Service
             }
         }
 
-        private async Task ReadFromSupabase()
-        {
+        private async Task ReadFromSupabase() {
             using var scope = _scopeFactory.CreateScope();
 
             var options = scope.ServiceProvider.GetRequiredService<IOptions<SupabaseOptions>>();
@@ -56,21 +48,32 @@ namespace E_Attend.Service
             var supabase = new Supabase.Client(options.Value.Url, options.Value.Key, supabaseOptions);
             await supabase.InitializeAsync();
 
-            var lst = await supabase.Rpc<List<Entities.Models.Attendance>>("AttendanceTableUsingJoin", null);
+            var attendances = await supabase.Rpc<List<Entities.Models.Attendance>>("AttendanceTableUsingJoin", null);
+            var lectures = await supabase.Rpc<List<Entities.Models.Lecture>>("LectureTableProcedure", null);
 
-            if (lst != null)
-            {
-                foreach (var ele in lst)
-                {
+            if (attendances != null) {
+                foreach (var ele in attendances) {
                     if (await unitOfWork.AttendanceRepository.GetFirstOrDefaultAsync(
                             a => a.Status == ele.Status &&
                                  a.Timestamp == ele.Timestamp &&
                                  a.CourseID == ele.CourseID &&
-                                 a.StudentID == ele.StudentID) == null)
-                    {
+                                 a.StudentID == ele.StudentID) == null) {
                         await unitOfWork.AttendanceRepository.AddAsync(ele);
                     }
+                }
 
+                await unitOfWork.CompleteAsync();
+            }
+
+
+            if (lectures != null) {
+                foreach (var ele in lectures) {
+                    if (await unitOfWork.LectureRepository.GetFirstOrDefaultAsync(
+                            a => a.ID == ele.ID &&
+                                 a.Day == ele.Day &&
+                                 a.CourseID == ele.CourseID) == null) {
+                        await unitOfWork.LectureRepository.AddAsync(ele);
+                    }
                 }
 
                 await unitOfWork.CompleteAsync();

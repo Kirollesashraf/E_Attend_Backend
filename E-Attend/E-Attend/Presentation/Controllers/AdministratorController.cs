@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using E_Attend.Entities.Repositories;
 using E_Attend.Service.Attendance;
 using E_Attend.Service.Enrollment;
+using E_Attend.Service.Lecture;
 using Microsoft.AspNetCore.Authorization;
 
 namespace E_Attend.Presentation.Controllers;
@@ -21,16 +22,43 @@ public class AdministratorController : ControllerBase {
     private readonly ICourseService _courseService;
     private readonly IEnrollmentService _enrollmentService;
     private readonly IAttendanceService _attendanceService;
+    private readonly ILectureService _lectureService;
 
     public AdministratorController(IInstructorService instructorService, ICourseService courseService,
-        IStudentService studentService, IEnrollmentService enrollmentService,
+        IStudentService studentService, IEnrollmentService enrollmentService, ILectureService lectureService,
         IAttendanceService attendanceService) {
         _studentService = studentService;
         _courseService = courseService;
         _instructorService = instructorService;
         _enrollmentService = enrollmentService;
+        _lectureService = lectureService;
         _attendanceService = attendanceService;
     }
+
+    
+    [HttpGet("lectures")]
+    public async Task<IActionResult> ViewAllLectures() => Ok(await _lectureService.ViewAllLecturesAsync());
+
+    [HttpGet("lectures/{lectureId}")]
+    public async Task<IActionResult> GetLectureById(string lectureId) => Ok(await _lectureService.GetLectureByIdAsync(lectureId));
+
+    [HttpGet("lectures/course/{courseId}")]
+    public async Task<IActionResult> GetLecturesByCourse(string courseId) => Ok(await _lectureService.GetLecturesByCourseAsync(courseId));
+
+    [HttpPost("lectures")]
+    public async Task<IActionResult> AddLecture([FromBody] Entities.Models.Lecture lecture) => Ok(await _lectureService.AddLectureAsync(lecture));
+
+    [HttpPut("lectures/{lectureId}")]
+    public async Task<IActionResult> UpdateLecture(string lectureId, [FromBody] Entities.Models.Lecture updatedLecture) => Ok(await _lectureService.UpdateLectureAsync(lectureId, updatedLecture));
+
+    [HttpDelete("lectures/{lectureId}")]
+    public async Task<IActionResult> DeleteLecture(string lectureId) => Ok(await _lectureService.DeleteLectureAsync(lectureId));
+
+    [HttpGet("lectures/{lectureId}/students")]
+    public async Task<IActionResult> GetStudentsAttendedLecture(string lectureId) => Ok(await _lectureService.GetStudentsAttendLecture(lectureId));
+
+    [HttpGet("lectures/student/{studentId}/course/{courseId}")]
+    public async Task<IActionResult> GetStudentAttendLecture(string studentId, string courseId) => Ok(await _lectureService.GetStudentAttendLecture(studentId, courseId));
 
 
     [HttpGet("attendance/{attendanceId}")]

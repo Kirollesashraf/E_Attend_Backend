@@ -14,6 +14,11 @@ namespace E_Attend.Entities.Models
         [Required]
         [ForeignKey("Course")]
         public string CourseID { get; set; }
+        
+        
+        [Required]
+        [ForeignKey("Lecture")]
+        public string LectureID { get; set; }
 
         [Required]
         public string Status { get; set; }

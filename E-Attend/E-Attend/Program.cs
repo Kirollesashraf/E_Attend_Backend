@@ -105,8 +105,8 @@ builder.Services.AddScoped<ISheetService, SheetService>();
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
 builder.Services.AddScoped<ILectureRepository, LectureRepository>();
 builder.Services.AddScoped<ILectureRepository, LectureRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ILectureService, LectureService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // ? Allow CORS for all origins
 builder.Services.AddCors(options => {

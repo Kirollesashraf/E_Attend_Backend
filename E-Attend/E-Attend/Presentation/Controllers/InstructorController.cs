@@ -2,6 +2,7 @@
 using E_Attend.Entities.Models;
 using E_Attend.Service.Assignment.Interfaces;
 using E_Attend.Service.Attendance;
+using E_Attend.Service.Lecture;
 using E_Attend.Service.Sheet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,33 @@ public class InstructorController : ControllerBase {
         private readonly ISheetService _sheetService;
         private readonly IAssignmentService _assignmentService;
         private readonly IAttendanceService _attendanceService;
+        private readonly ILectureService _lectureService;
 
 
-        public InstructorController(ISheetService sheetService, IAssignmentService assignmentService, IAttendanceService attendanceService) {
+        public InstructorController(ISheetService sheetService, ILectureService lectureService, IAssignmentService assignmentService, IAttendanceService attendanceService) {
             _sheetService = sheetService;
             _assignmentService = assignmentService;
             _attendanceService = attendanceService;
+            _lectureService = lectureService;
         }
         
+        
+        
+
+        [HttpGet("lectures/course/{courseId}")]
+        public async Task<IActionResult> GetLecturesByCourse(string courseId) => Ok(await _lectureService.GetLecturesByCourseAsync(courseId));
+
+        [HttpPost("lectures")]
+        public async Task<IActionResult> AddLecture([FromBody] Entities.Models.Lecture lecture) => Ok(await _lectureService.AddLectureAsync(lecture));
+
+        [HttpPut("lectures/{lectureId}")]
+        public async Task<IActionResult> UpdateLecture(string lectureId, [FromBody] Entities.Models.Lecture updatedLecture) => Ok(await _lectureService.UpdateLectureAsync(lectureId, updatedLecture));
+
+        [HttpDelete("lectures/{lectureId}")]
+        public async Task<IActionResult> DeleteLecture(string lectureId) => Ok(await _lectureService.DeleteLectureAsync(lectureId));
+
+        [HttpGet("lectures/{lectureId}/students")]
+        public async Task<IActionResult> GetStudentsAttendedLecture(string lectureId) => Ok(await _lectureService.GetStudentsAttendLecture(lectureId));
         
         
         [HttpGet("attendance/{attendanceId}")]

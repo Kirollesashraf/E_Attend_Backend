@@ -15,7 +15,7 @@ namespace E_Attend.Entities.Repositories
         ISheetRepository SheetRepository { get; }
         IStudentRepository StudentRepository { get; }
         ISubmissionRepository SubmissionRepository { get; }
-        ILectureRepository Lectures { get; }
+        ILectureRepository LectureRepository { get; }
     
     
 

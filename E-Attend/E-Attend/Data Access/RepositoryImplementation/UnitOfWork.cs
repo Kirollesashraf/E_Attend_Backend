@@ -4,21 +4,20 @@ using E_Attend.Entities.Models;
 using E_Attend.Entities.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Attend.Data_Access.RepositoryImplementation
-{
+namespace E_Attend.Data_Access.RepositoryImplementation {
     public class UnitOfWork : IUnitOfWork {
         private readonly ApplicationDbContext context;
         private ApplicationDbContext _context;
         private LectureRepository _lectures;
 
-        public IAppUserRepository AppUserRepository { get; private set;  }
+        public IAppUserRepository AppUserRepository { get; private set; }
 
-        public IAssignmentRepository AssignmentRepository{ get; private set; }
+        public IAssignmentRepository AssignmentRepository { get; private set; }
 
 
         public IAttendanceRepository AttendanceRepository { get; private set; }
 
-        public ICourseRepository CourseRepository{ get; private set; }
+        public ICourseRepository CourseRepository { get; private set; }
 
         public IEnrollmentRepository EnrollmentRepository { get; private set; }
 
@@ -28,7 +27,8 @@ namespace E_Attend.Data_Access.RepositoryImplementation
 
         public IStudentRepository StudentRepository { get; private set; }
 
-        public ISubmissionRepository SubmissionRepository{ get; private set; }
+        public ISubmissionRepository SubmissionRepository { get; private set; }
+        public ILectureRepository LectureRepository { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context) {
             this.context = context;
@@ -41,31 +41,21 @@ namespace E_Attend.Data_Access.RepositoryImplementation
             this.SheetRepository = new SheetsRepository(this.context);
             this.StudentRepository = new StudentsRepository(this.context);
             this.SubmissionRepository = new SubmissionRepository(this.context);
+            this.LectureRepository = new LectureRepository(this.context);
         }
-        public async Task<int> CompleteAsync()
-        {
+
+        public async Task<int> CompleteAsync() {
             return await context.SaveChangesAsync();
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             context.Dispose();
         }
 
-        public async ValueTask DisposeAsync()
-        {
+        public async ValueTask DisposeAsync() {
             await context.DisposeAsync();
         }
 
-
-
-        public UnitOfWork(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-        public ILectureRepository Lectures =>
-            _lectures ??= new LectureRepository(_context);
-
-
+        
     }
 }
