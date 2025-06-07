@@ -1,4 +1,4 @@
-@E_Attend_HostAddress = http://localhost:5088
+@E_Attend_HostAddress = http://localhost:5044
 
 GET {{E_Attend_HostAddress}}/weatherforecast/
 Accept: application/json
