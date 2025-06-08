@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Attend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250608005241_InitialCreate")]
+    [Migration("20250608111709_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -49,11 +49,16 @@ namespace E_Attend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CourseId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Announcements");
                 });
@@ -138,6 +143,10 @@ namespace E_Attend.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -160,11 +169,11 @@ namespace E_Attend.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AnnouncementId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Credits")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -181,8 +190,6 @@ namespace E_Attend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AnnouncementId");
 
                     b.HasIndex("InstructorId");
 
@@ -228,6 +235,10 @@ namespace E_Attend.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -240,6 +251,8 @@ namespace E_Attend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Lectures");
                 });
@@ -420,6 +433,13 @@ namespace E_Attend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("E_Attend.Entities.Announcement", b =>
+                {
+                    b.HasOne("E_Attend.Entities.Course", null)
+                        .WithMany("Announcements")
+                        .HasForeignKey("CourseId");
+                });
+
             modelBuilder.Entity("E_Attend.Entities.Attendance", b =>
                 {
                     b.HasOne("E_Attend.Entities.Course", "Course")
@@ -441,21 +461,24 @@ namespace E_Attend.Migrations
 
             modelBuilder.Entity("E_Attend.Entities.Course", b =>
                 {
-                    b.HasOne("E_Attend.Entities.Announcement", "Announcement")
-                        .WithMany()
-                        .HasForeignKey("AnnouncementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("E_Attend.Entities.Instructor", "Instructor")
                         .WithMany("Courses")
                         .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Announcement");
-
                     b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("E_Attend.Entities.Lecture", b =>
+                {
+                    b.HasOne("E_Attend.Entities.Course", "Course")
+                        .WithMany("Lectures")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Student", b =>
@@ -518,6 +541,13 @@ namespace E_Attend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("E_Attend.Entities.Course", b =>
+                {
+                    b.Navigation("Announcements");
+
+                    b.Navigation("Lectures");
                 });
 
             modelBuilder.Entity("E_Attend.Entities.Instructor", b =>

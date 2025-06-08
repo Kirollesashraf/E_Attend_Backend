@@ -17,6 +17,7 @@ public class Attendance
     public Course Course { get; set; }
     
     public string Status { get; set; }
+    public string Day { get; set; }
     public DateTime Date { get; set; } = DateTime.UtcNow;
     
 }

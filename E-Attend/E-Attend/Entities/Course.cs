@@ -9,15 +9,18 @@ public class Course
 
     public string Title { get; set; }
     public string Description { get; set; }
-    public string Code { get; set; }
+    public string Code { get; set; } 
+    
+    public string Credits { get; set; }
 
     [ForeignKey(nameof(Instructor))]
     public string InstructorId { get; set; }
     public virtual Instructor Instructor { get; set; }
     
-    [ForeignKey(nameof(Announcement))]
-    public string AnnouncementId { get; set; }
-    public virtual Announcement Announcement { get; set; }
+
+    public virtual ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
     
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+    
+    public virtual ICollection<Lecture> Lectures { get; set; } = new List<Lecture>();
 }

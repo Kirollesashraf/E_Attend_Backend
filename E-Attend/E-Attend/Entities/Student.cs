@@ -9,8 +9,8 @@ public class Student
 
     [ForeignKey(nameof(ApplicationUser))]
     public string UserId { get; set; }
-    
     public ApplicationUser ApplicationUser { get; set; }
+    
     public string Name { get; set; }
     public string Degree { get; set; }
     public string Department { get; set; }
