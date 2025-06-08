@@ -9,98 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/AppUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/AssignmentRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/AttendanceRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/CourseRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/EnrollmentRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/GenericRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/InstructorRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/LectureRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/SheetsRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/StudentsRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/SubmissionRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/RepositoryImplementation/UnitOfWork.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data Access/context/ApplicationDbContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.csproj.user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.http" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/E-Attend.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/ConfigurationModels/JWTOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/ConfigurationModels/SupabaseOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/DTOs/GeneralResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/AddRoleModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/AppUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Assignment.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Attendance.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/AuthModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Course.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Enrollment.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Instructor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Lecture.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/RegisterModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Sheet.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Student.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/Submission.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Models/TokenRequestModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IAppUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IAssignmentRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IAttendanceRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/ICourseRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IEnrollmentRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IGenericRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IInstructorRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/ILectureRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/ISheetRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IStudentRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/ISubmissionRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Repositories/IUnitOfWork.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250512133314_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250512133314_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250512133547_SeedRoles.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250512133547_SeedRoles.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Presentation/Controllers/AdministratorController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Presentation/Controllers/AuthController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Presentation/Controllers/InstructorController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Presentation/Controllers/LecturesController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Presentation/Controllers/StudentController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Assignment/AssignmentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Assignment/IAssignmentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Attendance/AttendanceService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Attendance/IAttendanceService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Auth/AuthService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Auth/IAuthService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/CourseService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/ICourseService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/DailySupabaseSyncService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Enrollment/EnrollmentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Enrollment/IEnrollmentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Generic/GenericService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Generic/IGenericService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Instructor/IInstructorService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Instructor/InstructorService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Lecture/ILectureService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Lecture/LectureService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Sheet/ISheetService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Sheet/SheetService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Student/IStudentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Student/StudentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Submission/ISubmissionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Submission/SubmissionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/swagger.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../source code/E_Attend/E_Attend/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../source code/E_Attend/E_Attend/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../source code/E_Attend/E_Attend/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Attendance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Attendance.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +100,8 @@
       <option name="presentableId" value="Default" />
       <updated>1749301359109</updated>
       <workItem from="1749301361621" duration="1928000" />
-      <workItem from="1749314343202" duration="3511000" />
+      <workItem from="1749314343202" duration="3920000" />
+      <workItem from="1749338709579" duration="1704000" />
     </task>
     <servers />
   </component>
