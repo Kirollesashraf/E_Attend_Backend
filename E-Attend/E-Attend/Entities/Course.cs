@@ -20,5 +20,4 @@ public class Course
     public virtual Announcement Announcement { get; set; }
     
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
-    public virtual ICollection<Lecture> Lectures { get; set; } = new List<Lecture>();
 }

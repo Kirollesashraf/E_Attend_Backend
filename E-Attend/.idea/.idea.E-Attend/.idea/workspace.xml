@@ -10,9 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Attendance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Attendance.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Student.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Student.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +103,7 @@
       <updated>1749301359109</updated>
       <workItem from="1749301361621" duration="1928000" />
       <workItem from="1749314343202" duration="3920000" />
-      <workItem from="1749338709579" duration="1704000" />
+      <workItem from="1749338709579" duration="4884000" />
     </task>
     <servers />
   </component>
