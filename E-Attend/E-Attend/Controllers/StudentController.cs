@@ -1,12 +1,14 @@
 ﻿using E_Attend.Entities;
 using E_Attend.Entities.DTO;
 using E_Attend.Service._Student;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Controllers;
 
 [Route("[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class StudentController : ControllerBase
 {
     private readonly IStudentService _studentService;

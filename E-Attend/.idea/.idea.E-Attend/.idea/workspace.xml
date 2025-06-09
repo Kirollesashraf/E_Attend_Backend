@@ -11,9 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250609150902_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250609150902_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/AttendanceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/AttendanceController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +144,7 @@
       <workItem from="1749470232598" duration="9681000" />
       <workItem from="1749481353198" duration="133000" />
       <workItem from="1749481526820" duration="658000" />
-      <workItem from="1749498192583" duration="2008000" />
+      <workItem from="1749498192583" duration="3669000" />
     </task>
     <servers />
   </component>
@@ -190,13 +192,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs</url>
-          <line>13</line>
+          <line>15</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Controllers\AuthenticationController.cs" containingFunctionPresentation="Constructor 'AuthenticationController'">
             <startOffsets>
-              <option value="404" />
+              <option value="475" />
             </startOffsets>
             <endOffsets>
-              <option value="405" />
+              <option value="476" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />

@@ -1,4 +1,5 @@
 ﻿using E_Attend.Service._Attendance;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Controllers;
@@ -14,14 +15,18 @@ public class AttendanceController : ControllerBase
         _attendanceService = attendanceService;
     }
 
+    
+    [Authorize("Admin,Student")]
     [HttpGet("student/{courseId}/{studentId}")]
     public async Task<IActionResult> GetStudentAttendanceInCourseAsync(string courseId, string studentId) =>
         Ok(await _attendanceService.GetStudentAttendanceInCourseAsync(courseId, studentId));
 
+    [Authorize("Admin,Instructor")]
     [HttpGet("scheduled/{courseId}")]
     public async Task<IActionResult> GetScheduledAttendanceAsync(string courseId) =>
         Ok(await _attendanceService.GetScheduledAttendanceAsync(courseId));
 
+    [Authorize("Admin,Instructor")]
     [HttpGet("unscheduled/{courseId}")]
     public async Task<IActionResult> GetUnscheduledAttendanceAsync(string courseId) =>
         Ok(await _attendanceService.GetUnscheduledAttendanceAsync(courseId));
