@@ -1,5 +1,5 @@
 ﻿using E_Attend.Entities;
-using E_Attend.Service._Attendance;
+using E_Attend.Entities.DTO;
 using E_Attend.Service._Student;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +9,18 @@ namespace E_Attend.Controllers;
 [ApiController]
 public class StudentController : ControllerBase
 {
-    private readonly IStudentService _service;
-
-    public StudentController(IStudentService service)
-    {
-        _service = service;
-    }
+    private readonly IStudentService _studentService;
+    public StudentController(IStudentService studentService) => _studentService = studentService;
 
     [HttpGet]
-    [Route("students")]
-    public async Task<IActionResult> GetStudentsAsync()
-        => Ok(await _service.GetStudentsAsync());
+    public async Task<IActionResult> GetStudentsAsync() =>
+        Ok(await _studentService.GetStudentsAsync());
+
+    [HttpPut("{studentId}")]
+    public async Task<IActionResult> UpdateStudentAsync(string studentId, [FromBody] UpdateStudentDto updatedStudent) =>
+        Ok(await _studentService.UpdateStudentAsync(studentId, updatedStudent));
+
+    [HttpDelete("{studentId}")]
+    public async Task<IActionResult> DeleteStudentAsync(string studentId) =>
+        Ok(await _studentService.DeleteStudentAsync(studentId));
 }

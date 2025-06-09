@@ -1,10 +1,12 @@
 ﻿using E_Attend.Entities;
+using E_Attend.Entities.DTO;
+using E_Attend.Service.Common;
 
 namespace E_Attend.Service._Student;
 
 public interface IStudentService
 {
-    public Task<IEnumerable<Student>> GetStudentsAsync();
-    public Task DeleteStudentAsync(string studentId);
-    public Task UpdateStudentAsync(string studentId, Student updatedStudent);
+    public Task<GeneralResponse<IEnumerable<Student>>> GetStudentsAsync();
+    public Task<GeneralResponse<string>> DeleteStudentAsync(string studentId);
+    public Task<GeneralResponse<string>> UpdateStudentAsync(string studentId, UpdateStudentDto updatedStudent);
 }

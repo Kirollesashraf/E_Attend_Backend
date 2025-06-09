@@ -1,4 +1,5 @@
 ﻿using E_Attend.Entities;
+using E_Attend.Entities.DTO;
 using E_Attend.Service._Course;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ public class CourseController : ControllerBase
         Ok(await _courseService.RemoveCourseAsync(courseId));
 
     [HttpPut("{courseId}")]
-    public async Task<IActionResult> UpdateCourseAsync(string courseId, [FromBody] Course updatedCourse) =>
+    public async Task<IActionResult> UpdateCourseAsync(string courseId, [FromBody] UpdateCourseDto updatedCourse) =>
         Ok(await _courseService.UpdateCourseAsync(courseId, updatedCourse));
 
     //===========================Announcement===========================

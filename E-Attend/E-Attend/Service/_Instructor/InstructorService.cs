@@ -1,6 +1,7 @@
-﻿using E_Attend.Data.Repositories.Implementation;
-using E_Attend.Data.Repositories.Interface;
+﻿using E_Attend.Data.Repositories.Interface;
 using E_Attend.Entities;
+using E_Attend.Entities.DTO;
+using E_Attend.Service.Common;
 
 namespace E_Attend.Service._Instructor;
 
@@ -13,36 +14,42 @@ public class InstructorService : IInstructorService
         _unitOfWork = unitOfWork;
     }
 
-    public Task<IEnumerable<Instructor>> GetAllInstructorAsync()
+    public async Task<GeneralResponse<IEnumerable<Instructor>>> GetAllInstructorAsync()
     {
-        return _unitOfWork.InstructorRepository.GetAllAsync(includes: [i => i.Courses, i => i.ApplicationUser]);
+        var instructors = await _unitOfWork.InstructorRepository.GetAllAsync(
+            includes: [i => i.Courses, i => i.ApplicationUser]);
+        return GeneralResponse<IEnumerable<Instructor>>.SuccessResponse(instructors);
     }
 
-    public async Task DeleteInstructorAsync(string instructorId)
+    public async Task<GeneralResponse<string>> DeleteInstructorAsync(string instructorId)
     {
         var instructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.Id == instructorId);
-        if (instructor != null)
+        if (instructor == null)
         {
-            _unitOfWork.InstructorRepository.Remove(instructor);
-            await _unitOfWork.CompleteAsync();
+            return GeneralResponse<string>.FailureResponse("Instructor not found.");
         }
+
+        _unitOfWork.InstructorRepository.Remove(instructor);
+        await _unitOfWork.CompleteAsync();
+        return GeneralResponse<string>.SuccessResponse("Instructor deleted successfully.");
     }
 
-    public async Task UpdateInstructorAsync(string instructorId, Instructor updatedInstructor)
+    public async Task<GeneralResponse<string>> UpdateInstructorAsync(string instructorId, UpdateInstructorDto updatedInstructor)
     {
         var existingInstructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.Id == instructorId);
-        if (existingInstructor != null)
+        if (existingInstructor == null)
         {
-            existingInstructor.Name = updatedInstructor.Name;
-            existingInstructor.UniversityId = updatedInstructor.UniversityId;
-            existingInstructor.Department = updatedInstructor.Department;
-            existingInstructor.Degree = updatedInstructor.Degree;
-            existingInstructor.Specialization = updatedInstructor.Specialization;
-
-            _unitOfWork.InstructorRepository.Update(existingInstructor);
-            await _unitOfWork.CompleteAsync();
+            return GeneralResponse<string>.FailureResponse("Instructor not found.");
         }
-   
-    }
 
+        existingInstructor.Name = updatedInstructor.Name;
+        existingInstructor.UniversityId = updatedInstructor.UniversityId;
+        existingInstructor.Department = updatedInstructor.Department;
+        existingInstructor.Degree = updatedInstructor.Degree;
+        existingInstructor.Specialization = updatedInstructor.Specialization;
+
+        _unitOfWork.InstructorRepository.Update(existingInstructor);
+        await _unitOfWork.CompleteAsync();
+        return GeneralResponse<string>.SuccessResponse("Instructor updated successfully.");
+    }
 }

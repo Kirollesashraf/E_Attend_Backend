@@ -1,4 +1,5 @@
 ﻿using E_Attend.Entities;
+using E_Attend.Entities.DTO;
 using E_Attend.Service.Common;
 
 namespace E_Attend.Service._Course
@@ -10,7 +11,7 @@ namespace E_Attend.Service._Course
         Task<GeneralResponse<Course?>> GetCourseAsync(string id);
         Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync();
         Task<GeneralResponse<string>> RemoveCourseAsync(string courseId);
-        Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, Course updatedCourse);
+        Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, UpdateCourseDto updatedCourse);
 
         //===========================Announcement===========================
         Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, Announcement announcement);

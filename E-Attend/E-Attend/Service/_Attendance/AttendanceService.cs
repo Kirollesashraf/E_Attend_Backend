@@ -1,6 +1,6 @@
-﻿using E_Attend.Data.Repositories.Implementation;
-using E_Attend.Data.Repositories.Interface;
+﻿using E_Attend.Data.Repositories.Interface;
 using E_Attend.Entities;
+using E_Attend.Service.Common;
 
 namespace E_Attend.Service._Attendance;
 
@@ -13,23 +13,24 @@ public class AttendanceService : IAttendanceService
         _unitOfWork = unitOfWork;
     }
 
-    // public Task FetchLatestAttendanceAsync()
-    // {
-    //     
-    // }
-    public Task<IEnumerable<Attendance>> GetStudentAttendanceInCourseAsync(string courseId, string studentId)
+    public async Task<GeneralResponse<IEnumerable<Attendance>>> GetStudentAttendanceInCourseAsync(string courseId, string studentId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId);
+        var attendances = await _unitOfWork.AttendanceRepository
+            .GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId);
+        return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 
-    public Task<IEnumerable<Attendance>> GetScheduledAttendanceAsync(string courseId)
+    public async Task<GeneralResponse<IEnumerable<Attendance>>> GetScheduledAttendanceAsync(string courseId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.Status == "SCHEDULED");
+        var attendances = await _unitOfWork.AttendanceRepository
+            .GetAllAsync(a => a.CourseId == courseId && a.Status == "SCHEDULED");
+        return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 
-    public Task<IEnumerable<Attendance>> GetUnscheduledAttendanceAsync(string courseId)
+    public async Task<GeneralResponse<IEnumerable<Attendance>>> GetUnscheduledAttendanceAsync(string courseId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.Status == "UNSCHEDULED");
+        var attendances = await _unitOfWork.AttendanceRepository
+            .GetAllAsync(a => a.CourseId == courseId && a.Status == "UNSCHEDULED");
+        return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
-
 }

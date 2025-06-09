@@ -1,5 +1,6 @@
 ﻿using E_Attend.Data.Repositories.Interface;
 using E_Attend.Entities;
+using E_Attend.Entities.DTO;
 using E_Attend.Service.Common;
 
 namespace E_Attend.Service._Course;
@@ -58,7 +59,7 @@ public class CourseService : ICourseService
         return GeneralResponse<string>.SuccessResponse("Course removed successfully.");
     }
 
-    public async Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, Course updatedCourse)
+    public async Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, UpdateCourseDto updatedCourse)
     {
         var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == courseId);
         if (course == null)
