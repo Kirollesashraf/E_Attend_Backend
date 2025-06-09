@@ -1,6 +1,6 @@
 ﻿using E_Attend.Entities.AuthenticationModels;
 
-namespace E_Attend.Service.Authentication;
+namespace E_Attend.Service._Authentication;
 
 public interface IAuthenticationService
 {

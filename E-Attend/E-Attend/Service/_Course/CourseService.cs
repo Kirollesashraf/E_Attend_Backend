@@ -1,9 +1,9 @@
 ﻿using E_Attend.Data.Repositories.Implementation;
 using E_Attend.Entities;
 
-namespace E_Attend.Service.Course;
+namespace E_Attend.Service._Course;
 
-public class CourseService
+public class CourseService : ICourseService
 {
     private readonly UnitOfWork _unitOfWork;
 
@@ -20,12 +20,14 @@ public class CourseService
 
     public async Task<Entities.Course?> GetCourseAsync(string id)
     {
-        return await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == id);
+        return await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == id,
+            includes: [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);
     }
 
     public async Task<IEnumerable<Entities.Course>> GetCoursesAsync()
     {
-        return await _unitOfWork.CourseRepository.GetAllAsync();
+        return await _unitOfWork.CourseRepository.GetAllAsync(includes:
+            [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);
     }
 
     public async Task RemoveCourseAsync(Entities.Course course)
@@ -45,7 +47,7 @@ public class CourseService
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Announcements);
-        
+
         course?.Announcements.Add(announcement);
         await _unitOfWork.CompleteAsync();
     }
@@ -55,12 +57,11 @@ public class CourseService
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Announcements);
-        
+
         course?.Announcements.Remove(announcement);
         _unitOfWork.AnnouncementRepository.Remove(announcement);
-        
+
         await _unitOfWork.CompleteAsync();
-        
     }
 
     public async Task UpdateAnnouncementAsync(string id, Announcement announcement)
@@ -68,31 +69,31 @@ public class CourseService
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Announcements);
-        
+
         course?.Announcements.Remove(announcement);
         course?.Announcements.Add(announcement);
-        
+
         _unitOfWork.AnnouncementRepository.Update(announcement);
-        
+
         await _unitOfWork.CompleteAsync();
     }
 
     public async Task<IEnumerable<Entities.Announcement>> GetAnnouncementsAsync(string id)
     {
         var course =
-             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
+            await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Announcements);
 
         return course?.Announcements;
     }
-    
+
     //==========================================Lecture===========================================
     public async Task AddLectureAsync(string id, Lecture lecture)
     {
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Lectures);
-    
+
         course?.Lectures.Add(lecture);
         await _unitOfWork.CompleteAsync();
     }
@@ -102,10 +103,10 @@ public class CourseService
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Lectures);
-    
+
         course?.Lectures.Remove(lecture);
         _unitOfWork.LectureRepository.Remove(lecture);
-    
+
         await _unitOfWork.CompleteAsync();
     }
 
@@ -116,9 +117,9 @@ public class CourseService
                 includes: c => c.Lectures);
         course?.Lectures.Remove(lecture);
         course?.Lectures.Add(lecture);
-    
+
         _unitOfWork.LectureRepository.Update(lecture);
-    
+
         await _unitOfWork.CompleteAsync();
     }
 
@@ -132,7 +133,7 @@ public class CourseService
     }
 
     //==========================================Student===========================================
-    
+
     public async Task AddStudentAsync(string id, Student student)
     {
         var course =
@@ -141,8 +142,8 @@ public class CourseService
 
         var stud = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(predicate: s => s.Id == id,
             includes: s => s.Courses);
-        
-        
+
+
         stud?.Courses.Add(course);
         course?.Students.Add(student);
         await _unitOfWork.CompleteAsync();
@@ -153,10 +154,10 @@ public class CourseService
         var course =
             await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(predicate: c => c.Id == id,
                 includes: c => c.Students);
-    
+
         course?.Students.Remove(student);
         _unitOfWork.StudentRepository.Remove(student);
-    
+
         await _unitOfWork.CompleteAsync();
     }
 
@@ -168,6 +169,4 @@ public class CourseService
 
         return course?.Students;
     }
-
-    
 }

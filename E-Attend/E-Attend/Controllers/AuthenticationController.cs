@@ -1,5 +1,5 @@
 ﻿using E_Attend.Entities.AuthenticationModels;
-using E_Attend.Service.Authentication;
+using E_Attend.Service._Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Attend.Controllers;

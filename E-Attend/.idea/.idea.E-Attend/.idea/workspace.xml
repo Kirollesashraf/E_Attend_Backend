@@ -11,8 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/IAuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Authentication/IAuthenticationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/ICourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,23 +66,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.E-Attend: http.executor": "Run",
-    ".NET Launch Settings Profile.E-Attend: https.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Backend-phase2",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.E-Attend: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.E-Attend: https.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Backend-phase2&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.E-Attend: https">
     <configuration name="E-Attend: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/E-Attend/E-Attend.csproj" />
@@ -137,7 +141,8 @@
       <workItem from="1749314343202" duration="3920000" />
       <workItem from="1749338709579" duration="5522000" />
       <workItem from="1749380458634" duration="5015000" />
-      <workItem from="1749420925273" duration="8178000" />
+      <workItem from="1749420925273" duration="8928000" />
+      <workItem from="1749470232598" duration="731000" />
     </task>
     <servers />
   </component>
@@ -171,14 +176,14 @@
           <option name="timeStamp" value="3" />
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs</url>
+          <url>file://$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs</url>
           <line>20</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Constructor 'AuthenticationService'">
             <startOffsets>
-              <option value="846" />
+              <option value="847" />
             </startOffsets>
             <endOffsets>
-              <option value="847" />
+              <option value="848" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
@@ -188,23 +193,23 @@
           <line>13</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Controllers\AuthenticationController.cs" containingFunctionPresentation="Constructor 'AuthenticationController'">
             <startOffsets>
-              <option value="403" />
+              <option value="404" />
             </startOffsets>
             <endOffsets>
-              <option value="404" />
+              <option value="405" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs</url>
+          <url>file://$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs</url>
           <line>47</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Method 'RegisterAdminAsync'">
             <startOffsets>
-              <option value="1874" />
+              <option value="1875" />
             </startOffsets>
             <endOffsets>
-              <option value="1924" />
+              <option value="1925" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="6" />

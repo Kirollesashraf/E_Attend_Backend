@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace E_Attend.Service.Authentication;
+namespace E_Attend.Service._Authentication;
 
 public class AuthenticationService : IAuthenticationService
 {

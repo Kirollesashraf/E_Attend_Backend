@@ -10,7 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using E_Attend.Entities;
 using E_Attend.Entities.OptionModels;
-using E_Attend.Service.Authentication;
+using E_Attend.Service._Authentication;
+using E_Attend.Service._Course;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -75,6 +76,7 @@ builder.Services.AddSwaggerGen(c => {
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {
