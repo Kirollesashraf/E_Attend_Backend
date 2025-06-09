@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using E_Attend.Entities;
 using E_Attend.Entities.OptionModels;
+using E_Attend.Service._Attendance;
 using E_Attend.Service._Authentication;
 using E_Attend.Service._Course;
 using E_Attend.Service._Instructor;
@@ -81,6 +82,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IInstructorService, InstructorService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {

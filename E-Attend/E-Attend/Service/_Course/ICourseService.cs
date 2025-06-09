@@ -2,25 +2,30 @@
 
 namespace E_Attend.Service._Course;
 
+
 public interface ICourseService
 {
-    Task AddCourseAsync(Entities.Course course);
-    Task<Entities.Course?> GetCourseAsync(string id);
-    Task<IEnumerable<Entities.Course>> GetCoursesAsync();
-    Task RemoveCourseAsync(Entities.Course course);
-    Task UpdateCourseAsync(Entities.Course course);
+    //===========================Course===========================
+    Task AddCourseAsync(Course course);
+    Task<Course?> GetCourseAsync(string id);
+    Task<IEnumerable<Course>> GetCoursesAsync();
+    Task RemoveCourseAsync(string courseId);
+    Task UpdateCourseAsync(string courseId, Course updatedCourse);
 
-    Task AddAnnouncementAsync(string id, Announcement announcement);
-    Task RemoveAnnouncementAsync(string id, Announcement announcement);
-    Task UpdateAnnouncementAsync(string id, Announcement announcement);
-    Task<IEnumerable<Entities.Announcement>> GetAnnouncementsAsync(string id);
+    //===========================Announcement===========================
+    Task AddAnnouncementAsync(string courseId, Announcement announcement);
+    Task<IEnumerable<Announcement>> GetAnnouncementsAsync(string courseId);
+    Task RemoveAnnouncementAsync(string courseId, string announcementId);
+    Task UpdateAnnouncementAsync(string announcementId, Announcement updatedAnnouncement);
 
-    Task AddLectureAsync(string id, Lecture lecture);
-    Task RemoveLectureAsync(string id, Lecture lecture);
-    Task UpdateLectureAsync(string id, Lecture lecture);
-    Task<IEnumerable<Lecture>> GetLecturesAsync(string id);
+    //===========================Lecture===========================
+    Task AddLectureAsync(string courseId, Lecture lecture);
+    Task<IEnumerable<Lecture>> GetLecturesAsync(string courseId);
+    Task RemoveLectureAsync(string lectureId);
+    Task UpdateLectureAsync(string lectureId, Lecture updatedLecture);
 
-    Task AddStudentAsync(string id, Student student);
-    Task RemoveStudentAsync(string id, Student student);
-    Task<IEnumerable<Student>> GetStudentsAsync(string id);
+    //===========================Student===========================
+    Task AddStudentAsync(string courseId, Student student);
+    Task<IEnumerable<Student>> GetStudentsAsync(string courseId);
+    Task RemoveStudentAsync(string courseId, string studentId);
 }
