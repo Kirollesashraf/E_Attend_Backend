@@ -11,14 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Attendance/AttendanceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Attendance/AttendanceService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Attendance/IAttendanceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Attendance/IAttendanceService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +139,7 @@
       <workItem from="1749338709579" duration="5522000" />
       <workItem from="1749380458634" duration="5015000" />
       <workItem from="1749420925273" duration="8928000" />
-      <workItem from="1749470232598" duration="4496000" />
+      <workItem from="1749470232598" duration="5974000" />
     </task>
     <servers />
   </component>

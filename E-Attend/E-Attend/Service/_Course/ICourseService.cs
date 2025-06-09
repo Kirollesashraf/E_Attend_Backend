@@ -1,31 +1,32 @@
 ﻿using E_Attend.Entities;
+using E_Attend.Service.Common;
 
-namespace E_Attend.Service._Course;
-
-
-public interface ICourseService
+namespace E_Attend.Service._Course
 {
-    //===========================Course===========================
-    Task AddCourseAsync(Course course);
-    Task<Course?> GetCourseAsync(string id);
-    Task<IEnumerable<Course>> GetCoursesAsync();
-    Task RemoveCourseAsync(string courseId);
-    Task UpdateCourseAsync(string courseId, Course updatedCourse);
+    public interface ICourseService
+    {
+        //===========================Course===========================
+        Task<GeneralResponse<string>> AddCourseAsync(Course course);
+        Task<GeneralResponse<Course?>> GetCourseAsync(string id);
+        Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync();
+        Task<GeneralResponse<string>> RemoveCourseAsync(string courseId);
+        Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, Course updatedCourse);
 
-    //===========================Announcement===========================
-    Task AddAnnouncementAsync(string courseId, Announcement announcement);
-    Task<IEnumerable<Announcement>> GetAnnouncementsAsync(string courseId);
-    Task RemoveAnnouncementAsync(string courseId, string announcementId);
-    Task UpdateAnnouncementAsync(string announcementId, Announcement updatedAnnouncement);
+        //===========================Announcement===========================
+        Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, Announcement announcement);
+        Task<GeneralResponse<IEnumerable<Announcement>>> GetAnnouncementsAsync(string courseId);
+        Task<GeneralResponse<string>> RemoveAnnouncementAsync(string courseId, string announcementId);
+        Task<GeneralResponse<string>> UpdateAnnouncementAsync(string announcementId, Announcement updatedAnnouncement);
 
-    //===========================Lecture===========================
-    Task AddLectureAsync(string courseId, Lecture lecture);
-    Task<IEnumerable<Lecture>> GetLecturesAsync(string courseId);
-    Task RemoveLectureAsync(string lectureId);
-    Task UpdateLectureAsync(string lectureId, Lecture updatedLecture);
+        //===========================Lecture===========================
+        Task<GeneralResponse<string>> AddLectureAsync(string courseId, Lecture lecture);
+        Task<GeneralResponse<IEnumerable<Lecture>>> GetLecturesAsync(string courseId);
+        Task<GeneralResponse<string>> RemoveLectureAsync(string lectureId);
+        Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, Lecture updatedLecture);
 
-    //===========================Student===========================
-    Task AddStudentAsync(string courseId, Student student);
-    Task<IEnumerable<Student>> GetStudentsAsync(string courseId);
-    Task RemoveStudentAsync(string courseId, string studentId);
+        //===========================Student===========================
+        Task<GeneralResponse<string>> AddStudentAsync(string courseId, Student student);
+        Task<GeneralResponse<IEnumerable<Student>>> GetStudentsAsync(string courseId);
+        Task<GeneralResponse<string>> RemoveStudentAsync(string courseId, string studentId);
+    }
 }

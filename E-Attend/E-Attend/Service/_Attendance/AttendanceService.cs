@@ -17,18 +17,19 @@ public class AttendanceService : IAttendanceService
     // {
     //     
     // }
-    public Task<IEnumerable<Attendance>> GetStudentAttendanceInCourseAsync(Course course, Student student)
+    public Task<IEnumerable<Attendance>> GetStudentAttendanceInCourseAsync(string courseId, string studentId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == course.Id && a.StudentId == student.Id);
+        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId);
     }
 
-    public Task<IEnumerable<Attendance>> GetScheduledAttendanceAsync(Course course)
+    public Task<IEnumerable<Attendance>> GetScheduledAttendanceAsync(string courseId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == course.Id && a.Status == "SCHEDULED");
+        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.Status == "SCHEDULED");
     }
 
-    public Task<IEnumerable<Attendance>> GetUnscheduledAttendanceAsync(Course course)
+    public Task<IEnumerable<Attendance>> GetUnscheduledAttendanceAsync(string courseId)
     {
-        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == course.Id && a.Status == "UNSCHEDULED");
+        return _unitOfWork.AttendanceRepository.GetAllAsync(a => a.CourseId == courseId && a.Status == "UNSCHEDULED");
     }
+
 }

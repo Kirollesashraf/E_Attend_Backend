@@ -4,7 +4,7 @@ namespace E_Attend.Service._Attendance;
 
 public interface IAttendanceService
 {
-    public Task<IEnumerable<Attendance>> GetStudentAttendanceInCourseAsync(Course course, Student student);
-    public Task<IEnumerable<Attendance>> GetScheduledAttendanceAsync(Course course);
-    public Task<IEnumerable<Attendance>> GetUnscheduledAttendanceAsync(Course course);
+    public Task<IEnumerable<Attendance>> GetStudentAttendanceInCourseAsync(string courseId, string studentId);
+    public Task<IEnumerable<Attendance>> GetScheduledAttendanceAsync(string courseId);
+    public Task<IEnumerable<Attendance>> GetUnscheduledAttendanceAsync(string courseId);
 }
