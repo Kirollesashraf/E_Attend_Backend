@@ -11,12 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/AuthenticationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/IAuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Authentication/IAuthenticationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Course/ICourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +136,7 @@
       <workItem from="1749338709579" duration="5522000" />
       <workItem from="1749380458634" duration="5015000" />
       <workItem from="1749420925273" duration="8928000" />
-      <workItem from="1749470232598" duration="731000" />
+      <workItem from="1749470232598" duration="1839000" />
     </task>
     <servers />
   </component>
