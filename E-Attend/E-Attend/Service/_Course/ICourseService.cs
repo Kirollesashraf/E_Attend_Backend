@@ -10,6 +10,7 @@ namespace E_Attend.Service._Course
         Task<GeneralResponse<string>> AddCourseAsync(AddCourseDto addCourseDto);
         Task<GeneralResponse<Course?>> GetCourseAsync(string id);
         Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync();
+        Task<GeneralResponse<Course?>> GetCourseByTitleAsync(string courseTitle);
         Task<GeneralResponse<string>> RemoveCourseAsync(string courseId);
         Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, UpdateCourseDto updatedCourse);
 

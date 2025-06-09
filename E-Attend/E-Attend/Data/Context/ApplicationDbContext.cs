@@ -18,24 +18,39 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        // Announcement Entity
+        
         modelBuilder.Entity<Announcement>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id)
+                .HasConversion<int>(
+                    v => int.Parse(v),       
+                    v => v.ToString()       
+                )
+                .ValueGeneratedOnAdd()
+                .UseIdentityColumn();
+
+            
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Content).IsRequired();
-            entity.Property(e => e.Created).IsRequired();
+            entity.Property(e => e.Created).IsRequired().HasDefaultValue(DateTime.UtcNow);
         });
-
-        // Attendance Entity
+        
         modelBuilder.Entity<Attendance>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id)
+                .HasConversion<int>(
+                    v => int.Parse(v),       
+                    v => v.ToString()       
+                )
+                .ValueGeneratedOnAdd()
+                .UseIdentityColumn();
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Status).IsRequired().HasMaxLength(50);
-            entity.Property(e => e.Day).IsRequired().HasMaxLength(20);
+            entity.Property(e => e.TimeSlot).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Date).IsRequired();
 
             entity.HasOne(d => d.Student)
@@ -52,11 +67,18 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
             entity.HasIndex(a => new { a.StudentId, a.CourseId, a.Date }).IsUnique();
         });
-
-        // Course Entity
+        
         modelBuilder.Entity<Course>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id)
+                .HasConversion<int>(
+                    v => int.Parse(v),       
+                    v => v.ToString()       
+                )
+                .ValueGeneratedOnAdd()
+                .UseIdentityColumn();
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(1000);
@@ -82,8 +104,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
-
-        // Instructor Entity
+        
         modelBuilder.Entity<Instructor>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -96,8 +117,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             entity.HasIndex(e => e.UniversityId).IsUnique();
             entity.HasIndex(e => e.UserId).IsUnique();
         });
-
-        // Lecture Entity
+        
         modelBuilder.Entity<Lecture>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -115,7 +135,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             entity.HasIndex(e => new { e.CourseId, e.Date, e.Title }).IsUnique();
         });
 
-        // Student Entity
         modelBuilder.Entity<Student>(entity =>
         {
             entity.HasKey(e => e.Id);

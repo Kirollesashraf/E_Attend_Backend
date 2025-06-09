@@ -15,10 +15,10 @@ using E_Attend.Service._Authentication;
 using E_Attend.Service._Course;
 using E_Attend.Service._Instructor;
 using E_Attend.Service._Student;
+using E_Attend.Service._Supabase;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -45,7 +45,7 @@ builder.Services.AddAuthentication(
         };
     }
 );
-
+builder.Services.Configure<SupabaseOptions>(builder.Configuration.GetSection("Supabase"));
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWTOptions"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -83,6 +83,8 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IInstructorService, InstructorService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+builder.Services.AddHostedService<DailySupabaseSyncService>();
+
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {

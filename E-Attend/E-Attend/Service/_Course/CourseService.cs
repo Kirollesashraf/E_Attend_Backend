@@ -50,6 +50,17 @@ public class CourseService : ICourseService
 
         return GeneralResponse<Course?>.SuccessResponse(course);
     }
+    
+    public async Task<GeneralResponse<Course?>> GetCourseByTitleAsync(string courseTitle)
+    {
+        var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(
+            c => c.Title == courseTitle);
+
+        if (course == null)
+            return GeneralResponse<Course?>.FailureResponse("Course not found.");
+
+        return GeneralResponse<Course?>.SuccessResponse(course);
+    }
 
     public async Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync()
     {
