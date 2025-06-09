@@ -12,6 +12,8 @@ using E_Attend.Entities;
 using E_Attend.Entities.OptionModels;
 using E_Attend.Service._Authentication;
 using E_Attend.Service._Course;
+using E_Attend.Service._Instructor;
+using E_Attend.Service._Student;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,6 +79,8 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IInstructorService, InstructorService>();
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {

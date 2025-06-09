@@ -12,19 +12,23 @@ public class CourseService : ICourseService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task AddCourseAsync(Entities.Course course)
+    public async Task AddCourseAsync(Course course)
     {
         _unitOfWork.CourseRepository.AddAsync(course);
+        
+        var instructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i =>i.Id  == course.InstructorId, includes: i => i.Courses );
+        instructor?.Courses.Add(course);
+        
         await _unitOfWork.CompleteAsync();
     }
 
-    public async Task<Entities.Course?> GetCourseAsync(string id)
+    public async Task<Course?> GetCourseAsync(string id)
     {
         return await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == id,
             includes: [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);
     }
 
-    public async Task<IEnumerable<Entities.Course>> GetCoursesAsync()
+    public async Task<IEnumerable<Course>> GetCoursesAsync()
     {
         return await _unitOfWork.CourseRepository.GetAllAsync(includes:
             [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);

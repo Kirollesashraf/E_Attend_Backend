@@ -3,7 +3,7 @@ using E_Attend.Entities;
 
 namespace E_Attend.Service._Student;
 
-public class StudentService
+public class StudentService : IStudentService
 {
     private readonly UnitOfWork _unitOfWork;
 
