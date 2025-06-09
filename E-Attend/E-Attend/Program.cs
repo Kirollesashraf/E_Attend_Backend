@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Text;
 using E_Attend.Data.Context;
 using E_Attend.Data.Repositories.Implementation;
@@ -8,11 +6,11 @@ using E_Attend.Data.Repositories.Interface;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using E_Attend.Entities;
-using Microsoft.AspNetCore.Authentication;
+using E_Attend.Entities.OptionModels;
+using E_Attend.Service.Authentication;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +42,7 @@ builder.Services.AddAuthentication(
     }
 );
 
-
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWTOptions"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
@@ -75,11 +73,9 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
-// Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
-// ? Allow CORS for all origins
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {
         policy.AllowAnyOrigin()
@@ -93,12 +89,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
-    // app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
 
-// ? Apply CORS policy
 app.UseCors("AllowAll");
 
 app.UseAuthentication();

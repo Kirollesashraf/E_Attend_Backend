@@ -29,8 +29,12 @@ public class AuthenticationService : IAuthenticationService
         if (await _userManager.FindByEmailAsync(model.Email) is not null)
             return new AuthenticationModel() { Message = "Email is already registered" };
         
+        if (await _userManager.FindByNameAsync(model.Username) is not null)
+            return new AuthenticationModel() { Message = "Username is already registered" };
+
         var user = new ApplicationUser() {
             Email = model.Email,
+            UserName = model.Username
             
         };
         var res = await _userManager.CreateAsync(user, model.Password);
@@ -54,7 +58,7 @@ public class AuthenticationService : IAuthenticationService
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
             UserId = user.Id,
-            Roles = ["User"],
+            Roles = ["Admin"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };
@@ -63,8 +67,12 @@ public class AuthenticationService : IAuthenticationService
         if (await _userManager.FindByEmailAsync(model.Email) is not null)
             return new AuthenticationModel() { Message = "Email is already registered" };
         
+        if (await _userManager.FindByNameAsync(model.Username) is not null)
+            return new AuthenticationModel() { Message = "Username is already registered" };
+        
         var user = new ApplicationUser() {
             Email = model.Email,
+            UserName = model.Username
             
         };
         var res = await _userManager.CreateAsync(user, model.Password);
@@ -100,19 +108,23 @@ public class AuthenticationService : IAuthenticationService
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
             UserId = user.Id,
-            Roles = ["User"],
+            Roles = ["Instructor"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };
     }
     
     
-    public async Task<AuthenticationModel> RegisterAdminAsync(StudentRegisterModel model) {
+    public async Task<AuthenticationModel> RegisterStudentAsync(StudentRegisterModel model) {
         if (await _userManager.FindByEmailAsync(model.Email) is not null)
             return new AuthenticationModel() { Message = "Email is already registered" };
         
+        if (await _userManager.FindByNameAsync(model.Username) is not null)
+            return new AuthenticationModel() { Message = "Username is already registered" };
+        
         var user = new ApplicationUser() {
             Email = model.Email,
+            UserName = model.Username
             
         };
         var res = await _userManager.CreateAsync(user, model.Password);
@@ -145,7 +157,7 @@ public class AuthenticationService : IAuthenticationService
             ExpiresOn = jwtSecurityToken.ValidTo,
             IsAuthenticated = true,
             UserId = user.Id,
-            Roles = ["User"],
+            Roles = ["Student"],
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             Username = user.UserName
         };
