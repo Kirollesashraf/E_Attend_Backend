@@ -14,8 +14,8 @@ public class Course
     public string Credits { get; set; }
 
     [ForeignKey(nameof(Instructor))]
-    public string InstructorId { get; set; }
-    public virtual Instructor Instructor { get; set; }
+    public string? InstructorId { get; set; }
+    public virtual Instructor? Instructor { get; set; }
     
 
     public virtual ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();

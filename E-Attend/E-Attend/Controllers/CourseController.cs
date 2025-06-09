@@ -15,7 +15,7 @@ public class CourseController : ControllerBase
 
     //===========================Course===========================
     [HttpPost]
-    public async Task<IActionResult> AddCourseAsync([FromBody] Course course) =>
+    public async Task<IActionResult> AddCourseAsync([FromBody] AddCourseDto course) =>
         Ok(await _courseService.AddCourseAsync(course));
 
     [HttpGet("{id}")]

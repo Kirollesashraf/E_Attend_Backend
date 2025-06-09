@@ -17,7 +17,7 @@ public class StudentService : IStudentService
     public async Task<GeneralResponse<IEnumerable<Student>>> GetStudentsAsync()
     {
         var students = await _unitOfWork.StudentRepository.GetAllAsync(
-            includes: [s => s.ApplicationUser, s => s.Courses]);
+            includes: [s => s.Courses]);
         return GeneralResponse<IEnumerable<Student>>.SuccessResponse(students);
     }
 

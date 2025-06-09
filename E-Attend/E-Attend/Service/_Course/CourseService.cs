@@ -15,14 +15,25 @@ public class CourseService : ICourseService
     }
 
     //===========================Course===========================
-    public async Task<GeneralResponse<string>> AddCourseAsync(Course course)
+    public async Task<GeneralResponse<string>> AddCourseAsync(AddCourseDto addCourseDto)
     {
+        var course = new Course()
+        {
+            Id = Guid.NewGuid().ToString(),
+            Description = addCourseDto.Description,
+            Credits = addCourseDto.Credits,
+            InstructorId = addCourseDto.InstructorId,
+            Code = addCourseDto.Code,
+            Title = addCourseDto.Title
+            
+        };
          _unitOfWork.CourseRepository.AddAsync(course);
 
         var instructor = await _unitOfWork.InstructorRepository
             .GetFirstOrDefaultAsync(i => i.Id == course.InstructorId, includes: i => i.Courses);
 
         instructor?.Courses.Add(course);
+        
 
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Course added successfully.");
@@ -42,8 +53,7 @@ public class CourseService : ICourseService
 
     public async Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync()
     {
-        var courses = await _unitOfWork.CourseRepository.GetAllAsync(
-            includes: [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);
+        var courses = await _unitOfWork.CourseRepository.GetAllAsync();
 
         return GeneralResponse<IEnumerable<Course>>.SuccessResponse(courses);
     }

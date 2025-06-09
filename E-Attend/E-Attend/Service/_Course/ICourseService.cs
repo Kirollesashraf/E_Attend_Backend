@@ -7,7 +7,7 @@ namespace E_Attend.Service._Course
     public interface ICourseService
     {
         //===========================Course===========================
-        Task<GeneralResponse<string>> AddCourseAsync(Course course);
+        Task<GeneralResponse<string>> AddCourseAsync(AddCourseDto addCourseDto);
         Task<GeneralResponse<Course?>> GetCourseAsync(string id);
         Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync();
         Task<GeneralResponse<string>> RemoveCourseAsync(string courseId);

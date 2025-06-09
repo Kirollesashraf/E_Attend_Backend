@@ -12,21 +12,12 @@
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250608111709_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250608111709_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250609005914_AddDateToAnnouncement.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250609005914_AddDateToAnnouncement.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Attendance/AttendanceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Attendance/AttendanceService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Attendance/IAttendanceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Attendance/IAttendanceService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Course.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +143,9 @@
       <workItem from="1749338709579" duration="5522000" />
       <workItem from="1749380458634" duration="5015000" />
       <workItem from="1749420925273" duration="8928000" />
-      <workItem from="1749470232598" duration="7070000" />
+      <workItem from="1749470232598" duration="9681000" />
+      <workItem from="1749481353198" duration="133000" />
+      <workItem from="1749481526820" duration="658000" />
     </task>
     <servers />
   </component>

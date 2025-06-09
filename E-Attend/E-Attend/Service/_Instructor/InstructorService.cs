@@ -17,7 +17,7 @@ public class InstructorService : IInstructorService
     public async Task<GeneralResponse<IEnumerable<Instructor>>> GetAllInstructorAsync()
     {
         var instructors = await _unitOfWork.InstructorRepository.GetAllAsync(
-            includes: [i => i.Courses, i => i.ApplicationUser]);
+            includes: [i => i.Courses]);
         return GeneralResponse<IEnumerable<Instructor>>.SuccessResponse(instructors);
     }
 
