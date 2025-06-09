@@ -9,4 +9,6 @@ public class Announcement
     
     [DataType(DataType.Text)]
     public string Content { get; set; }
+    
+    public DateTime Created { get; set; }
 }

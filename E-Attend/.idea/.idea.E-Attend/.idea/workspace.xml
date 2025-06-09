@@ -11,12 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/AuthenticationModels/RegisterModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/AuthenticationModels/RegisterModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/Authentication/AuthenticationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/Authentication/IAuthenticationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/Authentication/IAuthenticationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +137,7 @@
       <workItem from="1749314343202" duration="3920000" />
       <workItem from="1749338709579" duration="5522000" />
       <workItem from="1749380458634" duration="5015000" />
-      <workItem from="1749420925273" duration="6359000" />
+      <workItem from="1749420925273" duration="8178000" />
     </task>
     <servers />
   </component>
