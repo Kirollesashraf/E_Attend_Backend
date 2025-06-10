@@ -145,7 +145,7 @@ public class AuthenticationService : IAuthenticationService
             Name = model.Name,
             Degree = model.Degree,
             Department = model.Department,
-           // Id = Guid.CreateVersion7().ToString(),
+            Id = Guid.CreateVersion7().ToString(),
             UserId = user.Id,
         });
         await _unitOfWork.CompleteAsync();

@@ -61,34 +61,34 @@ public class DailySupabaseSyncService : BackgroundService
 
         var scheduled = await supabase.Rpc<List<ScheduledAttendanceDto>>("ScheduledAttendance", null);
         
-        foreach (var attendance in scheduled)
-        {
-            var course = await courseService.GetCourseByTitleAsync(attendance.CourseName);
-            var a = new Attendance()
-            {
-                StudentId = attendance.StudentId,
-                Status = attendance.Status,
-                CourseId = course.Data?.Id,
-                TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate
-            };
-            await attendanceService.AddAttendanceAsync(a);
-        }
+        // foreach (var attendance in scheduled)
+        // {
+        //     var course = await courseService.GetCourseByTitleAsync(attendance.CourseName);
+        //     var a = new Attendance()
+        //     {
+        //         StudentId = attendance.StudentId,
+        //         Status = attendance.Status,
+        //         CourseId = course.Data?.Id,
+        //         TimeSlot = attendance.TimeSlot,
+        //         Date = attendance.AttendanceDate
+        //     };
+        //     await attendanceService.AddAttendanceAsync(a);
+        // }
         
         var unscheduled = await supabase.Rpc<List<ScheduledAttendanceDto>>("UnscheduledAttendance", null);
-        foreach (var attendance in scheduled)
-        {
-            var course = await courseService.GetCourseByTitleAsync(attendance.CourseName);
-            var a = new Attendance()
-            {
-                StudentId = attendance.StudentId,
-                Status = "UNSCHEDULED" + attendance.Status,
-                CourseId = course.Data?.Id,
-                TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate
-            };
-            await attendanceService.AddAttendanceAsync(a);
-        }
+        // foreach (var attendance in scheduled)
+        // {
+        //     var course = await courseService.GetCourseByTitleAsync(attendance.CourseName);
+        //     var a = new Attendance()
+        //     {
+        //         StudentId = attendance.StudentId,
+        //         Status = "UNSCHEDULED" + attendance.Status,
+        //         CourseId = course.Data?.Id,
+        //         TimeSlot = attendance.TimeSlot,
+        //         Date = attendance.AttendanceDate
+        //     };
+        //     await attendanceService.AddAttendanceAsync(a);
+        // }
 
         _logger.LogInformation("Supabase data sync complete.");
     }
