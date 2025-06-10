@@ -208,7 +208,7 @@ public class CourseService : ICourseService
     }
 
     //===========================Student===========================
-    public async Task<GeneralResponse<string>> AddStudentAsync(string courseId, Student student)
+    public async Task<GeneralResponse<string>> AddStudentAsync(string courseId, string studentId)
     {
         var course = await _unitOfWork.CourseRepository
             .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Students);
@@ -216,7 +216,8 @@ public class CourseService : ICourseService
         if (course == null)
             return GeneralResponse<string>.FailureResponse("Course not found.");
 
-        course.Students.Add(student);
+        var student = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s=>s.Id == studentId);
+        if (student != null) course.Students.Add(student);
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Student added successfully.");
     }

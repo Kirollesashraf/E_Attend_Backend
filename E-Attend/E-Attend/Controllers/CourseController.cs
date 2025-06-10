@@ -84,8 +84,8 @@ public class CourseController : ControllerBase
     //===========================Student===========================
     [Authorize(Roles = "Admin")]
     [HttpPost("{courseId}/students")]
-    public async Task<IActionResult> AddStudentAsync(string courseId, [FromBody] Student student) =>
-        Ok(await _courseService.AddStudentAsync(courseId, student));
+    public async Task<IActionResult> AddStudentAsync(string courseId, string studentId) =>
+        Ok(await _courseService.AddStudentAsync(courseId, studentId));
 
     [Authorize(Roles = "Admin,Instructor")]
     [HttpGet("{courseId}/students")]

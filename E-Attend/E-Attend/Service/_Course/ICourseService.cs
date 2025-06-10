@@ -27,7 +27,7 @@ namespace E_Attend.Service._Course
         Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, Lecture updatedLecture);
 
         //===========================Student===========================
-        Task<GeneralResponse<string>> AddStudentAsync(string courseId, Student student);
+        Task<GeneralResponse<string>> AddStudentAsync(string courseId, string studentId);
         Task<GeneralResponse<IEnumerable<Student>>> GetStudentsAsync(string courseId);
         Task<GeneralResponse<string>> RemoveStudentAsync(string courseId, string studentId);
     }
