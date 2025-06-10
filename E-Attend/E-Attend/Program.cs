@@ -16,6 +16,7 @@ using E_Attend.Service._Course;
 using E_Attend.Service._Instructor;
 using E_Attend.Service._Student;
 using E_Attend.Service._Supabase;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 
 var builder = WebApplication.CreateBuilder(args);

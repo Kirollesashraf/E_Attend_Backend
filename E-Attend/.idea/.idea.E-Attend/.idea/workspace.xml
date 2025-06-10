@@ -10,15 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Data/Repositories/Implementation/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Data/Repositories/Implementation/UnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/DTO/AddAnnouncementDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/DTO/AddAnnouncementDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250610151427_AddCourseIDToAnnouncemnt.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/20250610151427_AddCourseIDToAnnouncemnt.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +142,7 @@
       <workItem from="1749481353198" duration="133000" />
       <workItem from="1749481526820" duration="658000" />
       <workItem from="1749498192583" duration="8752000" />
-      <workItem from="1749568311379" duration="4827000" />
+      <workItem from="1749568311379" duration="5428000" />
     </task>
     <servers />
   </component>

@@ -21,17 +21,17 @@ public class AuthenticationController : ControllerBase
     public async Task<AuthenticationModel> LoginAsync(LoginModel model) =>
         await _authenticationService.LoginAsync(model);
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
     [HttpPost("register/admin")]
     public async Task<AuthenticationModel> RegisterAdminAsync(RegisterModel model) =>
         await _authenticationService.RegisterAdminAsync(model);
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
     [HttpPost("register/instructor")]
     public async Task<AuthenticationModel> RegisterInstructorAsync(InstructorRegisterModel model) =>
         await _authenticationService.RegisterInstructorAsync(model);
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Bearer" ,Roles = "Admin")]
     [HttpPost("register/student")]
     public async Task<AuthenticationModel> RegisterStudentAsync(StudentRegisterModel model) =>
         await _authenticationService.RegisterStudentAsync(model);
