@@ -25,12 +25,55 @@ public class StudentService : IStudentService
             UserId = s.UserId,
             Name = s.Name,
             Degree = s.Degree,
-            Department = s.Department
-            
+            Department = s.Department,
+            Courses = s.Courses?.Select(c => new CourseDto
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                Code = c.Code,
+                Credits = c.Credits,
+                InstructorId = c.InstructorId
+            }).ToList()
         }).ToList();
 
         return GeneralResponse<IEnumerable<StudentDto>>.SuccessResponse(studentsDto);
     }
+    
+    public async Task<GeneralResponse<StudentDto>> GetStudentAsync(string studentId)
+    {
+        var student = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s=>s.Id == studentId,
+            includes: [s => s.Courses]);
+
+
+        if (student == null)
+        {
+            return GeneralResponse<StudentDto>.FailureResponse("Student not found.");
+        }
+
+        // Map the student to StudentDto and include the courses as CourseDto
+        var studentDto = new StudentDto
+        {
+            Id = student.Id,
+            UserId = student.UserId,
+            Name = student.Name,
+            Degree = student.Degree,
+            Department = student.Department,
+            Courses = student.Courses?.Select(c => new CourseDto
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                Code = c.Code,
+                Credits = c.Credits,
+                InstructorId = c.InstructorId
+            }).ToList()
+        };
+
+        return GeneralResponse<StudentDto>.SuccessResponse(studentDto);
+    }
+
+
 
     public async Task<GeneralResponse<string>> UpdateStudentAsync(string studentId, UpdateStudentDto updatedStudent)
     {

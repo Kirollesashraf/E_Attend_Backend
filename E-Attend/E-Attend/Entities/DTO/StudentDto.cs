@@ -9,5 +9,8 @@ public class StudentDto
     public string Name { get; set; }
     public string Degree { get; set; }
     public string Department { get; set; }
+    
+    public List<CourseDto>? Courses { get; set; } = [];
+ 
 
 }

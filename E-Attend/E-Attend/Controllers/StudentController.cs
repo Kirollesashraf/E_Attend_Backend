@@ -18,6 +18,10 @@ public class StudentController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetStudentsAsync() =>
         Ok(await _studentService.GetStudentsAsync());
+    
+    [HttpGet("{studentId}")]
+    public async Task<IActionResult> GetStudentAsync(string studentId) =>
+        Ok(await _studentService.GetStudentAsync(studentId));
 
     [HttpPut("{studentId}")]
     public async Task<IActionResult> UpdateStudentAsync(string studentId, [FromBody] UpdateStudentDto updatedStudent) =>

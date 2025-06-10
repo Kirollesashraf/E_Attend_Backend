@@ -80,10 +80,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .WithMany(p => p.Courses)
                 .UsingEntity(j => j.ToTable("CourseStudents"));
 
+          
             entity.HasMany(d => d.Lectures)
-                .WithOne(p => p.Course)
-                .HasForeignKey(d => d.CourseId)
+                .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
+
         });
 
         modelBuilder.Entity<Instructor>(entity =>
@@ -107,13 +108,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             entity.Property(e => e.Topic).HasMaxLength(500);
             entity.Property(e => e.Date).IsRequired();
 
-            entity.HasOne(d => d.Course)
-                .WithMany(p => p.Lectures)
-                .HasForeignKey(d => d.CourseId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
+          
 
-            entity.HasIndex(e => new { e.CourseId, e.Date, e.Title }).IsUnique();
+            entity.HasIndex(e => new { e.Date, e.Title }).IsUnique();
         });
 
         modelBuilder.Entity<Student>(entity =>

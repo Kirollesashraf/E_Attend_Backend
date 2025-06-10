@@ -16,13 +16,21 @@ public class AttendanceService : IAttendanceService
 
     public async Task<GeneralResponse<string>> AddAttendanceAsync(Attendance attendance)
     {
+        var a = await _unitOfWork.AttendanceRepository.GetFirstOrDefaultAsync(aa =>
+            aa.StudentId == attendance.StudentId && aa.Date == attendance.Date && aa.TimeSlot == attendance.TimeSlot);
+        if (a != null)
+        {
+            return GeneralResponse<string>.FailureResponse("Attendance cannot be added");
+        }
+
         _unitOfWork.AttendanceRepository.AddAsync(attendance);
         await _unitOfWork.CompleteAsync();
-        
+
         return GeneralResponse<string>.SuccessResponse("Attendance added");
     }
 
-    public async Task<GeneralResponse<IEnumerable<Attendance>>> GetStudentAttendanceInCourseAsync(string courseId, string studentId)
+    public async Task<GeneralResponse<IEnumerable<Attendance>>> GetStudentAttendanceInCourseAsync(string courseId,
+        string studentId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
             .GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId);
@@ -32,14 +40,14 @@ public class AttendanceService : IAttendanceService
     public async Task<GeneralResponse<IEnumerable<Attendance>>> GetScheduledAttendanceAsync(string courseId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
-            .GetAllAsync(a => a.CourseId == courseId && a.Status.Contains("SCHEDULED"));
+            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("SCHEDULED"));
         return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 
     public async Task<GeneralResponse<IEnumerable<Attendance>>> GetUnscheduledAttendanceAsync(string courseId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
-            .GetAllAsync(a => a.CourseId == courseId && a.Status.Contains("UNSCHEDULED") );
+            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("UNSCHEDULED"));
         return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 }
