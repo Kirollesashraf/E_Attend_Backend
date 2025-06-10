@@ -252,11 +252,11 @@ public class CourseService : ICourseService
         if (course == null)
             return GeneralResponse<IEnumerable<StudentDto>>.FailureResponse("Course not found.");
 
-        IEnumerable<StudentDto> studentCourses = [];
+        List<StudentDto> studentCourses = new List<StudentDto>();
 
         foreach (var student in course.Students)
         {
-            studentCourses = studentCourses.Append(new StudentDto()
+            studentCourses.Add(new StudentDto()
             {
                 Degree = student.Degree,
                 Department = student.Department,
