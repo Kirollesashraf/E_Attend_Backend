@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Attend.Entities;
 
@@ -11,4 +12,7 @@ public class Announcement
     public string Content { get; set; }
     
     public DateTime Created { get; set; }
+    [ForeignKey(nameof(Course))]
+    public string CourseId { get; set; }
+    public virtual Course Course { get; set; }
 }

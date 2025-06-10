@@ -15,16 +15,16 @@ namespace E_Attend.Service._Course
         Task<GeneralResponse<string>> UpdateCourseAsync(string courseId, UpdateCourseDto updatedCourse);
 
         //===========================Announcement===========================
-        Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, Announcement announcement);
+        Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, AddAnnouncementDto announcement);
         Task<GeneralResponse<IEnumerable<Announcement>>> GetAnnouncementsAsync(string courseId);
         Task<GeneralResponse<string>> RemoveAnnouncementAsync(string courseId, string announcementId);
-        Task<GeneralResponse<string>> UpdateAnnouncementAsync(string announcementId, Announcement updatedAnnouncement);
+        Task<GeneralResponse<string>> UpdateAnnouncementAsync(string announcementId, UpdateAnnouncementDto updatedAnnouncement);
 
         //===========================Lecture===========================
-        Task<GeneralResponse<string>> AddLectureAsync(string courseId, Lecture lecture);
+        Task<GeneralResponse<string>> AddLectureAsync(string courseId, AddLectureDto lecture);
         Task<GeneralResponse<IEnumerable<Lecture>>> GetLecturesAsync(string courseId);
         Task<GeneralResponse<string>> RemoveLectureAsync(string lectureId);
-        Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, Lecture updatedLecture);
+        Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, UpdateLectureDto updatedLecture);
 
         //===========================Student===========================
         Task<GeneralResponse<string>> AddStudentAsync(string courseId, string studentId);

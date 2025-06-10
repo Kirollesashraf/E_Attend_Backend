@@ -41,7 +41,7 @@ public class CourseController : ControllerBase
     //===========================Announcement===========================
     [Authorize(Roles = "Instructor,Admin")]
     [HttpPost("{courseId}/announcements")]
-    public async Task<IActionResult> AddAnnouncementAsync(string courseId, [FromBody] Announcement announcement) =>
+    public async Task<IActionResult> AddAnnouncementAsync(string courseId, [FromBody] AddAnnouncementDto announcement) =>
         Ok(await _courseService.AddAnnouncementAsync(courseId, announcement));
 
     [Authorize(Roles = "Instructor,Student,Admin")]
@@ -57,13 +57,13 @@ public class CourseController : ControllerBase
     [Authorize(Roles = "Instructor,Admin")]
     [HttpPut("announcements/{announcementId}")]
     public async Task<IActionResult> UpdateAnnouncementAsync(string announcementId,
-        [FromBody] Announcement updatedAnnouncement) =>
+        [FromBody] UpdateAnnouncementDto updatedAnnouncement) =>
         Ok(await _courseService.UpdateAnnouncementAsync(announcementId, updatedAnnouncement));
 
     //===========================Lecture===========================
     [Authorize(Roles = "Admin,Instructor")]
     [HttpPost("{courseId}/lectures")]
-    public async Task<IActionResult> AddLectureAsync(string courseId, [FromBody] Lecture lecture) =>
+    public async Task<IActionResult> AddLectureAsync(string courseId, [FromBody] AddLectureDto lecture) =>
         Ok(await _courseService.AddLectureAsync(courseId, lecture));
 
     [Authorize(Roles = "Admin,Instructor,Student")]
@@ -78,7 +78,7 @@ public class CourseController : ControllerBase
 
     [Authorize(Roles = "Admin,Instructor")]
     [HttpPut("lectures/{lectureId}")]
-    public async Task<IActionResult> UpdateLectureAsync(string lectureId, [FromBody] Lecture updatedLecture) =>
+    public async Task<IActionResult> UpdateLectureAsync(string lectureId, [FromBody] UpdateLectureDto updatedLecture) =>
         Ok(await _courseService.UpdateLectureAsync(lectureId, updatedLecture));
 
     //===========================Student===========================

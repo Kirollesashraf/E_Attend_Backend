@@ -1,6 +1,7 @@
 ﻿using E_Attend.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace E_Attend.Data.Context;
 
@@ -15,6 +16,17 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Attendance> Attendances { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
 
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+
+        optionsBuilder.ConfigureWarnings(warnings =>
+        {
+            warnings.Ignore(RelationalEventId.PendingModelChangesWarning);
+        });
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -23,11 +35,16 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Content).IsRequired();
             entity.Property(e => e.Created).IsRequired().HasDefaultValue(DateTime.UtcNow);
+            entity.HasOne(d => d.Course)
+                .WithMany(p => p.Announcements)
+                .HasForeignKey(d => d.CourseId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
         });
 
         modelBuilder.Entity<Attendance>(entity =>
@@ -80,11 +97,10 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .WithMany(p => p.Courses)
                 .UsingEntity(j => j.ToTable("CourseStudents"));
 
-          
+
             entity.HasMany(d => d.Lectures)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
-
         });
 
         modelBuilder.Entity<Instructor>(entity =>
@@ -108,7 +124,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             entity.Property(e => e.Topic).HasMaxLength(500);
             entity.Property(e => e.Date).IsRequired();
 
-          
+            entity.HasOne(d => d.Course)
+                .WithMany(p => p.Lectures)
+                .HasForeignKey(d => d.CourseId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             entity.HasIndex(e => new { e.Date, e.Title }).IsUnique();
         });

@@ -51,7 +51,6 @@ public class StudentService : IStudentService
             return GeneralResponse<StudentDto>.FailureResponse("Student not found.");
         }
 
-        // Map the student to StudentDto and include the courses as CourseDto
         var studentDto = new StudentDto
         {
             Id = student.Id,

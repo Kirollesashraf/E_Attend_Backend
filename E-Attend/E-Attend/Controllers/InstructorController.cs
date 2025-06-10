@@ -18,6 +18,11 @@ public class InstructorController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllInstructorAsync() =>
         Ok(await _instructorService.GetAllInstructorAsync());
+    
+    
+    [HttpGet("{instructorId}")]
+    public async Task<IActionResult> GetInstructorAsync(string instructorId) =>
+        Ok(await _instructorService.GetInstructorAsync(instructorId));
 
     [HttpDelete("{instructorId}")]
     public async Task<IActionResult> DeleteInstructorAsync(string instructorId) =>

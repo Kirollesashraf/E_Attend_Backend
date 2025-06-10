@@ -9,4 +9,7 @@ public class Lecture
     public string Title { get; set; }
     public string Topic { get; set; }
     public DateTime Date { get; set; }
+    [ForeignKey(nameof(Course))]
+    public string CourseId { get; set; }
+    public virtual Course Course { get; set; }
 }

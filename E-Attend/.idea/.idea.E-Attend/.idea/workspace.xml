@@ -9,7 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="" />
+    <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.E-Attend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/CourseController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Data/Context/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/E-Attend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Announcement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/DTO/InstructorDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/DTO/InstructorDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Entities/Lecture.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/CourseService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Course/ICourseService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/appsettings.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,23 +74,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.E-Attend: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.E-Attend: https.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Backend-phase2&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.E-Attend: http.executor": "Run",
+    ".NET Launch Settings Profile.E-Attend: https.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Backend-phase2",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.E-Attend: https">
     <configuration name="E-Attend: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/E-Attend/E-Attend.csproj" />
@@ -139,6 +154,7 @@
       <workItem from="1749481353198" duration="133000" />
       <workItem from="1749481526820" duration="658000" />
       <workItem from="1749498192583" duration="8752000" />
+      <workItem from="1749568311379" duration="2506000" />
     </task>
     <servers />
   </component>
@@ -189,10 +205,10 @@
           <line>15</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Controllers\AuthenticationController.cs" containingFunctionPresentation="Constructor 'AuthenticationController'">
             <startOffsets>
-              <option value="475" />
+              <option value="456" />
             </startOffsets>
             <endOffsets>
-              <option value="476" />
+              <option value="503" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
@@ -212,13 +228,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/E-Attend/Service/_Supabase/DailySupabaseSyncService.cs</url>
-          <line>77</line>
+          <line>74</line>
           <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\_Supabase\DailySupabaseSyncService.cs" containingFunctionPresentation="Method 'ReadFromSupabase'">
             <startOffsets>
-              <option value="2654" />
+              <option value="2611" />
             </startOffsets>
             <endOffsets>
-              <option value="2752" />
+              <option value="2657" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />

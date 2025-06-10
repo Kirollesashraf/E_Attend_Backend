@@ -25,15 +25,14 @@ public class CourseService : ICourseService
             InstructorId = addCourseDto.InstructorId,
             Code = addCourseDto.Code,
             Title = addCourseDto.Title
-            
         };
-         _unitOfWork.CourseRepository.AddAsync(course);
+        _unitOfWork.CourseRepository.AddAsync(course);
 
         var instructor = await _unitOfWork.InstructorRepository
             .GetFirstOrDefaultAsync(i => i.Id == course.InstructorId, includes: i => i.Courses);
 
         instructor?.Courses.Add(course);
-        
+
 
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Course added successfully.");
@@ -68,7 +67,7 @@ public class CourseService : ICourseService
                 Department = s.Department
             })
             .ToList();
-        
+
         courseDto.Students = studentsDto;
 
         return GeneralResponse<CourseDto?>.SuccessResponse(courseDto);
@@ -76,8 +75,7 @@ public class CourseService : ICourseService
 
     public async Task<GeneralResponse<Course?>> GetCourseByTitleAsync(string courseTitle)
     {
-        var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(
-            c => c.Title == courseTitle);
+        var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Title == courseTitle);
 
         if (course == null)
             return GeneralResponse<Course?>.FailureResponse("Course not found.");
@@ -121,14 +119,23 @@ public class CourseService : ICourseService
     }
 
     //===========================Announcement===========================
-    public async Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, Announcement announcement)
+    public async Task<GeneralResponse<string>> AddAnnouncementAsync(string courseId, AddAnnouncementDto announcementDto)
     {
         var course = await _unitOfWork.CourseRepository
             .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Announcements);
 
         if (course == null)
             return GeneralResponse<string>.FailureResponse("Course not found.");
+        var announcement = new Announcement()
+        {
+            Content = announcementDto.Content,
+            CourseId = course.Id,
+            Title = announcementDto.Title,
+            Created = announcementDto.Created,
+            Id = Guid.CreateVersion7().ToString()
+        };
 
+        _unitOfWork.AnnouncementRepository.AddAsync(announcement);
         course.Announcements.Add(announcement);
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Announcement added successfully.");
@@ -136,13 +143,8 @@ public class CourseService : ICourseService
 
     public async Task<GeneralResponse<IEnumerable<Announcement>>> GetAnnouncementsAsync(string courseId)
     {
-        var course = await _unitOfWork.CourseRepository
-            .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Announcements);
-
-        if (course == null)
-            return GeneralResponse<IEnumerable<Announcement>>.FailureResponse("Course not found.");
-
-        return GeneralResponse<IEnumerable<Announcement>>.SuccessResponse(course.Announcements);
+        return GeneralResponse<IEnumerable<Announcement>>.SuccessResponse(
+            await _unitOfWork.AnnouncementRepository.GetAllAsync(a => a.CourseId == courseId));
     }
 
     public async Task<GeneralResponse<string>> RemoveAnnouncementAsync(string courseId, string announcementId)
@@ -158,7 +160,8 @@ public class CourseService : ICourseService
         return GeneralResponse<string>.SuccessResponse("Announcement removed successfully.");
     }
 
-    public async Task<GeneralResponse<string>> UpdateAnnouncementAsync(string announcementId, Announcement updatedAnnouncement)
+    public async Task<GeneralResponse<string>> UpdateAnnouncementAsync(string announcementId,
+        UpdateAnnouncementDto updatedAnnouncement)
     {
         var announcement = await _unitOfWork.AnnouncementRepository
             .GetFirstOrDefaultAsync(a => a.Id == announcementId);
@@ -175,7 +178,7 @@ public class CourseService : ICourseService
     }
 
     //===========================Lecture===========================
-    public async Task<GeneralResponse<string>> AddLectureAsync(string courseId, Lecture lecture)
+    public async Task<GeneralResponse<string>> AddLectureAsync(string courseId, AddLectureDto lectureDto)
     {
         var course = await _unitOfWork.CourseRepository
             .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Lectures);
@@ -183,6 +186,15 @@ public class CourseService : ICourseService
         if (course == null)
             return GeneralResponse<string>.FailureResponse("Course not found.");
 
+        var lecture = new Lecture()
+        {
+            CourseId = courseId,
+            Title = lectureDto.Title,
+            Topic = lectureDto.Topic,
+            Id = Guid.CreateVersion7().ToString(),
+            Date = DateTime.UtcNow
+        };
+        _unitOfWork.LectureRepository.AddAsync(lecture);
         course.Lectures.Add(lecture);
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Lecture added successfully.");
@@ -190,13 +202,8 @@ public class CourseService : ICourseService
 
     public async Task<GeneralResponse<IEnumerable<Lecture>>> GetLecturesAsync(string courseId)
     {
-        var course = await _unitOfWork.CourseRepository
-            .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Lectures);
 
-        if (course == null)
-            return GeneralResponse<IEnumerable<Lecture>>.FailureResponse("Course not found.");
-
-        return GeneralResponse<IEnumerable<Lecture>>.SuccessResponse(course.Lectures);
+        return GeneralResponse<IEnumerable<Lecture>>.SuccessResponse(await _unitOfWork.LectureRepository.GetAllAsync(l => l.CourseId == courseId));
     }
 
     public async Task<GeneralResponse<string>> RemoveLectureAsync(string lectureId)
@@ -212,7 +219,7 @@ public class CourseService : ICourseService
         return GeneralResponse<string>.SuccessResponse("Lecture removed successfully.");
     }
 
-    public async Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, Lecture updatedLecture)
+    public async Task<GeneralResponse<string>> UpdateLectureAsync(string lectureId, UpdateLectureDto updatedLecture)
     {
         var lecture = await _unitOfWork.LectureRepository
             .GetFirstOrDefaultAsync(l => l.Id == lectureId);
@@ -220,7 +227,7 @@ public class CourseService : ICourseService
         if (lecture == null)
             return GeneralResponse<string>.FailureResponse("Lecture not found.");
 
-        lecture.Title = updatedLecture.Title;
+        lecture.Title = updatedLecture.Title; 
         lecture.Topic = updatedLecture.Topic;
         lecture.Date = updatedLecture.Date;
 
@@ -238,7 +245,7 @@ public class CourseService : ICourseService
         if (course == null)
             return GeneralResponse<string>.FailureResponse("Course not found.");
 
-        var student = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s=>s.Id == studentId);
+        var student = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s => s.Id == studentId);
         if (student != null) course.Students.Add(student);
         await _unitOfWork.CompleteAsync();
         return GeneralResponse<string>.SuccessResponse("Student added successfully.");
@@ -267,12 +274,12 @@ public class CourseService : ICourseService
         }
 
         return GeneralResponse<IEnumerable<StudentDto>>.SuccessResponse(studentCourses);
-
     }
 
     public async Task<GeneralResponse<string>> RemoveStudentAsync(string courseId, string studentId)
     {
-        var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Students);
+        var course =
+            await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Students);
 
         if (course == null)
             return GeneralResponse<string>.FailureResponse("Course not found.");
@@ -292,13 +299,13 @@ public class CourseService : ICourseService
                     student.Courses.Remove(c);
                     break;
                 }
-                 
+
             _unitOfWork.StudentRepository.Update(student);
             if (course != null) _unitOfWork.CourseRepository.Update(course);
             await _unitOfWork.CompleteAsync();
-            return GeneralResponse<string>.SuccessResponse("Student removed successfully.");   
+            return GeneralResponse<string>.SuccessResponse("Student removed successfully.");
         }
-        
+
         return GeneralResponse<string>.FailureResponse("Student cannot be removed");
     }
 }
