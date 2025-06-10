@@ -1,6 +1,6 @@
 ﻿namespace E_Attend.Entities.DTO;
 
-public class CourseStudentsDto
+public class CourseDto
 {
     public string Id { get; set; }
 
@@ -12,5 +12,5 @@ public class CourseStudentsDto
 
     public string? InstructorId { get; set; }
 
-    public List<StudentCoursesDto>? Students { get; set; } = [];
+    public List<StudentDto>? Students { get; set; } = [];
 }

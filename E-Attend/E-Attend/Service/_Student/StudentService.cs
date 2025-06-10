@@ -14,12 +14,12 @@ public class StudentService : IStudentService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<GeneralResponse<IEnumerable<StudentCoursesDto>>> GetStudentsAsync()
+    public async Task<GeneralResponse<IEnumerable<StudentDto>>> GetStudentsAsync()
     {
         var students = await _unitOfWork.StudentRepository.GetAllAsync(
             includes: [s => s.Courses]);
 
-        var studentsDto = students.Select(s => new StudentCoursesDto
+        var studentsDto = students.Select(s => new StudentDto
         {
             Id = s.Id,
             UserId = s.UserId,
@@ -29,7 +29,7 @@ public class StudentService : IStudentService
             
         }).ToList();
 
-        return GeneralResponse<IEnumerable<StudentCoursesDto>>.SuccessResponse(studentsDto);
+        return GeneralResponse<IEnumerable<StudentDto>>.SuccessResponse(studentsDto);
     }
 
     public async Task<GeneralResponse<string>> UpdateStudentAsync(string studentId, UpdateStudentDto updatedStudent)

@@ -39,16 +39,16 @@ public class CourseService : ICourseService
         return GeneralResponse<string>.SuccessResponse("Course added successfully.");
     }
 
-    public async Task<GeneralResponse<CourseStudentsDto?>> GetCourseAsync(string id)
+    public async Task<GeneralResponse<CourseDto?>> GetCourseAsync(string id)
     {
         var course = await _unitOfWork.CourseRepository.GetFirstOrDefaultAsync(
             c => c.Id == id,
             includes: [c => c.Announcements, c => c.Lectures, c => c.Students, c => c.Instructor]);
 
         if (course == null)
-            return GeneralResponse<CourseStudentsDto?>.FailureResponse("Course not found.");
+            return GeneralResponse<CourseDto?>.FailureResponse("Course not found.");
 
-        var courseDto = new CourseStudentsDto
+        var courseDto = new CourseDto
         {
             Id = course.Id,
             Title = course.Title,
@@ -59,7 +59,7 @@ public class CourseService : ICourseService
         };
 
         var studentsDto = course.Students
-            .Select(s => new StudentCoursesDto
+            .Select(s => new StudentDto
             {
                 Id = s.Id,
                 UserId = s.UserId,
@@ -71,7 +71,7 @@ public class CourseService : ICourseService
         
         courseDto.Students = studentsDto;
 
-        return GeneralResponse<CourseStudentsDto?>.SuccessResponse(courseDto);
+        return GeneralResponse<CourseDto?>.SuccessResponse(courseDto);
     }
 
     public async Task<GeneralResponse<Course?>> GetCourseByTitleAsync(string courseTitle)
@@ -244,18 +244,19 @@ public class CourseService : ICourseService
         return GeneralResponse<string>.SuccessResponse("Student added successfully.");
     }
 
-    public async Task<GeneralResponse<IEnumerable<StudentCoursesDto>>> GetStudentsAsync(string courseId)
+    public async Task<GeneralResponse<IEnumerable<StudentDto>>> GetStudentsAsync(string courseId)
     {
         var course = await _unitOfWork.CourseRepository
             .GetFirstOrDefaultAsync(c => c.Id == courseId, includes: c => c.Students);
 
         if (course == null)
-            return GeneralResponse<IEnumerable<StudentCoursesDto>>.FailureResponse("Course not found.");
+            return GeneralResponse<IEnumerable<StudentDto>>.FailureResponse("Course not found.");
 
-        IEnumerable<StudentCoursesDto>studentCourses = new List<StudentCoursesDto>();
+        IEnumerable<StudentDto> studentCourses = [];
 
         foreach (var student in course.Students)
-            studentCourses.Append(new StudentCoursesDto()
+        {
+            studentCourses = studentCourses.Append(new StudentDto()
             {
                 Degree = student.Degree,
                 Department = student.Department,
@@ -263,8 +264,10 @@ public class CourseService : ICourseService
                 Name = student.Name,
                 UserId = student.UserId
             });
-        
-        return GeneralResponse<IEnumerable<StudentCoursesDto>>.SuccessResponse(studentCourses);
+        }
+
+        return GeneralResponse<IEnumerable<StudentDto>>.SuccessResponse(studentCourses);
+
     }
 
     public async Task<GeneralResponse<string>> RemoveStudentAsync(string courseId, string studentId)

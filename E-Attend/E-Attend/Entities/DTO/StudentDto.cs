@@ -1,6 +1,6 @@
 ﻿namespace E_Attend.Entities.DTO;
 
-public class StudentCoursesDto
+public class StudentDto
 {
     public string Id { get; set; }
     

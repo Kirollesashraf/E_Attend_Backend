@@ -8,7 +8,7 @@ namespace E_Attend.Service._Course
     {
         //===========================Course===========================
         Task<GeneralResponse<string>> AddCourseAsync(AddCourseDto addCourseDto);
-        Task<GeneralResponse<CourseStudentsDto?>> GetCourseAsync(string id);
+        Task<GeneralResponse<CourseDto?>> GetCourseAsync(string id);
         Task<GeneralResponse<IEnumerable<Course>>> GetCoursesAsync();
         Task<GeneralResponse<Course?>> GetCourseByTitleAsync(string courseTitle);
         Task<GeneralResponse<string>> RemoveCourseAsync(string courseId);
@@ -28,7 +28,7 @@ namespace E_Attend.Service._Course
 
         //===========================Student===========================
         Task<GeneralResponse<string>> AddStudentAsync(string courseId, string studentId);
-        Task<GeneralResponse<IEnumerable<StudentCoursesDto>>> GetStudentsAsync(string courseId);
+        Task<GeneralResponse<IEnumerable<StudentDto>>> GetStudentsAsync(string courseId);
         Task<GeneralResponse<string>> RemoveStudentAsync(string courseId, string studentId);
     }
 }
