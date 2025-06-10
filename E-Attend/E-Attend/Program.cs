@@ -1,41 +1,30 @@
-using E_Attend.Data_Access.context;
-using E_Attend.Data_Access.RepositoryImplementation;
-using E_Attend.Entities.Repositories;
-using E_Attend.Service.Assignment;
-using E_Attend.Service.Assignment.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Text;
-using E_Attend.Entities.ConfigurationModels;
-using E_Attend.Entities.Models;
-using E_Attend.Service;
-using E_Attend.Service.Attendance;
-using E_Attend.Service.Auth;
-using E_Attend.Service.Course;
-using E_Attend.Service.Enrollment;
-using E_Attend.Service.Instructor;
-using E_Attend.Service.Sheet;
-using E_Attend.Service.Student;
-using E_Attend.Service.Submission;
+using E_Attend.Data.Context;
+using E_Attend.Data.Repositories.Implementation;
+using E_Attend.Data.Repositories.Interface;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore;
-using E_Attend.Domain.Repositories;
-using E_Attend.Service.Lecture;
+using E_Attend.Entities;
+using E_Attend.Entities.OptionModels;
+using E_Attend.Service._Attendance;
+using E_Attend.Service._Authentication;
+using E_Attend.Service._Course;
+using E_Attend.Service._Instructor;
+using E_Attend.Service._Student;
+using E_Attend.Service._Supabase;
+using Microsoft.AspNetCore.Server.HttpSys;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Register ApplicationDbContext
-builder.Services.AddHostedService<DailySupabaseSyncService>();
-
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddAuthentication(
     options => {
@@ -57,11 +46,8 @@ builder.Services.AddAuthentication(
         };
     }
 );
-
-
-// Add services to the container.
 builder.Services.Configure<SupabaseOptions>(builder.Configuration.GetSection("Supabase"));
-builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWTOptions"));
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWTOptions"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
@@ -92,23 +78,15 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
-// Register UnitOfWork
-builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
-builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<IInstructorService, InstructorService>();
-builder.Services.AddScoped<IAssignmentService, AssignmentService>();
-builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
-builder.Services.AddScoped<ISheetService, SheetService>();
-builder.Services.AddScoped<ISubmissionService, SubmissionService>();
-builder.Services.AddScoped<ILectureRepository, LectureRepository>();
-builder.Services.AddScoped<ILectureRepository, LectureRepository>();
-builder.Services.AddScoped<ILectureService, LectureService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+builder.Services.AddHostedService<DailySupabaseSyncService>();
 
-// ? Allow CORS for all origins
+
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {
         policy.AllowAnyOrigin()
@@ -122,12 +100,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
-    // app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
 
-// ? Apply CORS policy
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
