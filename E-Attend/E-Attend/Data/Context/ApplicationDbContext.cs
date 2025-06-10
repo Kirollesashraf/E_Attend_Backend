@@ -137,7 +137,15 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.Id);
+              entity.HasKey(e => e.Id);
+                       entity.Property(e => e.Id)
+                           .HasConversion<int>(
+                               v => int.Parse(v),       
+                               v => v.ToString()       
+                           )
+                           .ValueGeneratedOnAdd()
+                           .UseIdentityColumn();
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Degree).HasMaxLength(100);
