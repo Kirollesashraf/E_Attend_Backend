@@ -9,6 +9,7 @@ namespace E_Attend.Controllers;
 [Route("[controller]")]
 [ApiController]
 [Authorize(Roles = "Admin")]
+
 public class StudentController : ControllerBase
 {
     private readonly IStudentService _studentService;

@@ -16,17 +16,17 @@ public class AttendanceController : ControllerBase
     }
 
     
-    [Authorize("Admin,Student")]
+    [Authorize(Roles = "Admin,Student")]
     [HttpGet("student/{courseId}/{studentId}")]
     public async Task<IActionResult> GetStudentAttendanceInCourseAsync(string courseId, string studentId) =>
         Ok(await _attendanceService.GetStudentAttendanceInCourseAsync(courseId, studentId));
 
-    [Authorize("Admin,Instructor")]
+    [Authorize(Roles = "Admin,Instructor")]
     [HttpGet("scheduled/{courseId}")]
     public async Task<IActionResult> GetScheduledAttendanceAsync(string courseId) =>
         Ok(await _attendanceService.GetScheduledAttendanceAsync(courseId));
 
-    [Authorize("Admin,Instructor")]
+    [Authorize(Roles = "Admin,Instructor")]
     [HttpGet("unscheduled/{courseId}")]
     public async Task<IActionResult> GetUnscheduledAttendanceAsync(string courseId) =>
         Ok(await _attendanceService.GetUnscheduledAttendanceAsync(courseId));

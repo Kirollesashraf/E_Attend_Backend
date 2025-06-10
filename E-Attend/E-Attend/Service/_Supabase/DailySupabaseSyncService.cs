@@ -69,8 +69,8 @@ public class DailySupabaseSyncService : BackgroundService
                 StudentId = attendance.StudentId,
                 Status = attendance.Status,
                 CourseId = course.Data?.Id,
-                TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate
+                TimeSlot = "SCHEDULED_"+attendance.TimeSlot,
+                Date = attendance.AttendanceDate.ToUniversalTime()
             };
             await attendanceService.AddAttendanceAsync(a);
         }
@@ -82,10 +82,10 @@ public class DailySupabaseSyncService : BackgroundService
             var a = new Attendance()
             {
                 StudentId = attendance.StudentId,
-                Status = "UNSCHEDULED" + attendance.Status,
+                Status = "UNSCHEDULED_" + attendance.Status,
                 CourseId = course.Data?.Id,
                 TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate
+                Date = attendance.AttendanceDate.ToUniversalTime()
             };
             await attendanceService.AddAttendanceAsync(a);
         }
