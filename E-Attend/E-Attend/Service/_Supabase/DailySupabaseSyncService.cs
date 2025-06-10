@@ -67,9 +67,9 @@ public class DailySupabaseSyncService : BackgroundService
             var a = new Attendance()
             {
                 StudentId = attendance.StudentId,
-                Status = attendance.Status,
+                Status = "SCHEDULED_"+attendance.Status,
                 CourseId = course.Data?.Id,
-                TimeSlot = "SCHEDULED_"+attendance.TimeSlot,
+                TimeSlot = attendance.TimeSlot,
                 Date = attendance.AttendanceDate.ToUniversalTime()
             };
             await attendanceService.AddAttendanceAsync(a);
