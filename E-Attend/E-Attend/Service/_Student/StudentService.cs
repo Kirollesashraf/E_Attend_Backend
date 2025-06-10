@@ -48,7 +48,7 @@ public class StudentService : IStudentService
 
         if (student == null)
         {
-            return GeneralResponse<StudentDto>.FailureResponse("Student not found.");
+            return GeneralResponse<StudentDto>.FailureResponse(message:"Student not found.");
         }
 
         var studentDto = new StudentDto

@@ -51,14 +51,10 @@ namespace E_Attend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CourseId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2025, 6, 10, 15, 14, 24, 658, DateTimeKind.Utc).AddTicks(9344));
+                        .HasDefaultValue(new DateTime(2025, 6, 10, 16, 25, 11, 816, DateTimeKind.Utc).AddTicks(4195));
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -68,8 +64,6 @@ namespace E_Attend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("CourseId1");
 
                     b.ToTable("Announcements");
                 });
@@ -478,16 +472,10 @@ namespace E_Attend.Migrations
 
             modelBuilder.Entity("E_Attend.Entities.Announcement", b =>
                 {
-                    b.HasOne("E_Attend.Entities.Course", null)
+                    b.HasOne("E_Attend.Entities.Course", "Course")
                         .WithMany("Announcements")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Attend.Entities.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Course");

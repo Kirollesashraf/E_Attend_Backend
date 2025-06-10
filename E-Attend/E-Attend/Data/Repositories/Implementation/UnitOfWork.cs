@@ -28,6 +28,7 @@ public class UnitOfWork : IUnitOfWork
         this.ApplicationUserRepository = new ApplicationUserRepository(this.context);
         this.AttendanceRepository = new AttendanceRepository(this.context);
         this.CourseRepository = new CourseRepository(this.context);
+        this.AnnouncementRepository = new AnnouncementRepository(this.context);
         this.InstructorRepository = new InstructorRepository(this.context);
         this.StudentRepository = new StudentRepository(this.context);
         this.LectureRepository = new LectureRepository(this.context);

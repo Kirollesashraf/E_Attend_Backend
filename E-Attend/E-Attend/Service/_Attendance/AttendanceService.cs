@@ -20,13 +20,13 @@ public class AttendanceService : IAttendanceService
             aa.StudentId == attendance.StudentId && aa.Date == attendance.Date && aa.TimeSlot == attendance.TimeSlot);
         if (a != null)
         {
-            return GeneralResponse<string>.FailureResponse("Attendance cannot be added");
+            return GeneralResponse<string>.FailureResponse(message:"Attendance cannot be added");
         }
 
         _unitOfWork.AttendanceRepository.AddAsync(attendance);
         await _unitOfWork.CompleteAsync();
 
-        return GeneralResponse<string>.SuccessResponse("Attendance added");
+        return GeneralResponse<string>.SuccessResponse(message:"Attendance added");
     }
 
     public async Task<GeneralResponse<IEnumerable<Attendance>>> GetStudentAttendanceInCourseAsync(string courseId,

@@ -50,7 +50,7 @@ public class InstructorService : IInstructorService
     {
         if (string.IsNullOrEmpty(id))
         {
-            return GeneralResponse<InstructorDto>.FailureResponse("Instructor ID cannot be null or empty.");
+            return GeneralResponse<InstructorDto>.FailureResponse(message:"Instructor ID cannot be null or empty.");
         }
 
         var instructor =
@@ -58,7 +58,7 @@ public class InstructorService : IInstructorService
             ;
         if (instructor == null)
         {
-            return GeneralResponse<InstructorDto>.FailureResponse($"Instructor with ID '{id}' not found.");
+            return GeneralResponse<InstructorDto>.FailureResponse(message:$"Instructor with ID '{id}' not found.");
         }
 
         var instructorDto = new InstructorDto
@@ -88,12 +88,12 @@ public class InstructorService : IInstructorService
         var instructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.Id == instructorId);
         if (instructor == null)
         {
-            return GeneralResponse<string>.FailureResponse("Instructor not found.");
+            return GeneralResponse<string>.FailureResponse(message:"Instructor not found.");
         }
 
         _unitOfWork.InstructorRepository.Remove(instructor);
         await _unitOfWork.CompleteAsync();
-        return GeneralResponse<string>.SuccessResponse("Instructor deleted successfully.");
+        return GeneralResponse<string>.SuccessResponse(message:"Instructor deleted successfully.");
     }
 
     public async Task<GeneralResponse<string>> UpdateInstructorAsync(string instructorId, UpdateInstructorDto updatedInstructor)
@@ -101,7 +101,7 @@ public class InstructorService : IInstructorService
         var existingInstructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.Id == instructorId);
         if (existingInstructor == null)
         {
-            return GeneralResponse<string>.FailureResponse("Instructor not found.");
+            return GeneralResponse<string>.FailureResponse(message:"Instructor not found.");
         }
 
         existingInstructor.Name = updatedInstructor.Name;
@@ -112,6 +112,6 @@ public class InstructorService : IInstructorService
 
         _unitOfWork.InstructorRepository.Update(existingInstructor);
         await _unitOfWork.CompleteAsync();
-        return GeneralResponse<string>.SuccessResponse("Instructor updated successfully.");
+        return GeneralResponse<string>.SuccessResponse(message:"Instructor updated successfully.");
     }
 }

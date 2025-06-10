@@ -6,6 +6,5 @@ public class AddAnnouncementDto
     
     public string Content { get; set; }
     
-    public string CourseId { get; set; }
     public DateTime Created { get; set; }
 }

@@ -35,11 +35,10 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Content).IsRequired();
             entity.Property(e => e.Created).IsRequired().HasDefaultValue(DateTime.UtcNow);
+            
             entity.HasOne(d => d.Course)
                 .WithMany(p => p.Announcements)
                 .HasForeignKey(d => d.CourseId)
@@ -50,7 +49,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         modelBuilder.Entity<Attendance>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Status).IsRequired().HasMaxLength(50);
@@ -89,18 +87,18 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .HasForeignKey(d => d.InstructorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasMany(d => d.Announcements)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+            // entity.HasMany(d => d.Announcements)
+            //     .WithOne()
+            //     .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasMany(d => d.Students)
                 .WithMany(p => p.Courses)
                 .UsingEntity(j => j.ToTable("CourseStudents"));
 
-
-            entity.HasMany(d => d.Lectures)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+            //
+            // entity.HasMany(d => d.Lectures)
+            //     .WithOne()
+            //     .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Instructor>(entity =>

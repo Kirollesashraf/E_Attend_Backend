@@ -12,6 +12,7 @@ public class Announcement
     public string Content { get; set; }
     
     public DateTime Created { get; set; }
+    
     [ForeignKey(nameof(Course))]
     public string CourseId { get; set; }
     public virtual Course Course { get; set; }
