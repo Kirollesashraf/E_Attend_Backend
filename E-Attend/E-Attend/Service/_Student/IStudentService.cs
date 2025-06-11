@@ -9,5 +9,6 @@ public interface IStudentService
     public Task<GeneralResponse<IEnumerable<StudentDto>>> GetStudentsAsync();
     public Task<GeneralResponse<StudentDto>> GetStudentAsync(string studentId);
     public Task<GeneralResponse<string>> DeleteStudentAsync(string studentId);
+    public Task<GeneralResponse<StudentDto>> GetStudentByUserIdAsync(string studentId);
     public Task<GeneralResponse<string>> UpdateStudentAsync(string studentId, UpdateStudentDto updatedStudent);
 }

@@ -83,6 +83,45 @@ public class InstructorService : IInstructorService
 
         return GeneralResponse<InstructorDto>.SuccessResponse(instructorDto);
     }
+    
+    
+    public async Task<GeneralResponse<InstructorDto>> GetInstructorByUserIdAsync(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+        {
+            return GeneralResponse<InstructorDto>.FailureResponse(message:"Instructor User ID cannot be null or empty.");
+        }
+
+        var instructor =
+                await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.UserId == id, includes: i => i.Courses)
+            ;
+        if (instructor == null)
+        {
+            return GeneralResponse<InstructorDto>.FailureResponse(message:$"Instructor with User ID '{id}' not found.");
+        }
+
+        var instructorDto = new InstructorDto
+        {
+            Id = instructor.Id,
+            UserId = instructor.UserId,
+            Name = instructor.Name,
+            UniversityId = instructor.UniversityId,
+            Degree = instructor.Degree,
+            Specialization = instructor.Specialization,
+            Department = instructor.Department,
+            Courses = instructor.Courses?.Select(c => new CourseDto
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                Code = c.Code,
+                Credits = c.Credits,
+                InstructorId = c.InstructorId
+            }).ToList() ?? new List<CourseDto>()
+        };
+
+        return GeneralResponse<InstructorDto>.SuccessResponse(instructorDto);
+    }
     public async Task<GeneralResponse<string>> DeleteInstructorAsync(string instructorId)
     {
         var instructor = await _unitOfWork.InstructorRepository.GetFirstOrDefaultAsync(i => i.Id == instructorId);

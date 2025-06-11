@@ -71,7 +71,37 @@ public class StudentService : IStudentService
 
         return GeneralResponse<StudentDto>.SuccessResponse(studentDto);
     }
+    public async Task<GeneralResponse<StudentDto>> GetStudentByUserIdAsync(string studentId)
+    {
+        var student = await _unitOfWork.StudentRepository.GetFirstOrDefaultAsync(s=>s.UserId == studentId,
+            includes: [s => s.Courses]);
 
+
+        if (student == null)
+        {
+            return GeneralResponse<StudentDto>.FailureResponse(message:"Student not found.");
+        }
+
+        var studentDto = new StudentDto
+        {
+            Id = student.Id,
+            UserId = student.UserId,
+            Name = student.Name,
+            Degree = student.Degree,
+            Department = student.Department,
+            Courses = student.Courses?.Select(c => new CourseDto
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                Code = c.Code,
+                Credits = c.Credits,
+                InstructorId = c.InstructorId
+            }).ToList()
+        };
+
+        return GeneralResponse<StudentDto>.SuccessResponse(studentDto);
+    }
 
 
     public async Task<GeneralResponse<string>> UpdateStudentAsync(string studentId, UpdateStudentDto updatedStudent)
