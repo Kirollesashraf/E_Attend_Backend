@@ -20,12 +20,12 @@ public class InstructorController : ControllerBase
 
 
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin,Instructor")]
-    [HttpGet("{instructorId}")]
+    [HttpGet("id/{instructorId}")]
     public async Task<IActionResult> GetInstructorAsync(string instructorId) =>
         Ok(await _instructorService.GetInstructorAsync(instructorId));
     
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin,Instructor")]
-    [HttpGet("{instructorId}")]
+    [HttpGet("userid/{instructorId}")]
     public async Task<IActionResult> GetInstructorByUserIdAsync(string instructorId) =>
         Ok(await _instructorService.GetInstructorByUserIdAsync(instructorId));
 

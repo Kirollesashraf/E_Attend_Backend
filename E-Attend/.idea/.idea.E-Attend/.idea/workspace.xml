@@ -12,6 +12,10 @@
     <list default="true" id="497e9016-54c7-4a5f-84d2-6e7a9ab69a45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/InstructorController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Controllers/StudentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/IInstructorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Instructor/InstructorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/IStudentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/E-Attend/Service/_Student/StudentService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +73,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Backend-phase2",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -178,14 +182,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs</url>
           <line>20</line>
-          <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Constructor 'AuthenticationService'">
-            <startOffsets>
-              <option value="847" />
-            </startOffsets>
-            <endOffsets>
-              <option value="848" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Constructor 'AuthenticationService'" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -204,14 +201,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/E-Attend/Service/_Authentication/AuthenticationService.cs</url>
           <line>47</line>
-          <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Method 'RegisterAdminAsync'">
-            <startOffsets>
-              <option value="1875" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1925" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="K:\Kareem's\Programming vol.3\Github\E-Attend\E_Attend_Backend\E-Attend\E-Attend\Service\Authentication\AuthenticationService.cs" containingFunctionPresentation="Method 'RegisterAdminAsync'" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
