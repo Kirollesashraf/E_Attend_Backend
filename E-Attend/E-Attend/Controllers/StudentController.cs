@@ -28,9 +28,9 @@ public class StudentController : ControllerBase
     
     
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin,Student")]
-    [HttpGet("userid/{studentId}")]
-    public async Task<IActionResult> GetStudentByUserIdAsync(string studentId) =>
-        Ok(await _studentService.GetStudentByUserIdAsync(studentId));
+    [HttpGet("userid/{userId}")]
+    public async Task<IActionResult> GetStudentByUserIdAsync(string userId) =>
+        Ok(await _studentService.GetStudentByUserIdAsync(userId));
 
 
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]

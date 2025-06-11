@@ -25,9 +25,9 @@ public class InstructorController : ControllerBase
         Ok(await _instructorService.GetInstructorAsync(instructorId));
     
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin,Instructor")]
-    [HttpGet("userid/{instructorId}")]
-    public async Task<IActionResult> GetInstructorByUserIdAsync(string instructorId) =>
-        Ok(await _instructorService.GetInstructorByUserIdAsync(instructorId));
+    [HttpGet("userid/{userId}")]
+    public async Task<IActionResult> GetInstructorByUserIdAsync(string userId) =>
+        Ok(await _instructorService.GetInstructorByUserIdAsync(userId));
 
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
     [HttpDelete("{instructorId}")]
