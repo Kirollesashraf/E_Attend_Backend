@@ -33,21 +33,21 @@ public class AttendanceService : IAttendanceService
         string studentId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
-            .GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId);
+            .GetAllAsync(a => a.CourseId == courseId && a.StudentId == studentId, includes: [a=>a.Student, a=>a.Course]);
         return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 
     public async Task<GeneralResponse<IEnumerable<Attendance>>> GetScheduledAttendanceAsync(string courseId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
-            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("SCHEDULED"));
+            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("SCHEDULED"), includes: [a=>a.Student, a=>a.Course]);
         return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 
     public async Task<GeneralResponse<IEnumerable<Attendance>>> GetUnscheduledAttendanceAsync(string courseId)
     {
         var attendances = await _unitOfWork.AttendanceRepository
-            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("UNSCHEDULED"));
+            .GetAllAsync(a => a.CourseId == courseId && a.Status.StartsWith("UNSCHEDULED"), includes: [a=>a.Student, a=>a.Course]);
         return GeneralResponse<IEnumerable<Attendance>>.SuccessResponse(attendances);
     }
 }
