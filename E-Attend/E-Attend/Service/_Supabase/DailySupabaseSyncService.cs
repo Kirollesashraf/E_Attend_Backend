@@ -56,10 +56,28 @@ public class DailySupabaseSyncService : BackgroundService
             AutoConnectRealtime = true
         };
 
+        
         var supabase = new Supabase.Client(options.Value.Url, options.Value.Key, supabaseOptions);
         await supabase.InitializeAsync();
+        var courses = await supabase.Rpc<List<Course>>("GetCourses", null);
+        foreach (var course in courses)
+        {
+            var existingCourse = await courseService.GetCourseByTitleAsync(course.Title);
+            if (existingCourse.Data == null) continue;
 
+            await courseService.AddCourseAsync(new AddCourseDto()
+            {
+                Code = Guid.NewGuid().ToString(),
+                Title = course.Title,
+                Description = "NONE",
+                Credits = "NONE",
+            });
+        }
+
+        
         var scheduled = await supabase.Rpc<List<ScheduledAttendanceDto>>("ScheduledAttendance", null);
+        
+        
         
         foreach (var attendance in scheduled)
         {
