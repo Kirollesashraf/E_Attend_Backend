@@ -63,7 +63,7 @@ public class DailySupabaseSyncService : BackgroundService
         foreach (var course in courses)
         {
             var existingCourse = await courseService.GetCourseByTitleAsync(course.Title);
-            if (existingCourse.Data == null) continue;
+            if (existingCourse.Data is not  null) continue;
 
             await courseService.AddCourseAsync(new AddCourseDto()
             {
