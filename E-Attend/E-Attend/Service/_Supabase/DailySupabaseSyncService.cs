@@ -63,7 +63,7 @@ public class DailySupabaseSyncService : BackgroundService
         foreach (var course in courses)
         {
             var existingCourse = await courseService.GetCourseByTitleAsync(course.Title);
-            if (existingCourse.Data is not  null) continue;
+            if (existingCourse.Success) continue;
 
             await courseService.AddCourseAsync(new AddCourseDto()
             {
@@ -76,23 +76,22 @@ public class DailySupabaseSyncService : BackgroundService
 
         
         var scheduled = await supabase.Rpc<List<ScheduledAttendanceDto>>("ScheduledAttendance", null);
-        
-        
-        
+
+
         foreach (var attendance in scheduled)
         {
             var course = await courseService.GetCourseByTitleAsync(attendance.CourseName);
             var a = new Attendance()
             {
                 StudentId = attendance.StudentId,
-                Status = "SCHEDULED_"+attendance.Status,
+                Status = "SCHEDULED_" + attendance.Status,
                 CourseId = course.Data?.Id,
                 TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate.ToUniversalTime()
+                Date = (DateTime.SpecifyKind(attendance.AttendanceDate, DateTimeKind.Utc)).ToUniversalTime(),
             };
             await attendanceService.AddAttendanceAsync(a);
         }
-        
+
         var unscheduled = await supabase.Rpc<List<ScheduledAttendanceDto>>("UnscheduledAttendance", null);
         foreach (var attendance in unscheduled)
         {
@@ -103,7 +102,7 @@ public class DailySupabaseSyncService : BackgroundService
                 Status = "UNSCHEDULED_" + attendance.Status,
                 CourseId = course.Data?.Id,
                 TimeSlot = attendance.TimeSlot,
-                Date = attendance.AttendanceDate.ToUniversalTime()
+                Date = (DateTime.SpecifyKind(attendance.AttendanceDate, DateTimeKind.Utc)).ToUniversalTime(),
             };
             await attendanceService.AddAttendanceAsync(a);
         }
